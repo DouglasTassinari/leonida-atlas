@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /admin-review/
+Disallow: /api/
+Allow: /api/image/
 
 # TODO: update the domain below to match astro.config.mjs
 Sitemap: https://leonida-atlas-4z0.pages.dev/sitemap-index.xml
+Sitemap: https://leonida-atlas-4z0.pages.dev/sitemap-community.xml

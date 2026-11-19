@@ -1,13 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { t, staticLocales } from '../../i18n/index.js';
+import { t, staticLocales, url } from '../../i18n/index.js';
+import { site } from '../../data/site.js';
 export const getStaticPaths = staticLocales;
 const { lang } = Astro.params;
 const L = t(lang).log;
+const C = t(lang).community;
+const pub = { ...C, lang, key: site.turnstileSiteKey || '' };
 const CATS = ['Locations', 'Characters', 'Vehicles', 'Activities', 'Secrets'];
 ---
 <Base lang={lang} path="/log" title={L.title} description={L.desc}>
-  <div id="app" data-i18n={JSON.stringify(L)}>
+  <div id="app" data-i18n={JSON.stringify(L)} data-pub={JSON.stringify(pub)}>
   <h1>{L.title}</h1>
   <p class="lead">{L.lead}</p>
 
@@ -28,6 +31,21 @@ const CATS = ['Locations', 'Characters', 'Vehicles', 'Activities', 'Secrets'];
     <textarea id="note" rows="2" maxlength="300"></textarea>
     <p><button type="submit">{L.add}</button></p>
   </form>
+
+  <section class="panel" id="pubsec" aria-labelledby="pubh">
+    <h2 id="pubh" style="margin-top:0">{C.shareH}</h2>
+    <p class="meta">{C.shareLead}</p>
+    <label for="img">{C.image}</label>
+    <input id="img" type="file" accept="image/jpeg,image/png,image/webp" />
+    <p class="meta">{C.imageHint}</p>
+    <div id="prev" hidden><img id="previmg" alt="" style="max-width:100%;max-height:240px;border-radius:10px" /> <button id="rmimg" type="button" class="ghost">{C.imageRemove}</button></div>
+    <label for="yt">{C.youtube}</label>
+    <input id="yt" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" />
+    <p><label style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input id="consent" type="checkbox" style="width:auto;min-height:0;margin-top:5px" /> <span>{C.consent} <a href={url(lang, '/terms')}>{C.termsLink}</a></span></label></p>
+    <div id="ts"></div>
+    <p><button id="pubbtn" type="button">{C.publish}</button> <a href={url(lang, '/community')}>{t(lang).nav.community}</a></p>
+    <p class="meta" id="pubmsg" role="status" aria-live="polite"></p>
+  </section>
 
   <section class="panel" aria-live="polite">
     <p><strong id="total" style="font-size:2rem">0</strong> <span class="meta">{L.discoveries}</span> · <strong id="rank">{L.ranks.Rookie}</strong></p>
@@ -143,6 +161,64 @@ const CATS = ['Locations', 'Characters', 'Vehicles', 'Activities', 'Secrets'];
           navigator.share(data).catch(function (err) { if (!err || err.name !== 'AbortError') fallback(); });
         } else { fallback(); }
       }, 'image/png');
+    });
+
+    // ---------- public sharing (optional, separate from the private log) ----------
+    var P = JSON.parse($('app').dataset.pub), imgB64 = '', tsToken = '', tsId = null;
+    var MAXB = 600 * 1024;
+    function pmsg(t, ok) { var m = $('pubmsg'); m.textContent = t; m.style.color = ok ? 'var(--ok, #5af0b0)' : ''; }
+    function clearImg() { imgB64 = ''; $('img').value = ''; $('prev').hidden = true; $('previmg').removeAttribute('src'); }
+    $('rmimg').addEventListener('click', clearImg);
+    function toBlob(cv, type, q) { return new Promise(function (res) { cv.toBlob(res, type, q); }); }
+    // resize in the browser: max 1280 px, re-encoded (drops EXIF), WebP preferred, JPEG fallback
+    async function prepareImage(file) {
+      var bmp = await createImageBitmap(file);
+      var scale = Math.min(1, 1280 / Math.max(bmp.width, bmp.height));
+      for (var round = 0; round < 4; round++) {
+        var w = Math.max(1, Math.round(bmp.width * scale)), h = Math.max(1, Math.round(bmp.height * scale));
+        var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(bmp, 0, 0, w, h);
+        var qs = [0.82, 0.7, 0.55, 0.4];
+        for (var i = 0; i < qs.length; i++) {
+          var b = await toBlob(cv, 'image/webp', qs[i]);
+          if (!b || b.type !== 'image/webp') b = await toBlob(cv, 'image/jpeg', qs[i]);
+          if (b && b.size <= MAXB) return b;
+        }
+        scale *= 0.75;
+      }
+      throw new Error('big');
+    }
+    function blobToB64(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1]); }; r.onerror = rej; r.readAsDataURL(b); }); }
+    $('img').addEventListener('change', async function () {
+      var file = this.files && this.files[0]; imgB64 = ''; $('prev').hidden = true; pmsg('');
+      if (!file) return;
+      if (['image/jpeg', 'image/png', 'image/webp'].indexOf(file.type) < 0) { clearImg(); pmsg(P.eImage); return; }
+      try {
+        var b = await prepareImage(file);
+        imgB64 = await blobToB64(b);
+        $('previmg').src = URL.createObjectURL(b); $('prev').hidden = false;
+      } catch (e) { clearImg(); pmsg(e && e.message === 'big' ? P.eBig : P.eRead); }
+    });
+    if (P.key) { // Turnstile only when a site key is configured in src/data/site.js
+      var sc = document.createElement('script'); sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; sc.async = true;
+      sc.onload = function () { tsId = window.turnstile.render('#ts', { sitekey: P.key, callback: function (t) { tsToken = t; }, 'expired-callback': function () { tsToken = ''; } }); };
+      document.head.appendChild(sc);
+    }
+    var ERR = { consent: 'eConsent', title: 'eTitle', note: 'eNote', text: 'eText', blocked: 'eBlocked', youtube: 'eYoutube', image: 'eImage', big: 'eBig', rate: 'eRate', captcha: 'eCaptcha' };
+    $('pubbtn').addEventListener('click', function () {
+      var btn = $('pubbtn'), title = $('title').value.trim(), note = $('note').value.trim();
+      if (!$('consent').checked) { pmsg(P.eConsent); return; }
+      if (!title || title.length > 80) { pmsg(P.eTitle); return; }
+      if ([].concat(Array.from(note)).length > 280) { pmsg(P.eNote); return; }
+      btn.disabled = true; pmsg(P.sending);
+      fetch('/api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+        category: $('cat').value, title: title, note: note, youtube: $('yt').value.trim(), image: imgB64 || undefined,
+        consent: true, lang: P.lang, turnstileToken: tsToken
+      }) }).then(function (r) { return r.json().catch(function () { return { ok: false, code: 'generic' }; }); }).then(function (d) {
+        if (d.ok) { pmsg(P.ok, true); clearImg(); $('yt').value = ''; $('consent').checked = false; }
+        else pmsg(P[ERR[d.code] || 'eGeneric']);
+        if (P.key && window.turnstile && tsId !== null) { window.turnstile.reset(tsId); tsToken = ''; }
+      }).catch(function () { pmsg(P.eGeneric); }).then(function () { btn.disabled = false; });
     });
 
     render();

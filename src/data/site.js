@@ -2,6 +2,9 @@
 // While adsEnabled is false nothing ad-related is rendered (no boxes, no scripts).
 export const site = {
   adsEnabled: false,
+  // Cloudflare Turnstile (optional). Leave empty to disable the widget. To enable, paste the site key (e.g. 0x4AAAAAAGJGoQ2uZkebknNM)
+  // and also set the TURNSTILE_SECRET secret in the Cloudflare Pages dashboard (the server only demands a token when that secret exists).
+  turnstileSiteKey: '',
   adsense: { client: '', slots: { rail: '', inline: '' } },
 };
 export const adLabel = {

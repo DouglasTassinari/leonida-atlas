@@ -14,6 +14,7 @@ for (const f of fs.readdirSync(postDir)) {
 const sitemapFilter = (page) => {
   const path = new URL(page).pathname;
   if (path === '/') return false;
+  if (path.startsWith('/admin-review') || /\/community\/item\/$/.test(path)) return false;
   const m = path.match(/^\/([^/]+)\/posts\/([^/]+)\/$/);
   // Article pages only for real translations (other locales canonicalize to English).
   if (m) return !!publishedPosts[m[2]] && publishedPosts[m[2]].includes(m[1]);
@@ -41,5 +42,5 @@ export default defineConfig({
     '/disclaimer': '/en/disclaimer/',
     '/privacy': '/en/privacy/',
   },
-  integrations: [sitemap({ filter: sitemapFilter, i18n: { defaultLocale: 'en', locales: sitemapLocales } })],
+  integrations: [sitemap({ filter: sitemapFilter, customSitemaps: ['https://leonida-atlas-4z0.pages.dev/sitemap-community.xml'], i18n: { defaultLocale: 'en', locales: sitemapLocales } })],
 });

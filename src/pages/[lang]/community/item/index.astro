@@ -1,0 +1,67 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { t, staticLocales, url } from '../../../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const T = t(lang);
+const C = T.community;
+const data = { ...C, cats: T.log.cats, lang };
+---
+<Base lang={lang} path="/community/item" title={C.itemTitle} description={C.itemDesc} noAlternates>
+  <article id="app" data-i18n={JSON.stringify(data)}>
+    <p><a href={url(lang, '/community')}>{C.back}</a></p>
+    <p class="meta" id="status" role="status" aria-live="polite">{C.loading}</p>
+    <div id="item" hidden>
+      <p class="cat meta" id="cat"></p>
+      <h1 id="h"></h1>
+      <figure id="fig" hidden><img id="img" alt="" style="max-width:100%;border-radius:12px" /></figure>
+      <p id="note" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+      <div id="yt" hidden></div>
+      <p class="meta" id="by"></p>
+      <p><button id="rep" type="button" class="ghost">{C.report}</button> <span class="meta" id="repmsg" role="status" aria-live="polite"></span></p>
+    </div>
+  </article>
+</Base>
+<script is:inline>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var I = JSON.parse($('app').dataset.i18n);
+  var id = new URLSearchParams(location.search).get('id') || '';
+  function robots(c) { var m = document.createElement('meta'); m.name = 'robots'; m.content = c; document.head.appendChild(m); }
+  function fail() { $('status').textContent = I.nf; robots('noindex'); }
+  if (!/^[a-f0-9]{16}$/.test(id)) { fail(); return; }
+  var can = document.querySelector('link[rel=canonical]');
+  if (can) can.href = location.origin + location.pathname + '?id=' + id;
+  fetch('/api/community/' + id).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (p) {
+    $('status').hidden = true; $('item').hidden = false;
+    $('cat').textContent = I.cats[p.category] || p.category;
+    $('h').textContent = p.title;
+    $('note').textContent = p.note || '';
+    var d = new Date(p.at);
+    $('by').textContent = I.author + ' | ' + d.toLocaleDateString(I.lang);
+    var title = p.title + ' | Leonida Atlas', desc = (p.note || I.itemDesc).slice(0, 155);
+    document.title = title;
+    var md = document.querySelector('meta[name=description]'); if (md) md.content = desc;
+    [['og:title', title], ['og:description', desc]].forEach(function (x) { var m = document.querySelector('meta[property="' + x[0] + '"]'); if (m) m.content = x[1]; });
+    if (p.has_image) {
+      var im = $('img'); im.src = '/api/image/' + p.id; im.alt = p.title; $('fig').hidden = false;
+      var og = document.querySelector('meta[property="og:image"]'); if (og) og.content = location.origin + '/api/image/' + p.id;
+    }
+    if (p.youtube_id) {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + p.youtube_id; f.title = I.video; f.loading = 'lazy';
+      f.allow = 'accelerometer; encrypted-media; gyroscope; picture-in-picture'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:12px';
+      $('yt').appendChild(f); $('yt').hidden = false;
+    }
+    // thin pages (short note and no image) stay out of the index
+    if (!p.has_image && (p.note || '').length < 60) robots('noindex');
+    $('rep').addEventListener('click', function () {
+      $('rep').disabled = true;
+      fetch('/api/report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: p.id }) })
+        .then(function (r) { if (!r.ok) throw 0; $('repmsg').textContent = I.reported; })
+        .catch(function () { $('repmsg').textContent = I.reportErr; $('rep').disabled = false; });
+    });
+  }).catch(fail);
+})();
+</script>

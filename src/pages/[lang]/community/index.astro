@@ -1,0 +1,59 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { t, staticLocales, url } from '../../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const T = t(lang);
+const C = T.community;
+const data = { ...C, cats: T.log.cats, item: url(lang, '/community/item'), lang };
+---
+<Base lang={lang} path="/community" title={C.title} description={C.desc}>
+  <div id="app" data-i18n={JSON.stringify(data)}>
+    <h1>{C.title}</h1>
+    <p class="lead">{C.lead}</p>
+    <p><a href={url(lang, '/log')}>{C.shareCta}</a> · <a href={url(lang, '/terms')}>{C.termsLink}</a></p>
+    <ul class="wall" id="wall"></ul>
+    <p class="meta" id="status" role="status" aria-live="polite">{C.loading}</p>
+    <p><button id="more" type="button" class="ghost" hidden>{C.more}</button></p>
+  </div>
+</Base>
+<style is:global>
+  ul.wall{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  ul.wall li{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  ul.wall img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#0e0619}
+  ul.wall .body{padding:10px 12px}
+  ul.wall .cat{font-size:.8rem;color:var(--teal)}
+  ul.wall .t{font-weight:700;overflow-wrap:anywhere}
+  ul.wall a{color:inherit;text-decoration:none}
+  ul.wall a:hover .t{text-decoration:underline}
+</style>
+<script is:inline>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var I = JSON.parse($('app').dataset.i18n);
+  var next = null, busy = false, total = 0;
+  function card(p) {
+    var li = document.createElement('li'), a = document.createElement('a');
+    a.href = I.item + '?id=' + encodeURIComponent(p.id);
+    if (p.has_image) { var im = document.createElement('img'); im.loading = 'lazy'; im.alt = p.title; im.src = '/api/image/' + p.id; a.appendChild(im); }
+    var b = document.createElement('div'); b.className = 'body';
+    var c = document.createElement('div'); c.className = 'cat'; c.textContent = I.cats[p.category] || p.category;
+    var t = document.createElement('div'); t.className = 't'; t.textContent = p.title;
+    b.appendChild(c); b.appendChild(t);
+    if (p.note) { var n = document.createElement('div'); n.className = 'meta'; n.textContent = p.note.length > 120 ? p.note.slice(0, 117) + '...' : p.note; b.appendChild(n); }
+    var m = document.createElement('div'); m.className = 'meta'; m.textContent = I.author; b.appendChild(m);
+    a.appendChild(b); li.appendChild(a); return li;
+  }
+  function load() {
+    if (busy) return; busy = true; $('more').disabled = true;
+    fetch('/api/community?limit=12' + (next ? '&before=' + next : '')).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+      d.items.forEach(function (p) { $('wall').appendChild(card(p)); total++; });
+      next = d.next; $('more').hidden = !next;
+      $('status').textContent = total ? '' : I.empty;
+    }).catch(function () { $('status').textContent = I.loadErr; })
+      .then(function () { busy = false; $('more').disabled = false; });
+  }
+  $('more').addEventListener('click', load);
+  load();
+})();
+</script>

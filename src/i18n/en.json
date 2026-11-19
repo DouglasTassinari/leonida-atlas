@@ -8,13 +8,15 @@
   "guides": "Guides",
   "about": "About",
   "news": "News",
-  "posts": "Posts"
+  "posts": "Posts",
+  "community": "Community"
  },
  "footer": {
   "disclaimer": "Leonida Atlas is an unofficial fan site. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All trademarks belong to their owners.",
   "about": "About",
   "disc": "Disclaimer",
-  "privacy": "Privacy"
+  "privacy": "Privacy",
+  "terms": "Terms"
  },
  "home": {
   "title": "Leonida Atlas",
@@ -145,7 +147,9 @@
   "h3": "Future ads and cookies",
   "p3": "We may show advertising or use analytics in the future. If we do, third-party vendors may use cookies or similar technologies to serve ads or measure traffic. This policy will be updated before that happens, including how to opt out and, where required, a consent prompt.",
   "h4": "External links",
-  "p4": "We link to third-party sites such as the Rockstar Games newswire. Their privacy practices are their own."
+  "p4": "We link to third-party sites such as the Rockstar Games newswire. Their privacy practices are their own.",
+  "commH": "Community posts",
+  "commP": "If you publish a discovery, it becomes public and indexable by search engines. Your text, optional image and optional YouTube link are stored on Cloudflare. We do not store your IP address: only a one-way hash, kept for at most 7 days, is used to limit spam. The image is analysed by an AI service on Cloudflare for moderation, and is not stored if it is flagged. Rejected posts are deleted. To remove a published post, see the Terms."
  },
  "g": {
   "hubTitle": "GTA VI Guides",
@@ -322,5 +326,62 @@
   "fan": "Leonida Atlas is an unofficial fan site, not affiliated with Rockstar Games or Take-Two Interactive. Information may change; check official sources.",
   "home": "Home",
   "srcQuote": "Excerpt"
+ },
+ "community": {
+  "title": "Community discoveries",
+  "desc": "Discoveries shared by Leonida Atlas visitors: locations, characters, vehicles, activities and secrets. Community contributions, unverified.",
+  "lead": "Fan discoveries sent by visitors and reviewed by hand before they appear here. These are unverified community contributions, not official information.",
+  "empty": "No community discoveries yet. Be the first to share one in the Leonida Log.",
+  "shareCta": "Share yours in the Leonida Log",
+  "more": "Load more",
+  "loading": "Loading...",
+  "loadErr": "Could not load discoveries. Please try again later.",
+  "nf": "This discovery is not available.",
+  "back": "Back to community discoveries",
+  "author": "Community contribution, unverified",
+  "report": "Report",
+  "reported": "Thanks, the report was received.",
+  "reportErr": "Could not send the report.",
+  "video": "Video on YouTube",
+  "itemTitle": "Community discovery",
+  "itemDesc": "A discovery shared by the Leonida Atlas community. Unverified.",
+  "shareH": "Share with the community",
+  "shareLead": "Optionally publish the discovery above (category, title and note) on the public community wall. Saving to your browser stays separate and private.",
+  "consent": "I understand that this content will be public and indexable by search engines, may be copied by third parties, and that I must not send story spoilers, leaks, personal data or material that is not mine. I accept the Terms. It can be removed on request.",
+  "termsLink": "Read the Terms",
+  "image": "Image (optional: JPEG, PNG or WebP)",
+  "imageHint": "Resized in your browser to 1280 px at most (this also removes EXIF and location data). Max 600 KB after resizing.",
+  "imageRemove": "Remove image",
+  "youtube": "YouTube link (optional)",
+  "publish": "Publish publicly",
+  "sending": "Sending...",
+  "ok": "Received, awaiting review. It will appear on the community wall only after a person approves it.",
+  "eConsent": "Please tick the consent box first.",
+  "eTitle": "Add a title (up to 80 characters).",
+  "eNote": "The note is too long (up to 280 characters).",
+  "eText": "Text cannot contain links or HTML. Please remove them.",
+  "eBlocked": "Some words are not allowed. Please rewrite your text.",
+  "eYoutube": "That is not a valid YouTube link.",
+  "eImage": "Please use a JPEG, PNG or WebP image.",
+  "eBig": "The image is too large, even after resizing.",
+  "eRate": "Too many submissions. Please try again later.",
+  "eCaptcha": "Verification failed. Please try again.",
+  "eGeneric": "Could not send. Please try again later.",
+  "eRead": "Could not read this image."
+ },
+ "terms": {
+  "title": "Terms of Use",
+  "desc": "Rules for sharing content on Leonida Atlas: what is allowed, the license you grant, and how to ask for removal.",
+  "updated": "Last updated: November 19, 2026",
+  "h1": "Content rules",
+  "p1": "You may share your own GTA VI discoveries as a short title, a note of up to 280 characters, one image and an optional YouTube link. Content must be yours or you must have the right to share it. Do not include links in the text.",
+  "h2": "What is not allowed",
+  "p2": "No adult or sexual material, graphic violence, hate, harassment, illegal content, story spoilers, leaks, personal data (yours or anyone else's), advertising or spam, and no images that belong to third parties unless you have the right to share them.",
+  "h3": "License you grant",
+  "p3": "By publishing you give Leonida Atlas a free, non-exclusive, worldwide license to store and display your content on this site and in its sitemap, for as long as it stays online. You keep ownership. Because the wall is public, others may copy it, and search engines may index it.",
+  "h4": "Removal on request",
+  "p4": "To remove your content, open an issue at https://github.com/DouglasTassinari/leonida-atlas/issues with the link to the page. We do not ask for an email. We remove content that breaks these rules, that infringes rights, or that its author asks us to remove.",
+  "h5": "Moderation",
+  "p5": "Nothing is published automatically. Images are checked by an automated tool and every post is reviewed by a person. We may reject or remove anything at any time, without notice. Leonida Atlas is an unofficial fan site and community posts are not verified."
  }
 }

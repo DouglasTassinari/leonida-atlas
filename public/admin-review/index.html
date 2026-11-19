@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta name="referrer" content="no-referrer" />
+<title>Review</title>
+<style>
+  body{font:16px/1.5 system-ui,sans-serif;background:#12081f;color:#f6f0ff;margin:0;padding:16px}
+  main{max-width:820px;margin:0 auto}
+  input,button{font:inherit;padding:10px 12px;border-radius:8px;border:1px solid #4b3a6b;background:#0e0619;color:inherit}
+  button{cursor:pointer;background:#ff9a3c;color:#1a0610;font-weight:700;border:0}
+  button.no{background:#ff5a7a}.tabs button{background:transparent;color:#f6f0ff;border:1px solid #8a4dff}.tabs button.on{background:#8a4dff}
+  .item{background:#1d1030;border:1px solid #4b3a6b;border-radius:12px;padding:12px;margin:12px 0}
+  .item img{max-width:100%;max-height:360px;display:block;margin:8px 0;border-radius:8px}
+  .meta{color:#c3b4dc;font-size:.85rem;overflow-wrap:anywhere}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+  <h1>Community review</h1>
+  <form id="login" class="row">
+    <input id="tok" type="password" autocomplete="off" placeholder="Admin token" aria-label="Admin token" />
+    <button type="submit">Open</button>
+  </form>
+  <p id="msg" class="meta" role="status"></p>
+  <div id="panel" hidden>
+    <div class="tabs row">
+      <button data-s="pending" class="on">Pending</button>
+      <button data-s="blocked">Blocked by AI</button>
+      <button data-s="approved">Approved</button>
+    </div>
+    <div id="list"></div>
+  </div>
+</main>
+<script>
+(function () {
+  var token = ''; // memory only, never stored
+  var status = 'pending';
+  var $ = function (id) { return document.getElementById(id); };
+  function api(path, opts) {
+    opts = opts || {}; opts.headers = Object.assign({ Authorization: 'Bearer ' + token }, opts.headers || {});
+    return fetch(path, opts);
+  }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+  function load() {
+    $('msg').textContent = 'Loading...';
+    api('/api/admin/list?status=' + status).then(function (r) {
+      if (r.status === 401) { $('msg').textContent = 'Wrong token.'; $('panel').hidden = true; return null; }
+      return r.json();
+    }).then(function (d) {
+      if (!d) return;
+      $('msg').textContent = d.items.length + ' item(s)';
+      $('login').hidden = true; $('panel').hidden = false;
+      var list = $('list'); list.innerHTML = '';
+      d.items.forEach(function (it) {
+        var box = el('div', 'item');
+        box.appendChild(el('div', 'meta', it.category + ' | ' + it.lang + ' | ' + new Date(it.created_at).toLocaleString() + ' | reports: ' + it.report_count));
+        box.appendChild(el('h3', '', it.title));
+        if (it.note) box.appendChild(el('p', '', it.note));
+        if (it.youtube_id) box.appendChild(el('p', 'meta', 'YouTube: https://youtu.be/' + it.youtube_id));
+        if (it.image_key) {
+          var img = el('img'); img.alt = 'submitted image';
+          api('/api/admin/image?id=' + it.id).then(function (r) { return r.blob(); }).then(function (b) { img.src = URL.createObjectURL(b); });
+          box.appendChild(img);
+        }
+        if (it.ai_verdict) box.appendChild(el('pre', 'meta', 'AI: ' + it.ai_verdict));
+        var row = el('div', 'row');
+        if (status !== 'approved') { var ok = el('button', '', 'Approve'); ok.onclick = function () { decide(it.id, 'approve'); }; row.appendChild(ok); }
+        var no = el('button', 'no', 'Reject'); no.onclick = function () { decide(it.id, 'reject'); };
+        row.appendChild(no); box.appendChild(row); list.appendChild(box);
+      });
+    }).catch(function () { $('msg').textContent = 'Error loading.'; });
+  }
+  function decide(id, action) {
+    api('/api/admin/decide', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: id, action: action }) })
+      .then(function (r) { if (!r.ok) throw 0; load(); }).catch(function () { $('msg').textContent = 'Action failed.'; });
+  }
+  $('login').addEventListener('submit', function (e) { e.preventDefault(); token = $('tok').value.trim(); $('tok').value = ''; load(); });
+  document.querySelectorAll('.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on'); status = b.dataset.s; load();
+    });
+  });
+})();
+</script>
+</body>
+</html>

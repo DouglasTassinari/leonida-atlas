@@ -8,13 +8,15 @@
   "guides": "Guide",
   "about": "Chi siamo",
   "news": "Notizie",
-  "posts": "Articoli"
+  "posts": "Articoli",
+  "community": "Community"
  },
  "footer": {
   "disclaimer": "Leonida Atlas è un sito di fan non ufficiale. Non è affiliato, approvato né sponsorizzato da Rockstar Games o Take-Two Interactive. Tutti i marchi appartengono ai rispettivi proprietari.",
   "about": "Chi siamo",
   "disc": "Avvertenza",
-  "privacy": "Privacy"
+  "privacy": "Privacy",
+  "terms": "Termini"
  },
  "home": {
   "title": "Leonida Atlas",
@@ -145,7 +147,9 @@
   "h3": "Annunci e cookie futuri",
   "p3": "In futuro potremmo mostrare pubblicità o usare strumenti di analisi. In tal caso, fornitori terzi potrebbero usare cookie o tecnologie simili per mostrare annunci o misurare il traffico. Questa informativa sarà aggiornata prima, con le modalità di rifiuto e, dove richiesto, una richiesta di consenso.",
   "h4": "Link esterni",
-  "p4": "Rimandiamo a siti di terzi come il newswire di Rockstar Games. Le loro pratiche sulla privacy sono indipendenti dalle nostre."
+  "p4": "Rimandiamo a siti di terzi come il newswire di Rockstar Games. Le loro pratiche sulla privacy sono indipendenti dalle nostre.",
+  "commH": "Post della community",
+  "commP": "Se pubblichi una scoperta, diventa pubblica e indicizzabile dai motori di ricerca. Testo, immagine e link YouTube facoltativi sono archiviati su Cloudflare. Non conserviamo il tuo indirizzo IP: solo un hash irreversibile, per al massimo 7 giorni, serve a limitare lo spam. L'immagine è analizzata da un servizio di IA su Cloudflare per la moderazione e non viene conservata se segnalata. I post rifiutati vengono eliminati. Per rimuovere un post pubblicato, vedi i Termini."
  },
  "g": {
   "hubTitle": "Guide su GTA VI",
@@ -322,5 +326,62 @@
   "fan": "Leonida Atlas è un sito di fan non ufficiale, non affiliato a Rockstar Games né a Take-Two Interactive. Le informazioni possono cambiare; controlla le fonti ufficiali.",
   "home": "Home",
   "srcQuote": "Estratto"
+ },
+ "community": {
+  "title": "Scoperte della community",
+  "desc": "Scoperte condivise dai visitatori di Leonida Atlas: luoghi, personaggi, veicoli, attività e segreti. Contributi della community, non verificati.",
+  "lead": "Scoperte dei fan inviate dai visitatori e riviste a mano prima di comparire qui. Sono contributi non verificati della community, non informazioni ufficiali.",
+  "empty": "Ancora nessuna scoperta della community. Sii il primo a condividerne una nel Diario di Leonida.",
+  "shareCta": "Condividi la tua nel Diario di Leonida",
+  "more": "Carica altro",
+  "loading": "Caricamento...",
+  "loadErr": "Impossibile caricare le scoperte. Riprova più tardi.",
+  "nf": "Questa scoperta non è disponibile.",
+  "back": "Torna alle scoperte della community",
+  "author": "Contributo della community, non verificato",
+  "report": "Segnala",
+  "reported": "Grazie, la segnalazione è stata ricevuta.",
+  "reportErr": "Impossibile inviare la segnalazione.",
+  "video": "Video su YouTube",
+  "itemTitle": "Scoperta della community",
+  "itemDesc": "Una scoperta condivisa dalla community di Leonida Atlas. Non verificata.",
+  "shareH": "Condividi con la community",
+  "shareLead": "Se vuoi, pubblica la scoperta qui sopra (categoria, titolo e nota) sulla bacheca pubblica della community. Il salvataggio nel browser resta separato e privato.",
+  "consent": "Capisco che questo contenuto sarà pubblico e indicizzabile dai motori di ricerca, potrà essere copiato da terzi e che non devo inviare spoiler della storia, leak, dati personali né materiale non mio. Accetto i Termini. Può essere rimosso su richiesta.",
+  "termsLink": "Leggi i Termini",
+  "image": "Immagine (facoltativa: JPEG, PNG o WebP)",
+  "imageHint": "Ridimensionata nel tuo browser a 1280 px al massimo (rimuove anche EXIF e posizione). Max 600 KB dopo il ridimensionamento.",
+  "imageRemove": "Rimuovi immagine",
+  "youtube": "Link YouTube (facoltativo)",
+  "publish": "Pubblica pubblicamente",
+  "sending": "Invio...",
+  "ok": "Ricevuto, in attesa di revisione. Comparirà in bacheca solo dopo l'approvazione di una persona.",
+  "eConsent": "Seleziona prima la casella del consenso.",
+  "eTitle": "Aggiungi un titolo (max 80 caratteri).",
+  "eNote": "La nota è troppo lunga (max 280 caratteri).",
+  "eText": "Il testo non può contenere link o HTML. Rimuovili.",
+  "eBlocked": "Alcune parole non sono consentite. Riscrivi il testo.",
+  "eYoutube": "Non è un link YouTube valido.",
+  "eImage": "Usa un'immagine JPEG, PNG o WebP.",
+  "eBig": "L'immagine è troppo grande anche dopo il ridimensionamento.",
+  "eRate": "Troppi invii. Riprova più tardi.",
+  "eCaptcha": "Verifica non riuscita. Riprova.",
+  "eGeneric": "Invio non riuscito. Riprova più tardi.",
+  "eRead": "Impossibile leggere questa immagine."
+ },
+ "terms": {
+  "title": "Termini d'uso",
+  "desc": "Regole per condividere contenuti su Leonida Atlas: cosa è consentito, la licenza concessa e come chiedere la rimozione.",
+  "updated": "Ultimo aggiornamento: 19 novembre 2026",
+  "h1": "Regole sui contenuti",
+  "p1": "Puoi condividere le tue scoperte su GTA VI con un titolo breve, una nota di massimo 280 caratteri, un'immagine e un link YouTube facoltativo. Il contenuto deve essere tuo o devi avere il diritto di condividerlo. Non inserire link nel testo.",
+  "h2": "Cosa non è consentito",
+  "p2": "Niente materiale per adulti o sessuale, violenza esplicita, odio, molestie, contenuti illegali, spoiler della storia, leak, dati personali (tuoi o altrui), pubblicità o spam, né immagini di terzi senza diritto di condivisione.",
+  "h3": "Licenza concessa",
+  "p3": "Pubblicando concedi a Leonida Atlas una licenza gratuita, non esclusiva e mondiale per archiviare e mostrare il tuo contenuto su questo sito e nella sua sitemap, finché resta online. La proprietà resta tua. Poiché la bacheca è pubblica, altri possono copiarla e i motori di ricerca indicizzarla.",
+  "h4": "Rimozione su richiesta",
+  "p4": "Per rimuovere il tuo contenuto apri una issue su https://github.com/DouglasTassinari/leonida-atlas/issues con il link della pagina. Non chiediamo e-mail. Rimuoviamo i contenuti che violano queste regole o diritti, o che l'autore chiede di rimuovere.",
+  "h5": "Moderazione",
+  "p5": "Nulla viene pubblicato automaticamente. Le immagini sono controllate da uno strumento automatico e ogni invio è rivisto da una persona. Possiamo rifiutare o rimuovere qualsiasi contenuto in ogni momento, senza preavviso. Leonida Atlas è un sito di fan non ufficiale e i post della community non sono verificati."
  }
 }

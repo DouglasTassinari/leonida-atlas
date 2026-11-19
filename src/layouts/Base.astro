@@ -7,18 +7,19 @@ import { site, adLabel, menuLabel } from '../data/site.js';
 import { t, meta, completeLocales, url } from '../i18n/index.js';
 
 // lang: locale code; path: '' for home or '/log', '/guides/xyz' ...; jsonld: array of schema objects
-const { lang, path = '', title, description, jsonld = [], ogType = 'website', image = 'index', alternates, canonicalLang } = Astro.props;
+const { lang, path = '', title, description, jsonld = [], ogType = 'website', image = 'index', alternates, canonicalLang, robots, noAlternates } = Astro.props;
 // alternates: locales that really have this page (hreflang); canonicalLang: locale whose URL is canonical
 const ui = t(lang);
 const isHome = path === '';
 const fullTitle = isHome ? title : `${title} | Leonida Atlas`;
 const abs = (l) => new URL(url(l, path), Astro.site).href;
 const canonical = abs(canonicalLang || lang);
-const hreflangs = alternates || completeLocales;
+const hreflangs = noAlternates ? [] : (alternates || completeLocales);
 const nav = [
   ['/news', ui.nav.news],
   ['/posts', ui.nav.posts],
   ['/log', ui.nav.log],
+  ['/community', ui.nav.community],
   ['/fact-check', ui.nav.fact],
   ['/reality-check', ui.nav.reality],
   ['/guides', ui.nav.guides],
@@ -28,7 +29,7 @@ const nav = [
 const ogImage = new URL(`/og/${image}.png`, Astro.site).href;
 const ads = site.adsEnabled;
 const cur = path.replace(/\/$/, '');
-const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guides')) || (p === '/news' && cur.startsWith('/news')) || (p === '/posts' && cur.startsWith('/posts'));
+const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guides')) || (p === '/news' && cur.startsWith('/news')) || (p === '/posts' && cur.startsWith('/posts')) || (p === '/community' && cur.startsWith('/community'));
 ---
 <!doctype html>
 <html lang={meta[lang].html}>
@@ -37,9 +38,10 @@ const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guide
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  {robots && <meta name="robots" content={robots} />}
   <link rel="canonical" href={canonical} />
   {hreflangs.map((l) => <link rel="alternate" hreflang={meta[l].html} href={abs(l)} />)}
-  <link rel="alternate" hreflang="x-default" href={abs('en')} />
+  {!noAlternates && <link rel="alternate" hreflang="x-default" href={abs('en')} />}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="theme-color" content="#12081f" />
   <!-- Google Search Console: uncomment and paste the token once the property is created.
@@ -90,7 +92,7 @@ const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guide
   <footer class="site-footer">
     <div class="wrap">
       <p>{ui.footer.disclaimer}</p>
-      <p><a href={url(lang, '/about')}>{ui.footer.about}</a> · <a href={url(lang, '/disclaimer')}>{ui.footer.disc}</a> · <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a></p>
+      <p><a href={url(lang, '/about')}>{ui.footer.about}</a> · <a href={url(lang, '/disclaimer')}>{ui.footer.disc}</a> · <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a> · <a href={url(lang, '/terms')}>{ui.footer.terms}</a></p>
     </div>
   </footer>
   <script is:inline>

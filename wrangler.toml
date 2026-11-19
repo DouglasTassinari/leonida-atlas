@@ -1,0 +1,16 @@
+name = "leonida-atlas"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-11-19"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "leonida-community"
+database_id = "35be4c41-2994-4f4c-a270-95bf47d6816b"
+
+[ai]
+binding = "AI"
+
+# Secrets / variables (set in the Cloudflare dashboard, never here):
+#   ADMIN_TOKEN       (Secret)   required for /admin-review/
+#   TURNSTILE_SECRET  (Secret)   optional; when set, submissions require a Turnstile token
+#   IP_SALT           (Secret)   optional extra salt for the IP hash

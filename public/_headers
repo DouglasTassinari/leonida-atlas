@@ -1,0 +1,5 @@
+/admin-review/*
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/api/*
+  X-Robots-Tag: noindex
