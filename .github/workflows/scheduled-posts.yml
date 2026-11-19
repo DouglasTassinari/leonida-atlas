@@ -1,0 +1,14 @@
+name: Scheduled posts rebuild
+on:
+  schedule:
+    # 08:00, 14:00 and 20:00 America/Sao_Paulo (UTC-3) = 11:00, 17:00, 23:00 UTC
+    - cron: '2 11 * * *'
+    - cron: '2 17 * * *'
+    - cron: '2 23 * * *'
+  workflow_dispatch:
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        run: curl -fsS -X POST -d "" "${{ secrets.CF_DEPLOY_HOOK }}"
