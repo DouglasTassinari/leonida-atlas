@@ -3,8 +3,8 @@ export default {
   publishAt: '2026-11-20T20:00:00-03:00',
   cover: 'news',
   title: {
-    en: `GTA VI Radio Stations: The 7 Stations Rockstar Has Detailed`,
-    'pt-br': `Rádios de GTA VI: as 7 estações que a Rockstar detalhou`,
+    en: `GTA VI Radio and Music: What Rockstar Has Revealed`,
+    'pt-br': `Rádios e música de GTA VI: o que a Rockstar revelou`,
   },
   description: {
     en: `Rockstar's October post detailed six GTA VI stations, and its music page lists a seventh. Here is each station, its hosts and its sound.`,

@@ -3,8 +3,8 @@ export default {
   publishAt: '2026-11-20T14:00:00-03:00',
   cover: 'news',
   title: {
-    en: `GTA VI Controls Guide: Every Controller Scheme Explained`,
-    'pt-br': `Guia de controles de GTA VI: todos os esquemas explicados`,
+    en: `GTA VI Controller Layouts: What Rockstar's Support Page Covers`,
+    'pt-br': `Controles de GTA VI: o que a página de suporte da Rockstar cobre`,
   },
   description: {
     en: `Where GTA VI keeps its controller schemes, sensitivity and DualSense options, and how to tune each situation, from on foot to parachute.`,
