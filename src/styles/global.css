@@ -18,9 +18,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 .skip:focus{left:8px}
 .site-header{border-bottom:1px solid var(--line);background:rgba(18,8,31,.94);position:sticky;top:0;z-index:10}
 .bar{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px}
-.brand{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-family:var(--head);font-weight:800;font-size:1.35rem;letter-spacing:.08em;text-transform:uppercase;line-height:1}
-.brand svg{width:34px;height:34px;flex:none}
-.brand b{background:var(--sun);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:900;font-style:italic;font-size:1.5rem;letter-spacing:.07em;text-transform:uppercase;line-height:1;background:linear-gradient(180deg,#fff 0%,#e4d6ff 42%,#8fefff 52%,#ff9ad0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 7px rgba(255,79,163,.45))}
+.brand svg{width:46px;height:42px;flex:none;-webkit-text-fill-color:initial;filter:drop-shadow(0 0 6px rgba(255,90,140,.55))}
+.brand b{background:linear-gradient(180deg,#ffd24a 0%,#ff7a3c 50%,#ff3d9a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;letter-spacing:.16em}
 nav.main{display:flex;flex-wrap:wrap;gap:2px 16px;align-items:center}
 nav.main a{color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;font-family:var(--head);text-transform:uppercase;letter-spacing:.06em;font-size:.95rem}
 nav.main a:hover,nav.main a[aria-current]{color:var(--text);border-color:var(--pink)}
@@ -165,7 +165,7 @@ pre,code{overflow-wrap:anywhere;white-space:pre-wrap}
 .brand{min-height:44px}
 details.faq summary{min-height:44px;display:flex;align-items:center}
 .cover{max-width:1000px}
-@media (max-width:430px){.menu-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.brand{font-size:1.2rem}}
+@media (max-width:430px){.menu-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.brand{font-size:1.15rem}.brand svg{width:38px;height:35px}}
 
 /* news */
 .nfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
