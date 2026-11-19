@@ -44,3 +44,12 @@ canvas{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line
 .q button{display:block;width:100%;text-align:left;margin:8px 0;background:var(--panel);color:var(--text);border:1px solid var(--line)}
 .q button.right{border-color:var(--ok)}
 .q button.wrong{border-color:#e5484d}
+@media (max-width:480px){
+.site-header{position:static}
+.bar{gap:4px 12px}
+nav{gap:0 14px;width:100%}
+nav a{padding:10px 0;font-size:.95rem}
+.row>input,.row>button{flex:1 1 100%;max-width:none!important}
+.row a button{width:100%}
+}
+.next-rank{color:var(--muted);margin:0}

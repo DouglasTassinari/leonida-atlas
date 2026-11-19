@@ -27,6 +27,7 @@ import Base from '../layouts/Base.astro';
   <section class="panel" aria-live="polite">
     <p><strong id="total" style="font-size:2rem">0</strong> <span class="meta">discoveries</span> · <strong id="rank">Rookie</strong></p>
     <p class="meta" id="counts"></p>
+    <p class="next-rank" id="next"></p>
   </section>
 
   <ul class="entries" id="list"></ul>
@@ -35,7 +36,9 @@ import Base from '../layouts/Base.astro';
   <p class="meta">Generates an image on your device. Nothing is uploaded.</p>
   <p class="row"><input id="nick" maxlength="24" placeholder="Your name (optional)" style="max-width:260px" />
     <button id="make" type="button">Generate card</button>
-    <a id="dl" download="my-leonida-explorer-card.png" hidden><button type="button" class="ghost">Download PNG</button></a></p>
+    <a id="dl" download="my-leonida-explorer-card.png" hidden><button type="button" class="ghost">Download PNG</button></a>
+    <button id="share" type="button" class="ghost" hidden>Share my card</button></p>
+  <p class="meta" id="sharemsg" aria-live="polite"></p>
   <canvas id="card" width="1200" height="630" hidden></canvas>
 </Base>
 
@@ -50,6 +53,11 @@ import Base from '../layouts/Base.astro';
     function save() { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} }
 
     function rank(n) { return n >= 50 ? 'Legend' : n >= 10 ? 'Veteran' : n >= 1 ? 'Explorer' : 'Rookie'; }
+    function nextInfo(n) {
+      if (n >= 50) return 'Top rank reached. You are a Legend of Leonida!';
+      var t = n >= 10 ? 50 : n >= 1 ? 10 : 1, r = t === 50 ? 'Legend' : t === 10 ? 'Veteran' : 'Explorer', d = t - n;
+      return 'Next rank: ' + r + ' (' + d + ' more discover' + (d === 1 ? 'y' : 'ies') + ')';
+    }
     function stats() {
       var c = {}; CATS.forEach(function (k) { c[k] = 0; });
       items.forEach(function (x) { c[x.cat]++; });
@@ -60,6 +68,7 @@ import Base from '../layouts/Base.astro';
       var s = stats();
       $('total').textContent = s.t;
       $('rank').textContent = rank(s.t);
+      $('next').textContent = nextInfo(s.t);
       $('counts').textContent = CATS.map(function (k) { return k + ': ' + s.c[k]; }).join(' · ');
       var ul = $('list'); ul.innerHTML = '';
       items.forEach(function (it, idx) {
@@ -103,10 +112,26 @@ import Base from '../layouts/Base.astro';
       });
       var nick = $('nick').value.trim();
       if (nick) { g.fillStyle = '#e8ebf2'; g.font = '30px system-ui, sans-serif'; g.fillText(nick, 70, 540); }
+      g.fillStyle = '#ff5c8a'; g.font = 'bold 30px system-ui, sans-serif'; g.fillText('Can you beat my record?', 70, 505);
+      g.textAlign = 'right'; g.fillStyle = '#6b7488'; g.font = '22px system-ui, sans-serif'; g.fillText('Leonida Atlas', 1150, 595); g.textAlign = 'left';
       g.fillStyle = '#9aa4b8'; g.font = '22px system-ui, sans-serif';
       g.fillText('Fan site, not affiliated with Rockstar Games or Take-Two', 70, 595);
       cv.hidden = false;
       var dl = $('dl'); dl.href = cv.toDataURL('image/png'); dl.hidden = false;
+      $('share').hidden = false; $('sharemsg').textContent = '';
+    });
+
+    $('share').addEventListener('click', function () {
+      var cv = $('card'), msg = $('sharemsg');
+      function fallback() { $('dl').click(); msg.textContent = 'Sharing is not available here, so the PNG was downloaded instead.'; }
+      cv.toBlob(function (blob) {
+        if (!blob) { fallback(); return; }
+        var file = new File([blob], 'my-leonida-explorer-card.png', { type: 'image/png' });
+        var data = { files: [file], text: 'My Leonida Explorer Card — Can you beat my record?', url: location.origin };
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share(data).catch(function (err) { if (!err || err.name !== 'AbortError') fallback(); });
+        } else { fallback(); }
+      }, 'image/png');
     });
 
     render();

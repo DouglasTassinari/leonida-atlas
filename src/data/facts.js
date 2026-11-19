@@ -18,7 +18,7 @@ export const facts = [
   },
   {
     id: 'platforms',
-    claim: 'Grand Theft Auto VI is on PlayStation 5 and Xbox Series X|S. Rockstar has not listed a PC version on these pages.',
+    claim: 'Grand Theft Auto VI is available on PlayStation 5 and Xbox Series X|S.',
     source: 'Rockstar Games Newswire - Grand Theft Auto VI Now Available (Nov 19, 2026)',
     quote: 'now available worldwide for PlayStation 5 and XBOX Series X|S',
     url: NOW_URL, published: '2026-11-19', checked: CHECKED, status: 'confirmed',
@@ -41,14 +41,14 @@ export const facts = [
     id: 'trailer-date',
     claim: 'The official Launch Trailer was published on October 15, 2026.',
     source: 'Rockstar Games Newswire - Watch the Grand Theft Auto VI Launch Trailer',
-    quote: 'Check out the new Launch Trailer, featuring new music from electronic duo Justice',
+    quote: 'Article "Watch the Grand Theft Auto VI Launch Trailer", dated October 15, 2026: "Check out the new Launch Trailer, featuring new music from electronic duo Justice"',
     url: TRAILER_URL, published: '2026-10-15', checked: CHECKED, status: 'confirmed',
   },
   {
     id: 'preload-start',
-    claim: 'Digital pre-loading began on November 10, 2026 (PS5 at midnight local time, Xbox Series X|S at 12 a.m. GMT). Code-in-box versions were due from retailers from November 12.',
+    claim: 'Digital pre-loading was set to begin on November 10, 2026 (PS5 at midnight local time, Xbox Series X|S at 12 a.m. GMT). Code-in-box versions were due from retailers from November 12.',
     source: 'Rockstar Games Newswire - Pre-Load Begins on November 10 (Nov 3, 2026)',
-    quote: 'On XBOX Series X|S, pre-loading begins globally on Tuesday, November 10 at 12 a.m. GMT.',
+    quote: 'Digital pre-loading on PlayStation 5 will begin on Tuesday, November 10 at midnight local time in your respective time zone. On XBOX Series X|S, pre-loading begins globally on Tuesday, November 10 at 12 a.m. GMT. Code-in-box versions for both consoles should be available from retailers beginning November 12.',
     url: PRELOAD_URL, published: '2026-11-03', checked: CHECKED, status: 'confirmed',
   },
   {
