@@ -409,8 +409,8 @@
   "open": "전체 라디오 열기",
   "legal": "이 방송국에는 삽입 가능한 공식 플레이어가 없습니다. 미리 들을 수 있는 Rockstar Games 링크만 제공합니다.",
   "playerNote": "{p}의 공식 플레이어입니다. Tune in을 누른 뒤에만 불러옵니다.",
-  "privH": "Radio players (Apple Music, Spotify, YouTube)",
-  "privP": "Leonida Radio is a small player in the corner of every page. It loads nothing from third parties until you first tap, click or press a key on the site; then the selected official player (YouTube via youtube-nocookie.com, Apple Music or Spotify) is loaded and that platform may set cookies and receive technical data such as your IP address, under its own privacy policy. Browsers do not allow sound before you interact with the page. Pause stops it, and your choice is remembered. We save only your last station and whether you paused (localStorage). We do not host any audio.",
+  "privH": "Radio player (YouTube)",
+  "privP": "Leonida Radio is a small player in the corner of every page. It loads nothing from third parties until you first tap, click or press a key on the site; then the selected official YouTube player (youtube-nocookie.com) is loaded and YouTube may set cookies and receive technical data such as your IP address, under its own privacy policy. Browsers do not allow sound before you interact with the page. Pause stops it, and your choice is remembered. We save only your last station and whether you paused (localStorage). We do not host any audio.",
   "genre": {
    "album": "앨범",
    "score": "스코어",
@@ -421,7 +421,8 @@
    "afro": "아마피아노와 아프리카 클래식",
    "metal": "메탈",
    "pop": "팝",
-   "rap": "서던 랩과 힙합 클래식"
+   "rap": "서던 랩과 힙합 클래식",
+   "gta": "GTA on Spotify"
   },
   "tapStart": "Tap anywhere to start the radio",
   "play": "Play",
@@ -429,6 +430,9 @@
   "expand": "Open radio",
   "collapse": "Minimize radio",
   "manual": "Press play inside the player to hear this station.",
-  "dockLabel": "Leonida Radio"
+  "dockLabel": "Leonida Radio",
+  "listenReal": "Preview the real station at Rockstar",
+  "inspired": "Same style as this in-game station, as a public YouTube playlist. It is not the game's own audio. To preview the real station, use the link below.",
+  "officialNote": "Official playlist or video on YouTube."
  }
 }

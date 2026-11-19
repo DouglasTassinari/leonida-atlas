@@ -1,17 +1,17 @@
 ---
 // Leonida Radio dock: a small radio fixed in the corner of EVERY page. It is never swapped out
 // when the visitor navigates (see the inline router below), so the music keeps playing.
-// No game audio is hosted: only official embeds (YouTube / Apple Music / Spotify), created after the first
-// user gesture (browsers block sound before that). Stations with no official embed show a link only.
+// No game audio is hosted: every station is an official YouTube embed (youtube-nocookie.com), created after the
+// first user gesture (browsers block sound before that).
 import { t } from '../i18n/index.js';
 import { stations, dial, defaultStation } from '../data/radio.js';
 const { lang } = Astro.props;
 const R = t(lang).radio;
 const list = [...stations].sort((a, b) => a.freq - b.freq);
 const conf = {
-  stations: list.map((s) => ({ id: s.id, name: s.name, hosts: s.hosts || '', genre: s.genre, freq: s.freq, type: s.type, embed: s.embed || '', url: s.url, channel: s.channel })),
+  stations: list.map((s) => ({ id: s.id, name: s.name, hosts: s.hosts || '', genre: s.genre, kind: s.kind, freq: s.freq, yt: s.yt, url: s.url, channel: s.channel })),
   dial, def: defaultStation,
-  i: { tapStart: R.tapStart, play: R.play, pause: R.pause, expand: R.expand, collapse: R.collapse, manual: R.manual, prev: R.prev, next: R.next, presets: R.presets, legal: R.legal, listen: R.listen, hosts: R.hosts, genre: R.genre, onAir: R.onAir, standby: R.standby, label: R.dockLabel },
+  i: { tapStart: R.tapStart, play: R.play, pause: R.pause, expand: R.expand, collapse: R.collapse, inspired: R.inspired, officialNote: R.officialNote, listenReal: R.listenReal, prev: R.prev, next: R.next, presets: R.presets, listen: R.listen, hosts: R.hosts, genre: R.genre, onAir: R.onAir, standby: R.standby, label: R.dockLabel },
 };
 ---
 <div id="rx-dock" class="rxd" data-rx-keep data-conf={JSON.stringify(conf)} role="region" aria-label={R.dockLabel}>
@@ -35,7 +35,7 @@ const conf = {
 body{padding-bottom:76px}
 .rxd{position:fixed;right:12px;bottom:12px;z-index:60;width:min(380px,calc(100vw - 16px));font:.9rem/1.3 var(--body);color:var(--text)}
 @media (max-width:480px){.rxd{right:8px;bottom:8px}}
-.rxd-bar{display:flex;align-items:center;gap:6px;background:linear-gradient(160deg,#2a1647,#170a2a);border:2px solid var(--purple);border-radius:16px;padding:6px 8px;box-shadow:0 0 22px rgba(138,77,255,.45),0 6px 18px rgba(0,0,0,.5)}
+.rxd-bar{position:relative;z-index:1;display:flex;align-items:center;gap:6px;background:linear-gradient(160deg,#2a1647,#170a2a);border:2px solid var(--purple);border-radius:16px;padding:6px 8px;box-shadow:0 0 22px rgba(138,77,255,.45),0 6px 18px rgba(0,0,0,.5)}
 .rxd-led{width:10px;height:10px;border-radius:50%;background:#5c2a3a;flex:none;box-shadow:0 0 0 2px #12081f}
 .rxd.live .rxd-led{background:var(--bad);box-shadow:0 0 9px var(--bad),0 0 0 2px #12081f}
 .rxd-b{width:38px;height:38px;flex:none;border-radius:50%;border:2px solid var(--line);background:#1e1033;color:var(--text);cursor:pointer;font-size:.8rem;line-height:1;padding:0}
@@ -49,8 +49,8 @@ body{padding-bottom:76px}
 .rxd-tog{transition:transform .2s}
 .rxd.open .rxd-tog{transform:rotate(180deg)}
 .rxd-panel{background:linear-gradient(160deg,#2a1647,#170a2a);border:2px solid var(--purple);border-radius:16px;padding:10px;margin-bottom:8px;box-shadow:0 0 22px rgba(138,77,255,.45),0 6px 18px rgba(0,0,0,.5);max-height:calc(100vh - 110px);overflow:auto}
-/* collapsed: keep the player alive off-screen (never display:none, so it keeps playing) */
-.rxd:not(.open) .rxd-panel{position:fixed;left:-10000px;top:0;width:380px;visibility:visible;margin:0}
+/* collapsed: the player stays inside the viewport behind the bar (offscreen or display:none iframes never load) */
+.rxd:not(.open) .rxd-panel{position:absolute;right:0;bottom:0;width:100%;margin:0;opacity:0;pointer-events:none;z-index:-1}
 .rxd-frame iframe{display:block;width:100%;border:0;border-radius:10px;background:#000}
 .rxd-frame iframe.yt{aspect-ratio:16/9;min-height:200px}
 .rxd-info{display:grid;gap:4px;margin-top:8px;font-size:.82rem}
@@ -77,73 +77,60 @@ body{padding-bottom:76px}
   var K1 = 'leonida-radio:station', K2 = 'leonida-radio:paused';
   function d(n) { return root.querySelector('[data-d="' + n + '"]'); }
   var el = { panel: d('panel'), frame: d('frame'), info: d('info'), track: d('track'), needle: d('needle'), pres: d('pres'), led: d('led'), prev: d('prev'), play: d('play'), next: d('next'), name: d('name'), sub: d('sub'), tog: d('tog') };
-  var idx = 0, playing = false, open = false, armed = false, yt = null, sp = null, gen = 0, spApi = null;
+  var idx = 0, playing = false, open = false, armed = false, sp = null, gen = 0, spApi = null, began = false, lastEv = null;
   var X = C.dial;
 
   function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} return null; }
   function mk(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
-  function platform(t) { return t === 'apple' ? 'Apple Music' : t === 'spotify' ? 'Spotify' : 'YouTube'; }
-  function embedUrl(s) {
-    if (s.type === 'apple') return 'https://embed.music.apple.com/' + s.embed;
-    if (s.type === 'spotify') return 'https://open.spotify.com/embed/album/' + encodeURIComponent(s.embed) + '?theme=0';
-    if (s.type === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(s.embed) + '?autoplay=1&enablejsapi=1&playsinline=1&rel=0&modestbranding=1&origin=' + encodeURIComponent(location.origin);
-    return null;
-  }
 
   var saved = ls(K1);
   for (var i = 0; i < N; i++) if (S[i].id === (saved || C.def)) idx = i;
   var wantPlay = ls(K2) !== '1';
 
-  function cmd(fn) { if (yt && yt.contentWindow) { try { yt.contentWindow.postMessage(JSON.stringify({ event: 'command', func: fn, args: [] }), '*'); } catch (e) {} } }
-  function stopFrame() { gen++; if (sp) { try { sp.destroy(); } catch (e) {} } sp = null; clear(el.frame); yt = null; }
-  function spotifyApi() {
-    if (spApi) return spApi;
-    spApi = new Promise(function (res, rej) {
-      window.onSpotifyIframeApiReady = res;
-      var t = document.createElement('script'); t.src = 'https://open.spotify.com/embed/iframe-api/v1'; t.async = true; t.onerror = rej; document.head.appendChild(t);
-    });
-    return spApi;
+  function stopFrame() { gen++; began = false; sp = null; clear(el.frame); }
+  function cmd(fn) { if (sp && sp.contentWindow) { try { sp.contentWindow.postMessage(JSON.stringify({ event: 'command', func: fn, args: [] }), '*'); } catch (e) {} } }
+  function embedUrl(s) {
+    var y = s.yt, o = encodeURIComponent(location.origin);
+    var base = 'https://www.youtube-nocookie.com/embed/' + (y.t === 'playlist' ? 'videoseries?list=' + encodeURIComponent(y.id) + '&' : encodeURIComponent(y.id) + '?');
+    return base + 'autoplay=1&enablejsapi=1&playsinline=1&rel=0&modestbranding=1&origin=' + o;
   }
+  // YouTube tells us (postMessage) whether it is really playing, so the button never lies.
+  window.addEventListener('message', function (e) {
+    if (!sp || e.source !== sp.contentWindow) return;
+    var d = e.data; if (typeof d === 'string') { try { d = JSON.parse(d); } catch (x) { return; } }
+    if (!d) return;
+    var st = d.event === 'onStateChange' ? d.info : (d.info && d.info.playerState !== undefined ? d.info.playerState : null);
+    if (st === null || st === undefined) return;
+    lastEv = st;
+    if (st === 1 || st === 3) { began = true; ls(K2, null); if (!playing) { playing = true; ui(); } }
+    else if (st === 2 && began && playing) { playing = false; ls(K2, '1'); ui(); }
+  });
 
   function buildFrame() {
     stopFrame();
-    var s = S[idx], url = embedUrl(s);
-    if (!url) return false;
-    if (s.type === 'spotify') {   // official Spotify IFrame API: lets our own play/pause button control it
-      var holder = document.createElement('div'); el.frame.appendChild(holder);
-      var g = gen;
-      spotifyApi().then(function (api) {
-        if (g !== gen) return;
-        api.createController(holder, { uri: 'spotify:album:' + s.embed, width: '100%', height: 152 }, function (c) {
-          if (g !== gen) { try { c.destroy(); } catch (e) {} return; }
-          sp = c;
-          c.addListener('ready', function () { if (playing) c.play(); });
-        });
-      }).catch(function () { open = true; ui(); });
-      return true;
-    }
+    var s = S[idx]; if (!s.yt) return false;
     var f = document.createElement('iframe');
-    f.src = url; f.title = s.name + ' (' + platform(s.type) + ')'; f.referrerPolicy = 'strict-origin-when-cross-origin';
-    f.allow = s.type === 'apple' ? 'autoplay *; encrypted-media *; clipboard-write' : 'autoplay; encrypted-media; clipboard-write; picture-in-picture; fullscreen';
-    if (s.type === 'apple') f.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
-    if (s.type === 'youtube') { f.className = 'yt'; f.allowFullscreen = true; yt = f; } else { f.height = s.type === 'spotify' ? 152 : 175; }
-    el.frame.appendChild(f);
+    f.src = embedUrl(s); f.title = s.name + ' (YouTube)'; f.className = 'yt'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.allow = 'autoplay; encrypted-media; clipboard-write; picture-in-picture; fullscreen';
+    f.addEventListener('load', function () { try { f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1 }), '*'); } catch (x) {} });
+    el.frame.appendChild(f); sp = f;
+    var g = gen;
+    setTimeout(function () { if (g === gen && playing && !began) { playing = false; ui(); } }, 8000);   // blocked by the browser: show the play button
     return true;
   }
 
   function renderInfo() {
     var s = S[idx]; clear(el.info);
-    if (!s.type) el.info.appendChild(mk('p', '', I.legal));
-    else if (s.type === 'apple' && playing) el.info.appendChild(mk('p', 'meta', I.manual));
+    el.info.appendChild(mk('p', 'meta', s.kind === 'inspired' ? I.inspired : I.officialNote));
     if (s.hosts) el.info.appendChild(mk('p', 'meta', I.hosts + ': ' + s.hosts));
     el.info.appendChild(mk('p', 'meta', s.channel));
-    var p = mk('p'), a = mk('a', '', I.listen); a.href = s.url; a.rel = 'noopener'; a.target = '_blank'; p.appendChild(a); el.info.appendChild(p);
+    var p = mk('p'), a = mk('a', '', s.kind === 'inspired' ? I.listenReal : I.listen); a.href = s.url; a.rel = 'noopener'; a.target = '_blank'; p.appendChild(a); el.info.appendChild(p);
   }
 
   function ui() {
     var s = S[idx];
-    root.classList.toggle('live', playing && !!s.type);
+    root.classList.toggle('live', playing);
     root.classList.toggle('hint', armed && !playing);
     el.name.textContent = s.name;
     el.sub.textContent = armed && !playing ? I.tapStart : (s.freq.toFixed(1) + ' MHz · ' + (I.genre[s.genre] || ''));
@@ -170,26 +157,16 @@ body{padding-bottom:76px}
 
   function start() {            // must run inside a user gesture
     armed = false; ls(K2, null); playing = true;
-    var ok = buildFrame();
-    if (!S[idx].type) playing = false;
-    if (ok && S[idx].type === 'apple') open = true;   // Apple Music has no control API: needs a press on its own play button
-    ui();
+    buildFrame(); ui();
   }
-  function pause() {
-    playing = false; ls(K2, '1');
-    if (yt) cmd('pauseVideo'); else if (sp) { try { sp.pause(); } catch (e) {} } else stopFrame();
-    ui();
-  }
-  function resume() {
-    ls(K2, null);
-    if (yt) { playing = true; cmd('playVideo'); ui(); } else if (sp) { playing = true; try { sp.resume(); } catch (e) {} ui(); } else start();
-  }
+  function pause() { playing = false; ls(K2, '1'); cmd('pauseVideo'); ui(); }
+  function resume() { ls(K2, null); if (sp && began) { playing = true; cmd('playVideo'); ui(); } else start(); }
   function select(k, fromUser) {
     idx = (k + N) % N; ls(K1, S[idx].id);
     if (playing || armed || fromUser) { start(); } else { stopFrame(); ui(); }
   }
 
-  el.play.addEventListener('click', function () { if (armed || !playing) { if ((yt || sp) && !armed) resume(); else start(); } else pause(); });
+  el.play.addEventListener('click', function () { if (armed || !playing) { if (sp && !armed) resume(); else start(); } else pause(); });
   el.prev.addEventListener('click', function () { select(idx - 1, true); });
   el.next.addEventListener('click', function () { select(idx + 1, true); });
   el.tog.addEventListener('click', function () { open = !open; ui(); });
@@ -200,11 +177,11 @@ body{padding-bottom:76px}
   function onGesture(e) {
     if (root.contains(e.target)) { off(); return; }
     off();
-    if (wantPlay && S[idx].type) start();
+    if (wantPlay && S[idx].yt) start();
   }
   function off() { evs.forEach(function (n) { document.removeEventListener(n, onGesture, true); }); armed = armed && false; ui(); }
   buildStatic();
-  if (wantPlay && S[idx].type) { armed = true; evs.forEach(function (n) { document.addEventListener(n, onGesture, true); }); }
+  if (wantPlay && S[idx].yt) { armed = true; evs.forEach(function (n) { document.addEventListener(n, onGesture, true); }); }
   ui();
 
   // ---- keeps the radio alive while navigating: fetch + swap the page, never touch #rx-dock ----
@@ -286,6 +263,6 @@ body{padding-bottom:76px}
     if (!LANG.test(location.pathname)) { location.reload(); return; }
     go(location.href, false);
   });
-  window.__rxDock = { go: go };
+  window.__rxDock = { go: go, state: function () { return { playing: playing, began: began, station: S[idx].id, hasSp: !!sp, ev: lastEv }; } };
 })();
 </script>

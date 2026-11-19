@@ -409,8 +409,8 @@
   "open": "Abrir o rádio completo",
   "legal": "Esta estação não tem player oficial para incorporar. Só linkamos a Rockstar Games, onde dá para ouvir uma prévia.",
   "playerNote": "Player oficial de {p}. Só carrega depois que você apertar Tune in.",
-  "privH": "Players do rádio (Apple Music, Spotify, YouTube)",
-  "privP": "O Leonida Radio é um pequeno player no canto de todas as páginas. Ele não carrega nada de terceiros até você tocar, clicar ou apertar uma tecla no site; depois disso carrega o player oficial escolhido (YouTube via youtube-nocookie.com, Apple Music ou Spotify), e essa plataforma pode gravar cookies e receber dados técnicos como seu IP, conforme a política dela. Os navegadores não permitem som antes de você interagir com a página. Pausar para o som e sua escolha é lembrada. Guardamos só a última estação e se você pausou (localStorage). Não hospedamos nenhum áudio.",
+  "privH": "Player do rádio (YouTube)",
+  "privP": "O Leonida Radio é um pequeno player no canto de todas as páginas. Ele não carrega nada de terceiros até você tocar, clicar ou apertar uma tecla no site; depois disso carrega o player oficial do YouTube escolhido (youtube-nocookie.com), e o YouTube pode gravar cookies e receber dados técnicos como seu IP, conforme a política dele. Os navegadores não permitem som antes de você interagir com a página. Pausar para o som e sua escolha é lembrada. Guardamos só a última estação e se você pausou (localStorage). Não hospedamos nenhum áudio.",
   "genre": {
    "album": "Álbum",
    "score": "Trilha",
@@ -421,7 +421,8 @@
    "afro": "Amapiano e clássicos africanos",
    "metal": "Metal",
    "pop": "Pop",
-   "rap": "Rap do sul e clássicos do hip-hop"
+   "rap": "Rap do sul e clássicos do hip-hop",
+   "gta": "GTA no Spotify"
   },
   "tapStart": "Toque em qualquer lugar para ligar o rádio",
   "play": "Tocar",
@@ -429,6 +430,9 @@
   "expand": "Abrir o rádio",
   "collapse": "Minimizar o rádio",
   "manual": "Aperte o play dentro do player para ouvir esta estação.",
-  "dockLabel": "Leonida Radio"
+  "dockLabel": "Leonida Radio",
+  "listenReal": "Ouvir a prévia da estação real na Rockstar",
+  "inspired": "Mesmo estilo desta estação do jogo, em playlist pública do YouTube. Não é o áudio do próprio jogo. Para ouvir a prévia da estação real, use o link abaixo.",
+  "officialNote": "Playlist ou vídeo oficial no YouTube."
  }
 }
