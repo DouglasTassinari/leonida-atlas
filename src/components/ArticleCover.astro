@@ -1,0 +1,6 @@
+---
+import { coverSvg } from '../data/covers.js';
+// slug: guide slug or 'index'; alt: translated text (guide title)
+const { slug = 'index', alt } = Astro.props;
+---
+<div class="cover" role="img" aria-label={alt} set:html={coverSvg(slug)} />

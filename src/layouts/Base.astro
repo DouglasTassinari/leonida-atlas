@@ -1,10 +1,12 @@
 ---
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { site, adLabel, menuLabel } from '../data/site.js';
 import { t, meta, completeLocales, url } from '../i18n/index.js';
 
 // lang: locale code; path: '' for home or '/log', '/guides/xyz' ...; jsonld: array of schema objects
-const { lang, path = '', title, description, jsonld = [], ogType = 'website' } = Astro.props;
+const { lang, path = '', title, description, jsonld = [], ogType = 'website', image = 'index' } = Astro.props;
 const ui = t(lang);
 const isHome = path === '';
 const fullTitle = isHome ? title : `${title} | Leonida Atlas`;
@@ -18,6 +20,8 @@ const nav = [
   ['/gallery', ui.gallery.nav],
   ['/about', ui.nav.about],
 ];
+const ogImage = new URL(`/og/${image}.png`, Astro.site).href;
+const ads = site.adsEnabled;
 const cur = path.replace(/\/$/, '');
 const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guides'));
 ---
@@ -43,15 +47,22 @@ const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guide
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content={meta[lang].og} />
   {completeLocales.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={meta[l].og} />)}
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={title} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImage} />
+  <script is:inline>document.documentElement.classList.add('js')</script>
   {jsonld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
 </head>
-<body>
+<body class={ads ? 'has-rails' : undefined}>
   <a class="skip" href="#main">{ui.skip}</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href={url(lang)}><Logo />Leonida <b>Atlas</b></a>
-      <nav class="main" aria-label="Main">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mainnav" aria-label={menuLabel[lang]}><span aria-hidden="true"></span><span class="menu-txt">{menuLabel[lang]}</span></button>
+      <nav class="main" id="mainnav" aria-label="Main">
         {nav.map(([p, label]) => <a href={url(lang, p)} aria-current={isCurrent(p) ? 'page' : undefined}>{label}</a>)}
         <details class="lang">
           <summary aria-label={ui.langLabel}>{ui.langLabel}: {meta[lang].native}</summary>
@@ -64,12 +75,24 @@ const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guide
       </nav>
     </div>
   </header>
-  <main id="main" class="wrap"><slot /></main>
+  <div class="page wrap">
+    {ads && <aside class="ad-rail ad-left" aria-label={adLabel[lang]}><span class="ad-label">{adLabel[lang]}</span><AdSlot kind="rail" /></aside>}
+    <main id="main"><slot />
+      {ads && <aside class="ad-inline" aria-label={adLabel[lang]}><span class="ad-label">{adLabel[lang]}</span><AdSlot kind="inline" /></aside>}
+    </main>
+    {ads && <aside class="ad-rail ad-right" aria-label={adLabel[lang]}><span class="ad-label">{adLabel[lang]}</span><AdSlot kind="rail" /></aside>}
+  </div>
   <footer class="site-footer">
     <div class="wrap">
       <p>{ui.footer.disclaimer}</p>
       <p><a href={url(lang, '/about')}>{ui.footer.about}</a> · <a href={url(lang, '/disclaimer')}>{ui.footer.disc}</a> · <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a></p>
     </div>
   </footer>
+  <script is:inline>
+    (function(){var b=document.querySelector('.menu-btn'),n=document.getElementById('mainnav');if(!b||!n)return;
+    function set(o){b.setAttribute('aria-expanded',o);n.classList.toggle('open',o)}
+    b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true')});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&b.getAttribute('aria-expanded')==='true'){set(false);b.focus()}});})();
+  </script>
 </body>
 </html>

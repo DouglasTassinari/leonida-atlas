@@ -1,5 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import ArticleCover from '../../../components/ArticleCover.astro';
 import Trailer from '../../../components/Trailer.astro';
 import { facts } from '../../../data/facts.js';
 import { t, completeLocales, url, guideSlugs, guideFacts, guideRelated, langTable, langName, meta } from '../../../i18n/index.js';
@@ -30,9 +31,10 @@ const jsonld = [
   ] },
 ];
 ---
-<Base lang={lang} path={'/guides/' + slug} title={p.title} description={p.desc} jsonld={jsonld} ogType="article">
+<Base lang={lang} path={'/guides/' + slug} title={p.title} description={p.desc} jsonld={jsonld} ogType="article" image={slug}>
   <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{g.home}</a> / <a href={url(lang, '/guides')}>{g.hubTitle}</a> / {p.title}</nav>
   <h1>{p.title}</h1>
+  <ArticleCover slug={slug} alt={p.title} />
   {slug === 'cheats' && <p><span class="tag unconfirmed">{g.unconfirmedTag}</span></p>}
   <p class="lead">{p.lead}</p>
   <p>{p.body}</p>
