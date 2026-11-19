@@ -145,7 +145,7 @@
   "h2": "What we collect",
   "p2": "We do not ask you to create an account and we do not collect personal information through forms. Our hosting provider may keep standard server logs (such as IP address and requested page) for security and operation.",
   "h3": "Future ads and cookies",
-  "p3": "We may show advertising or use analytics in the future. If we do, third-party vendors may use cookies or similar technologies to serve ads or measure traffic. This policy will be updated before that happens, including how to opt out and, where required, a consent prompt.",
+  "p3": "We use Cloudflare Web Analytics to count visits. It does not use cookies and does not track individual visitors. We may also show advertising in the future. If we do, third-party vendors may use cookies or similar technologies to serve ads or measure traffic. This policy will be updated before that happens, including how to opt out and, where required, a consent prompt.",
   "h4": "External links",
   "p4": "We link to third-party sites such as the Rockstar Games newswire. Their privacy practices are their own.",
   "commH": "Community posts",
