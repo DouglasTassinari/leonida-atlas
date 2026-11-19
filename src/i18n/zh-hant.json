@@ -409,8 +409,8 @@
   "open": "開啟完整電台",
   "legal": "此電台沒有可嵌入的官方播放器。我們只提供指向 Rockstar Games 的連結，可在那裡試聽。",
   "playerNote": "來自 {p} 的官方播放器。僅在你按下 Tune in 後載入。",
-  "privH": "電台播放器（Apple Music、Spotify、YouTube）",
-  "privP": "在你按下 Tune in 之前，Leonida Radio 頁面不會從第三方載入任何內容。之後會載入所選的官方播放器（Apple Music、Spotify 或透過 youtube-nocookie.com 的 YouTube），相關平台可能依其自身隱私政策設定 Cookie 並接收 IP 位址等技術資料。我們只在瀏覽器（localStorage）中儲存你最後選擇的電台。我們不代管任何音訊。",
+  "privH": "Radio players (Apple Music, Spotify, YouTube)",
+  "privP": "Leonida Radio is a small player in the corner of every page. It loads nothing from third parties until you first tap, click or press a key on the site; then the selected official player (YouTube via youtube-nocookie.com, Apple Music or Spotify) is loaded and that platform may set cookies and receive technical data such as your IP address, under its own privacy policy. Browsers do not allow sound before you interact with the page. Pause stops it, and your choice is remembered. We save only your last station and whether you paused (localStorage). We do not host any audio.",
   "genre": {
    "album": "專輯",
    "score": "原聲",
@@ -422,6 +422,13 @@
    "metal": "金屬",
    "pop": "流行",
    "rap": "南方說唱與嘻哈經典"
-  }
+  },
+  "tapStart": "Tap anywhere to start the radio",
+  "play": "Play",
+  "pause": "Pause",
+  "expand": "Open radio",
+  "collapse": "Minimize radio",
+  "manual": "Press play inside the player to hear this station.",
+  "dockLabel": "Leonida Radio"
  }
 }

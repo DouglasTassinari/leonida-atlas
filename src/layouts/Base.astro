@@ -3,6 +3,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
 import AdSlot from '../components/AdSlot.astro';
+import RadioDock from '../components/RadioDock.astro';
 import { site, adLabel, menuLabel } from '../data/site.js';
 import { t, meta, completeLocales, url } from '../i18n/index.js';
 
@@ -24,7 +25,6 @@ const nav = [
   ['/reality-check', ui.nav.reality],
   ['/guides', ui.nav.guides],
   ['/gallery', ui.gallery.nav],
-  ['/radio', ui.nav.radio],
   ['/about', ui.nav.about],
 ];
 const ogImage = new URL(`/og/${image}.png`, Astro.site).href;
@@ -96,11 +96,12 @@ const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guide
       <p><a href={url(lang, '/about')}>{ui.footer.about}</a> · <a href={url(lang, '/disclaimer')}>{ui.footer.disc}</a> · <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a> · <a href={url(lang, '/terms')}>{ui.footer.terms}</a></p>
     </div>
   </footer>
+  <RadioDock lang={lang} />
   <script is:inline>
     (function(){var b=document.querySelector('.menu-btn'),n=document.getElementById('mainnav');if(!b||!n)return;
     function set(o){b.setAttribute('aria-expanded',o);n.classList.toggle('open',o)}
     b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true')});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&b.getAttribute('aria-expanded')==='true'){set(false);b.focus()}});})();
+    if(window.__menuEsc)document.removeEventListener('keydown',window.__menuEsc);window.__menuEsc=function(e){if(e.key==='Escape'&&b.getAttribute('aria-expanded')==='true'){set(false);b.focus()}};document.addEventListener('keydown',window.__menuEsc);})();
   </script>
 <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "23eeb6fc52fc4f138b9f5eb8d5749462"}'></script>
 </body>

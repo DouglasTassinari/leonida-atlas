@@ -409,8 +409,8 @@
   "open": "Abrir la radio completa",
   "legal": "Esta estación no tiene reproductor oficial incrustable. Solo enlazamos a Rockstar Games, donde puedes oír un adelanto.",
   "playerNote": "Reproductor oficial de {p}. Solo carga después de pulsar Tune in.",
-  "privH": "Reproductores de radio (Apple Music, Spotify, YouTube)",
-  "privP": "La página Leonida Radio no carga nada de terceros hasta que pulsas Tune in. Después se carga el reproductor oficial elegido (Apple Music, Spotify o YouTube mediante youtube-nocookie.com) y esa plataforma puede establecer cookies y recibir datos técnicos, como tu IP, según su propia política de privacidad. Solo guardamos en tu navegador (localStorage) la última estación elegida. No alojamos audio.",
+  "privH": "Radio players (Apple Music, Spotify, YouTube)",
+  "privP": "Leonida Radio is a small player in the corner of every page. It loads nothing from third parties until you first tap, click or press a key on the site; then the selected official player (YouTube via youtube-nocookie.com, Apple Music or Spotify) is loaded and that platform may set cookies and receive technical data such as your IP address, under its own privacy policy. Browsers do not allow sound before you interact with the page. Pause stops it, and your choice is remembered. We save only your last station and whether you paused (localStorage). We do not host any audio.",
   "genre": {
    "album": "Álbum",
    "score": "Banda sonora",
@@ -422,6 +422,13 @@
    "metal": "Metal",
    "pop": "Pop",
    "rap": "Rap del sur y clásicos del hip-hop"
-  }
+  },
+  "tapStart": "Tap anywhere to start the radio",
+  "play": "Play",
+  "pause": "Pause",
+  "expand": "Open radio",
+  "collapse": "Minimize radio",
+  "manual": "Press play inside the player to hear this station.",
+  "dockLabel": "Leonida Radio"
  }
 }

@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Scene from '../../components/Scene.astro';
-import Radio from '../../components/Radio.astro';
 import Trailer from '../../components/Trailer.astro';
 import PostCard from '../../components/PostCard.astro';
 import { posts } from '../../data/posts/index.js';
@@ -30,11 +29,6 @@ const jsonld = [{
     <a class="card t" href={url(lang, '/log')}><h3>{h.c2t}</h3><p>{h.c2p}</p></a>
     <a class="card" href={url(lang, '/fact-check')}><h3>{h.c3t}</h3><p>{h.c3p}</p></a>
   </div>
-  <section aria-labelledby="home-radio">
-    <h2 id="home-radio">{ui.radio.h1}</h2>
-    <p class="lead">{ui.radio.cardP} <a href={url(lang, '/radio')}>{ui.radio.open}</a></p>
-    <Radio lang={lang} compact />
-  </section>
   <Trailer lang={lang} />
   <div class="cards">
     <a class="card t" href={url(lang, '/news')}><h3>{ui.news.title}</h3><p>{ui.news.cardP}</p></a>
