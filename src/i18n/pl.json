@@ -142,5 +142,26 @@
    "body": "Poradniki osób trzecich krążące w sieci wzajemnie się różnią i żaden nie jest oficjalnym źródłem. Dopóki Rockstar niczego nie opublikuje, traktuj każdą listę kodów lub kombinacji przycisków jako niezweryfikowaną. Jeśli Rockstar opublikuje oficjalną listę, podlinkujemy ją tutaj.",
    "q": "Czy są oficjalne kody do GTA VI?", "a": "Żadne oficjalne źródło ich nie potwierdza, więc nie przedstawiamy niczego jako faktu."
   }
- }
+ },
+ "gallery": {
+  "nav": "Galeria fanów",
+  "title": "Galeria fanów",
+  "desc": "Publiczne wpisy fanów ze zrzutami ekranu i klipami z GTA VI, osadzone z oryginalnej platformy z podaniem autora i linkiem do każdego wpisu. Nie hostujemy obrazów.",
+  "lead": "Zrzuty ekranu i klipy udostępnione przez graczy w dniu premiery. Każdy element jest wyświetlany na oryginalnej platformie, z podaniem autora, datą i linkiem do wpisu.",
+  "notice": "Wpisy są osadzane z ich oryginalnych platform; nie hostujemy obrazów. Cała zawartość gry należy do Rockstar Games/Take-Two oraz twórców, którzy ją opublikowali. Aby poprosić o usunięcie elementu, skontaktuj się z nami przez stronę zgłoszeń (issues) repozytorium GitHub:",
+  "privacyNote": "Nic nie jest ładowane z X, dopóki nie klikniesz „Wczytaj osadzenie” przy danym elemencie. Po wczytaniu platforma może zapisać pliki cookie i widzieć Twoją wizytę; zobacz naszą stronę o prywatności.",
+  "load": "Wczytaj osadzenie",
+  "loadFail": "Osadzenie nie wczytało się. Użyj poniższego linku, aby otworzyć oryginalny wpis.",
+  "report": "Zgłoś/Usuń",
+  "view": "Zobacz oryginalny wpis",
+  "by": "Autor",
+  "posted": "Opublikowano",
+  "verified": "Sprawdzone przez nas",
+  "platform": "Platforma",
+  "desc2": "Nasz opis",
+  "cardP": "Wpisy fanów osadzone z X, z podaniem autora i bez hostowania obrazów.",
+  "privH": "Osadzone treści stron trzecich",
+  "privP": "Galeria fanów pokazuje wpisy z X, a strona główna i jeden poradnik pokazują film z YouTube. Wpisy z galerii ładują się dopiero po kliknięciu „Wczytaj osadzenie”. Po wczytaniu platforma może zapisywać pliki cookie i otrzymywać dane techniczne, takie jak Twój adres IP i odwiedzana strona, zgodnie z własną polityką prywatności. Zwiastun z YouTube korzysta z domeny youtube-nocookie.com o zwiększonej prywatności, ale i tak łączy się z YouTube po otwarciu strony. Nie hostujemy tych obrazów ani filmów."
+ },
+ "trailer": {"h": "Oficjalny zwiastun premierowy", "title": "Zwiastun premierowy Grand Theft Auto VI, odtwarzacz wideo YouTube", "cap": "Official Launch Trailer, kanał Rockstar Games na YouTube", "src": "Artykuł w Rockstar Newswire"}
 }

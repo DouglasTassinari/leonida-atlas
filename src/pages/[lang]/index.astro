@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Scene from '../../components/Scene.astro';
+import Trailer from '../../components/Trailer.astro';
 import { t, url, staticLocales, guideSlugs, meta } from '../../i18n/index.js';
 export const getStaticPaths = staticLocales;
 const { lang } = Astro.params;
@@ -25,6 +26,10 @@ const jsonld = [{
     <a class="card" href={url(lang, '/log')}><h3>{h.c1t}</h3><p>{h.c1p}</p></a>
     <a class="card t" href={url(lang, '/log')}><h3>{h.c2t}</h3><p>{h.c2p}</p></a>
     <a class="card" href={url(lang, '/fact-check')}><h3>{h.c3t}</h3><p>{h.c3p}</p></a>
+  </div>
+  <Trailer lang={lang} />
+  <div class="cards">
+    <a class="card" href={url(lang, '/gallery')}><h3>{ui.gallery.title}</h3><p>{ui.gallery.cardP}</p></a>
   </div>
   <h2>{h.guidesH}</h2>
   <p class="lead">{h.guidesLead}</p>

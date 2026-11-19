@@ -142,5 +142,26 @@
    "body": "Ratgeber von Drittanbietern im Netz widersprechen sich, und keiner ist eine offizielle Quelle. Solange Rockstar nichts veröffentlicht, gilt jede Liste von Codes oder Tastenfolgen als unbestätigt. Sobald Rockstar eine offizielle Liste veröffentlicht, verlinken wir sie hier.",
    "q": "Gibt es offizielle GTA-VI-Cheatcodes?", "a": "Keine offizielle Quelle bestätigt welche, daher behaupten wir nichts als Fakt."
   }
- }
+ },
+ "gallery": {
+  "nav": "Fan-Galerie",
+  "title": "Fan-Galerie",
+  "desc": "Öffentliche Fan-Beiträge mit GTA-VI-Screenshots und Clips, von der Originalplattform eingebettet, mit Namensnennung und Link zu jedem Beitrag. Wir hosten die Bilder nicht.",
+  "lead": "Screenshots und Clips, die Spieler am Erscheinungstag geteilt haben. Jeder Eintrag wird auf seiner Originalplattform angezeigt, mit Nennung des Urhebers, Datum und Link zum Beitrag.",
+  "notice": "Beiträge werden von ihren Originalplattformen eingebettet; wir hosten die Bilder nicht. Alle Spielinhalte gehören Rockstar Games/Take-Two und den veröffentlichenden Urhebern. Um die Entfernung eines Eintrags zu beantragen, kontaktiere uns über die Issues-Seite des GitHub-Repositorys:",
+  "privacyNote": "Von X wird nichts geladen, bis du bei einem Eintrag auf „Einbettung laden“ klickst. Nach dem Laden kann die Plattform Cookies setzen und deinen Besuch sehen; siehe unsere Datenschutzseite.",
+  "load": "Einbettung laden",
+  "loadFail": "Die Einbettung wurde nicht geladen. Öffne den Originalbeitrag über den Link unten.",
+  "report": "Melden/Entfernen",
+  "view": "Originalbeitrag ansehen",
+  "by": "Urheber",
+  "posted": "Veröffentlicht",
+  "verified": "Von uns geprüft",
+  "platform": "Plattform",
+  "desc2": "Unsere Beschreibung",
+  "cardP": "Fan-Beiträge von X, eingebettet mit Namensnennung und ohne gehostete Bilder.",
+  "privH": "Eingebettete Inhalte Dritter",
+  "privP": "Die Fan-Galerie zeigt Beiträge von X, die Startseite und eine Anleitung zeigen ein YouTube-Video. Galerie-Beiträge werden erst nach einem Klick auf „Einbettung laden“ geladen. Nach dem Laden kann die Plattform Cookies setzen und technische Daten wie deine IP-Adresse und die besuchte Seite erhalten, gemäß ihrer eigenen Datenschutzerklärung. Der YouTube-Trailer nutzt die datenschutzfreundliche Domain youtube-nocookie.com, verbindet sich aber beim Öffnen der Seite dennoch mit YouTube. Wir hosten diese Bilder und Videos nicht."
+ },
+ "trailer": {"h": "Offizieller Launch-Trailer", "title": "Grand Theft Auto VI Launch-Trailer, YouTube-Videoplayer", "cap": "Official Launch Trailer, YouTube-Kanal von Rockstar Games", "src": "Artikel im Rockstar Newswire"}
 }

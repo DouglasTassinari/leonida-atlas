@@ -250,5 +250,26 @@
    "q": "Are there official GTA VI cheat codes?",
    "a": "We have no official source confirming any, so we state nothing as fact."
   }
- }
+ },
+ "gallery": {
+  "nav": "Fan gallery",
+  "title": "Fan gallery",
+  "desc": "Public fan posts with GTA VI screenshots and clips, embedded from their original platform with credit and a link to each post. We do not host the images.",
+  "lead": "Screenshots and clips shared by players on launch day. Each item is shown on its original platform, with the author's credit, the date and a link to the post.",
+  "notice": "Posts are embedded from their original platforms; we do not host the images. All game content belongs to Rockstar Games/Take-Two and the posting creators. To request removal of an item, contact us via the GitHub repository issues page:",
+  "privacyNote": "Nothing is loaded from X until you click “Load embed” on an item. Once loaded, the platform may set cookies and see your visit; see our privacy page.",
+  "load": "Load embed",
+  "loadFail": "The embed did not load. Use the link below to open the original post.",
+  "report": "Report/Remove",
+  "view": "View original post",
+  "by": "Author",
+  "posted": "Posted",
+  "verified": "Checked by us",
+  "platform": "Platform",
+  "desc2": "Our description",
+  "cardP": "Fan posts embedded from X, with credit and no hosted images.",
+  "privH": "Embedded third-party content",
+  "privP": "The Fan gallery shows posts from X, and the home page and one guide show a YouTube video. Gallery posts load only after you click “Load embed”. When loaded, the platform may set cookies and receive technical data such as your IP address and the page you visited, under its own privacy policy. The YouTube trailer uses the privacy-enhanced youtube-nocookie.com domain, but it still contacts YouTube when the page opens. We do not host these images or videos."
+ },
+ "trailer": {"h": "Official launch trailer", "title": "Grand Theft Auto VI Launch Trailer, YouTube video player", "cap": "Official Launch Trailer, Rockstar Games YouTube channel", "src": "Rockstar Newswire article"}
 }

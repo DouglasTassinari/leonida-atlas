@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, url, staticLocales, meta } from '../../i18n/index.js';
+import { gallery, removalUrl, platformName } from '../../data/gallery.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const G = ui.gallery;
+const fmtDate = (d) => new Intl.DateTimeFormat(meta[lang].html, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(d + 'T00:00:00Z'));
+const pageUrl = new URL(url(lang, '/gallery'), Astro.site).href;
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: G.title, description: G.desc, url: pageUrl, inLanguage: meta[lang].html,
+    isPartOf: { '@type': 'WebSite', name: 'Leonida Atlas', url: new URL(url(lang), Astro.site).href },
+    mainEntity: { '@type': 'ItemList', numberOfItems: gallery.length,
+      itemListElement: gallery.map((it, i) => ({ '@type': 'ListItem', position: i + 1, url: it.url, name: `${it.author} (${platformName[it.platform]})` })) } },
+];
+---
+<Base lang={lang} path="/gallery" title={G.title} description={G.desc} jsonld={jsonld}>
+  <h1>{G.title}</h1>
+  <p class="lead">{G.lead}</p>
+  <aside class="panel notice" aria-label={G.report}>
+    <p>{G.notice} <a href={removalUrl} rel="noopener">{removalUrl}</a></p>
+    <p class="meta">{G.privacyNote} <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a></p>
+    <p><a class="btn" href={removalUrl} rel="noopener">{G.report}</a></p>
+  </aside>
+
+  <div class="gallery" data-i18n={JSON.stringify({ fail: G.loadFail })}>
+    {gallery.map((it) => (
+      <article class="panel gitem" data-platform={it.platform} data-url={it.url}>
+        <div class="slot">
+          <button type="button" class="load">{G.load}</button>
+        </div>
+        <dl class="meta gmeta">
+          <div><dt>{G.platform}</dt><dd>{platformName[it.platform]}</dd></div>
+          <div><dt>{G.by}</dt><dd>{it.author}</dd></div>
+          <div><dt>{G.posted}</dt><dd><time datetime={it.date}>{fmtDate(it.date)}</time></dd></div>
+          <div><dt>{G.verified}</dt><dd><time datetime={it.verified}>{fmtDate(it.verified)}</time></dd></div>
+        </dl>
+        <p class="gdesc"><span class="meta">{G.desc2}:</span> <span lang="en">{it.description}</span></p>
+        <p class="gactions"><a href={it.url} rel="noopener nofollow">{G.view}</a> · <a href={removalUrl} rel="noopener">{G.report}</a></p>
+        <p class="meta gfail" hidden></p>
+      </article>
+    ))}
+  </div>
+</Base>
+
+<script is:inline>
+  (function () {
+    var root = document.querySelector('.gallery');
+    if (!root) return;
+    var I = JSON.parse(root.dataset.i18n);
+    var scriptPromise = null;
+    function loadWidgets() {
+      if (window.twttr && window.twttr.widgets) return Promise.resolve(window.twttr);
+      if (scriptPromise) return scriptPromise;
+      scriptPromise = new Promise(function (res, rej) {
+        var s = document.createElement('script');
+        s.async = true; s.src = 'https://platform.twitter.com/widgets.js';
+        s.onload = function () { if (window.twttr && window.twttr.ready) window.twttr.ready(res); else res(window.twttr); };
+        s.onerror = function () { scriptPromise = null; rej(new Error('blocked')); };
+        document.head.appendChild(s);
+      });
+      return scriptPromise;
+    }
+    root.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('button.load');
+      if (!btn) return;
+      var item = btn.closest('.gitem'), slot = item.querySelector('.slot'), fail = item.querySelector('.gfail');
+      btn.disabled = true; fail.hidden = true;
+      var id = (item.dataset.url.match(/status\/(\d+)/) || [])[1];
+      var holder = document.createElement('div');
+      slot.innerHTML = ''; slot.appendChild(holder);
+      loadWidgets().then(function (tw) {
+        return tw.widgets.createTweet(id, holder, { conversation: 'none', theme: 'dark', dnt: true, align: 'center' });
+      }).then(function (el) {
+        if (!el) throw new Error('no embed');
+      }).catch(function () {
+        slot.innerHTML = ''; slot.appendChild(btn); btn.disabled = false;
+        fail.textContent = I.fail; fail.hidden = false;
+      });
+    });
+  })();
+</script>

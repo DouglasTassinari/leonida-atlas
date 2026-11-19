@@ -1,0 +1,13 @@
+---
+import { t } from '../i18n/index.js';
+import { trailer } from '../data/gallery.js';
+const { lang } = Astro.props;
+const T = t(lang).trailer;
+---
+<section class="trailer">
+  <h2>{T.h}</h2>
+  <figure>
+    <div class="video"><iframe src={`https://www.youtube-nocookie.com/embed/${trailer.id}`} title={T.title} loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+    <figcaption class="meta">{T.cap} · <a href={trailer.newswire} rel="noopener">{T.src}</a></figcaption>
+  </figure>
+</section>

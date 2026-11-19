@@ -142,5 +142,26 @@
    "body": "Las guías de terceros que circulan en línea se contradicen y ninguna es fuente oficial. Mientras Rockstar no publique nada, considera no verificada cualquier lista de códigos o secuencias de botones. Si Rockstar publica una lista oficial, la enlazaremos aquí.",
    "q": "¿Hay trucos oficiales de GTA VI?", "a": "Ninguna fuente oficial los confirma, así que no afirmamos nada como dato."
   }
- }
+ },
+ "gallery": {
+  "nav": "Galería de fans",
+  "title": "Galería de fans",
+  "desc": "Publicaciones públicas de fans con capturas y clips de GTA VI, incrustadas desde su plataforma original con crédito y enlace a cada publicación. No alojamos las imágenes.",
+  "lead": "Capturas y clips compartidos por jugadores el día del lanzamiento. Cada elemento se muestra en su plataforma original, con el crédito del autor, la fecha y el enlace a la publicación.",
+  "notice": "Las publicaciones se incrustan desde sus plataformas originales; no alojamos las imágenes. Todo el contenido del juego pertenece a Rockstar Games/Take-Two y a los creadores que publicaron. Para solicitar la eliminación de un elemento, contáctanos en la página de issues del repositorio de GitHub:",
+  "privacyNote": "No se carga nada de X hasta que hagas clic en “Cargar incrustación” en un elemento. Una vez cargado, la plataforma puede establecer cookies y ver tu visita; consulta nuestra página de privacidad.",
+  "load": "Cargar incrustación",
+  "loadFail": "La incrustación no se cargó. Usa el enlace de abajo para abrir la publicación original.",
+  "report": "Reportar/Eliminar",
+  "view": "Ver publicación original",
+  "by": "Autor",
+  "posted": "Publicado",
+  "verified": "Verificado por nosotros",
+  "platform": "Plataforma",
+  "desc2": "Nuestra descripción",
+  "cardP": "Publicaciones de fans incrustadas desde X, con crédito y sin alojar imágenes.",
+  "privH": "Contenido incrustado de terceros",
+  "privP": "La Galería de fans muestra publicaciones de X, y la página de inicio y una guía muestran un video de YouTube. Las publicaciones de la galería solo se cargan después de que haces clic en “Cargar incrustación”. Una vez cargadas, la plataforma puede establecer cookies y recibir datos técnicos, como tu dirección IP y la página que visitaste, según su propia política de privacidad. El tráiler de YouTube usa el dominio de privacidad mejorada youtube-nocookie.com, pero aun así se conecta a YouTube al abrir la página. No alojamos estas imágenes ni videos."
+ },
+ "trailer": {"h": "Tráiler oficial de lanzamiento", "title": "Tráiler de lanzamiento de Grand Theft Auto VI, reproductor de video de YouTube", "cap": "Official Launch Trailer, canal de YouTube de Rockstar Games", "src": "Artículo en Rockstar Newswire"}
 }

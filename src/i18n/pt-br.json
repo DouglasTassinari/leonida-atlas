@@ -142,5 +142,26 @@
    "body": "Os guias de terceiros que circulam na internet divergem entre si, e nenhum é fonte oficial. Enquanto a Rockstar não publicar nada, trate qualquer lista de códigos ou sequências de botões como não verificada. Se a Rockstar publicar uma lista oficial, vamos linkar aqui.",
    "q": "Existem cheats oficiais de GTA VI?", "a": "Nenhuma fonte oficial confirma, então não afirmamos nada como fato."
   }
- }
+ },
+ "gallery": {
+  "nav": "Galeria de fãs",
+  "title": "Galeria de fãs",
+  "desc": "Posts públicos de fãs com capturas e clipes de GTA VI, incorporados da plataforma original com crédito e link para cada post. Não hospedamos as imagens.",
+  "lead": "Capturas e clipes compartilhados por jogadores no dia do lançamento. Cada item aparece na plataforma original, com o crédito do autor, a data e o link do post.",
+  "notice": "Os posts são incorporados das plataformas originais; não hospedamos as imagens. Todo o conteúdo do jogo pertence à Rockstar Games/Take-Two e aos criadores que postaram. Para pedir a remoção de um item, fale conosco pela página de issues do repositório no GitHub:",
+  "privacyNote": "Nada é carregado do X até você clicar em “Carregar incorporação” em um item. Depois de carregado, a plataforma pode definir cookies e ver sua visita; veja nossa página de privacidade.",
+  "load": "Carregar incorporação",
+  "loadFail": "A incorporação não carregou. Use o link abaixo para abrir o post original.",
+  "report": "Denunciar/Remover",
+  "view": "Ver post original",
+  "by": "Autor",
+  "posted": "Publicado",
+  "verified": "Verificado por nós",
+  "platform": "Plataforma",
+  "desc2": "Nossa descrição",
+  "cardP": "Posts de fãs incorporados do X, com crédito e sem hospedar imagens.",
+  "privH": "Conteúdo incorporado de terceiros",
+  "privP": "A Galeria de fãs mostra posts do X, e a página inicial e um guia mostram um vídeo do YouTube. Os posts da galeria só carregam depois que você clica em “Carregar incorporação”. Quando carregados, a plataforma pode definir cookies e receber dados técnicos, como seu endereço IP e a página visitada, conforme a política de privacidade dela. O trailer do YouTube usa o domínio de privacidade reforçada youtube-nocookie.com, mas ainda se conecta ao YouTube quando a página abre. Não hospedamos essas imagens nem vídeos."
+ },
+ "trailer": {"h": "Trailer oficial de lançamento", "title": "Trailer de lançamento de Grand Theft Auto VI, player de vídeo do YouTube", "cap": "Official Launch Trailer, canal da Rockstar Games no YouTube", "src": "Artigo no Rockstar Newswire"}
 }

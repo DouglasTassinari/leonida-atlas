@@ -142,5 +142,26 @@
    "body": "Les guides tiers qui circulent en ligne se contredisent et aucun n’est une source officielle. Tant que Rockstar ne publie rien, considérez toute liste de codes ou de séquences de touches comme non vérifiée. Si Rockstar publie une liste officielle, nous la lierons ici.",
    "q": "Existe-t-il des codes de triche officiels pour GTA VI ?", "a": "Aucune source officielle ne le confirme ; nous n’affirmons donc rien."
   }
- }
+ },
+ "gallery": {
+  "nav": "Galerie des fans",
+  "title": "Galerie des fans",
+  "desc": "Publications publiques de fans avec des captures et extraits de GTA VI, intégrées depuis leur plateforme d'origine avec crédit et lien vers chaque publication. Nous n'hébergeons pas les images.",
+  "lead": "Captures et extraits partagés par des joueurs le jour de la sortie. Chaque élément s'affiche sur sa plateforme d'origine, avec le crédit de l'auteur, la date et un lien vers la publication.",
+  "notice": "Les publications sont intégrées depuis leurs plateformes d'origine ; nous n'hébergeons pas les images. Tout le contenu du jeu appartient à Rockstar Games/Take-Two et aux créateurs qui ont publié. Pour demander le retrait d'un élément, contactez-nous via la page des issues du dépôt GitHub :",
+  "privacyNote": "Rien n'est chargé depuis X tant que vous ne cliquez pas sur « Charger l'intégration » pour un élément. Une fois chargé, la plateforme peut déposer des cookies et voir votre visite ; consultez notre page de confidentialité.",
+  "load": "Charger l'intégration",
+  "loadFail": "L'intégration n'a pas pu se charger. Utilisez le lien ci-dessous pour ouvrir la publication d'origine.",
+  "report": "Signaler/Retirer",
+  "view": "Voir la publication d'origine",
+  "by": "Auteur",
+  "posted": "Publié",
+  "verified": "Vérifié par nous",
+  "platform": "Plateforme",
+  "desc2": "Notre description",
+  "cardP": "Publications de fans intégrées depuis X, avec crédit et sans hébergement d'images.",
+  "privH": "Contenus tiers intégrés",
+  "privP": "La galerie des fans affiche des publications de X, et la page d'accueil ainsi qu'un guide affichent une vidéo YouTube. Les publications de la galerie ne se chargent qu'après un clic sur « Charger l'intégration ». Une fois chargées, la plateforme peut déposer des cookies et recevoir des données techniques, comme votre adresse IP et la page visitée, selon sa propre politique de confidentialité. La bande-annonce YouTube utilise le domaine renforcé youtube-nocookie.com, mais contacte tout de même YouTube à l'ouverture de la page. Nous n'hébergeons ni ces images ni ces vidéos."
+ },
+ "trailer": {"h": "Bande-annonce officielle de lancement", "title": "Bande-annonce de lancement de Grand Theft Auto VI, lecteur vidéo YouTube", "cap": "Official Launch Trailer, chaîne YouTube de Rockstar Games", "src": "Article du Rockstar Newswire"}
 }

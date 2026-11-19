@@ -1,5 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import Trailer from '../../../components/Trailer.astro';
 import { facts } from '../../../data/facts.js';
 import { t, completeLocales, url, guideSlugs, guideFacts, guideRelated, langTable, langName, meta } from '../../../i18n/index.js';
 export function getStaticPaths() {
@@ -53,6 +54,8 @@ const jsonld = [
     </div>
     <p class="meta">{g.tableSrc}</p>
   )}
+
+  {slug === 'release-date' && <Trailer lang={lang} />}
 
   <h2>{g.sourcesH}</h2>
   {used.length === 0 ? (
