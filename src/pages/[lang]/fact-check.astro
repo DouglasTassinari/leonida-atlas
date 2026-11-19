@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import { facts, rumors } from '../../data/facts.js';
+import { t, staticLocales } from '../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const c = ui.fc;
+---
+<Base lang={lang} path="/fact-check" title={c.title} description={c.desc}>
+  <h1>{c.title}</h1>
+  <p class="lead">{c.lead}</p>
+
+  <h2>{c.confirmed}</h2>
+  {facts.map((f) => (
+    <article class="panel" id={f.id}>
+      <span class="tag confirmed">{c.tag}</span>
+      <p><strong>{ui.facts[f.id] ?? f.claim}</strong></p>
+      <blockquote class="meta" lang="en">“{f.quote}”</blockquote>
+      <p class="meta">{c.source}: <span lang="en">{f.source}</span><br />{c.url}: <a href={f.url} rel="noopener">{f.url}</a><br />{c.published}: {f.published ? <time datetime={f.published}>{f.published}</time> : c.notStated} · {c.checked}: <time datetime={f.checked}>{f.checked}</time> · {c.status}: {c.statusConfirmed}</p>
+    </article>
+  ))}
+
+  <h2>{c.rumors}</h2>
+  <p class="meta">{c.rumorsNote}</p>
+  {rumors.length === 0 ? (
+    <p class="panel"><span class="tag rumor">{c.rumorTag}</span> {c.none}</p>
+  ) : (
+    rumors.map((r) => (
+      <article class="panel">
+        <span class="tag rumor">{c.rumorTag}</span>
+        <p>{r.claim}</p>
+        <p class="meta">{r.source}{r.url && <> - <a href={r.url} rel="noopener nofollow">{r.url}</a></>} · {r.seen}</p>
+      </article>
+    ))
+  )}
+</Base>

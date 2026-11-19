@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import Scene from '../../components/Scene.astro';
+import { t, url, staticLocales, guideSlugs, meta } from '../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const h = ui.home;
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Leonida Atlas', url: new URL(url(lang), Astro.site).href,
+  inLanguage: meta[lang].html, description: h.desc,
+}];
+---
+<Base lang={lang} path="" title={h.title} description={h.desc} jsonld={jsonld}>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="kicker">{h.kicker}</p>
+      <h1>{h.h1}</h1>
+      <p class="lead">{h.lead}</p>
+      <a class="cta" href={url(lang, '/log')}>{h.cta}</a>
+    </div>
+    <Scene />
+  </section>
+  <div class="cards">
+    <a class="card" href={url(lang, '/log')}><h3>{h.c1t}</h3><p>{h.c1p}</p></a>
+    <a class="card t" href={url(lang, '/log')}><h3>{h.c2t}</h3><p>{h.c2p}</p></a>
+    <a class="card" href={url(lang, '/fact-check')}><h3>{h.c3t}</h3><p>{h.c3p}</p></a>
+  </div>
+  <h2>{h.guidesH}</h2>
+  <p class="lead">{h.guidesLead}</p>
+  <div class="cards">
+    {guideSlugs.slice(0, 6).map((s) => <a class="card t" href={url(lang, '/guides/' + s)}><h3>{ui.guides[s].title}</h3></a>)}
+  </div>
+  <p><a href={url(lang, '/guides')}>{h.guidesAll}</a></p>
+  <p class="meta">{h.note} <a href={url(lang, '/disclaimer')}>{ui.footer.disc}</a></p>
+</Base>

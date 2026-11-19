@@ -1,46 +1,73 @@
 ---
 import '../styles/global.css';
-const { title, description } = Astro.props;
-const fullTitle = title === 'Leonida Atlas' ? title : `${title} | Leonida Atlas`;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+import Logo from '../components/Logo.astro';
+import { t, meta, completeLocales, url } from '../i18n/index.js';
+
+// lang: locale code; path: '' for home or '/log', '/guides/xyz' ...; jsonld: array of schema objects
+const { lang, path = '', title, description, jsonld = [], ogType = 'website' } = Astro.props;
+const ui = t(lang);
+const isHome = path === '';
+const fullTitle = isHome ? title : `${title} | Leonida Atlas`;
+const abs = (l) => new URL(url(l, path), Astro.site).href;
+const canonical = abs(lang);
 const nav = [
-  ['/log', 'Leonida Log'],
-  ['/fact-check', 'Fact Check'],
-  ['/reality-check', 'Reality Check'],
-  ['/about', 'About'],
+  ['/log', ui.nav.log],
+  ['/fact-check', ui.nav.fact],
+  ['/reality-check', ui.nav.reality],
+  ['/guides', ui.nav.guides],
+  ['/about', ui.nav.about],
 ];
-const path = Astro.url.pathname.replace(/\/$/, '');
+const cur = path.replace(/\/$/, '');
+const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guides'));
 ---
 <!doctype html>
-<html lang="en">
+<html lang={meta[lang].html}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
+  {completeLocales.map((l) => <link rel="alternate" hreflang={meta[l].html} href={abs(l)} />)}
+  <link rel="alternate" hreflang="x-default" href={abs('en')} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#12081f" />
+  <!-- Google Search Console: uncomment and paste the token once the property is created.
+  <meta name="google-site-verification" content="PASTE_TOKEN_HERE" />
+  -->
+  <meta property="og:type" content={ogType} />
   <meta property="og:site_name" content="Leonida Atlas" />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={meta[lang].og} />
+  {completeLocales.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={meta[l].og} />)}
   <meta name="twitter:card" content="summary" />
+  {jsonld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
 </head>
 <body>
+  <a class="skip" href="#main">{ui.skip}</a>
   <header class="site-header">
     <div class="wrap bar">
-      <a class="brand" href="/">Leonida <span>Atlas</span></a>
-      <nav aria-label="Main">
-        {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+      <a class="brand" href={url(lang)}><Logo />Leonida <b>Atlas</b></a>
+      <nav class="main" aria-label="Main">
+        {nav.map(([p, label]) => <a href={url(lang, p)} aria-current={isCurrent(p) ? 'page' : undefined}>{label}</a>)}
+        <details class="lang">
+          <summary aria-label={ui.langLabel}>{ui.langLabel}: {meta[lang].native}</summary>
+          <ul>
+            {completeLocales.map((l) => (
+              <li><a href={url(l, path)} lang={meta[l].html} hreflang={meta[l].html} aria-current={l === lang ? 'true' : undefined}>{meta[l].native}</a></li>
+            ))}
+          </ul>
+        </details>
       </nav>
     </div>
   </header>
-  <main class="wrap"><slot /></main>
+  <main id="main" class="wrap"><slot /></main>
   <footer class="site-footer">
     <div class="wrap">
-      <p>Leonida Atlas is an unofficial fan site. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All trademarks belong to their owners.</p>
-      <p><a href="/about">About</a> · <a href="/disclaimer">Disclaimer</a> · <a href="/privacy">Privacy</a></p>
+      <p>{ui.footer.disclaimer}</p>
+      <p><a href={url(lang, '/about')}>{ui.footer.about}</a> · <a href={url(lang, '/disclaimer')}>{ui.footer.disc}</a> · <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a></p>
     </div>
   </footer>
 </body>

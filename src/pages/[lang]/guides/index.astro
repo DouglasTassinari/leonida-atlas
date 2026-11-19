@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { t, staticLocales, url, guideSlugs, meta } from '../../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const g = ui.g;
+const site = Astro.site;
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: g.home, item: new URL(url(lang), site).href },
+    { '@type': 'ListItem', position: 2, name: g.hubTitle, item: new URL(url(lang, '/guides'), site).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: g.hubTitle, description: g.hubDesc, inLanguage: meta[lang].html,
+    hasPart: guideSlugs.map((s) => ({ '@type': 'Article', headline: ui.guides[s].title, url: new URL(url(lang, '/guides/' + s), site).href })) },
+];
+---
+<Base lang={lang} path="/guides" title={g.hubTitle} description={g.hubDesc} jsonld={jsonld}>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{g.home}</a> / {g.hubTitle}</nav>
+  <h1>{g.hubTitle}</h1>
+  <p class="lead">{g.hubLead}</p>
+  <div class="cards">
+    {guideSlugs.map((s) => <a class="card t" href={url(lang, '/guides/' + s)}><h3>{ui.guides[s].title}</h3><p>{ui.guides[s].lead}</p></a>)}
+  </div>
+</Base>

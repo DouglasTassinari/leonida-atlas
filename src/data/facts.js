@@ -6,6 +6,7 @@ const PRELOAD_URL = RS + '/k4ak9okk485712/grand-theft-auto-vi-pre-load-begins-on
 const PRICE_URL = 'https://www.take2games.com/ir/news/rockstar-games-announces-pre-orders-grand-theft-auto-vi';
 const NOW_URL = RS + '/39akk424a9oo53/grand-theft-auto-vi-now-available';
 const TRAILER_URL = RS + '/517572321a549a/watch-the-grand-theft-auto-vi-launch-trailer';
+const LANG_URL = 'https://www.playstation.com/en-us/support/games/gta-vi-support/';
 const CHECKED = '2026-11-19';
 
 export const facts = [
@@ -78,6 +79,13 @@ export const facts = [
     source: 'Take-Two Interactive pre-order announcement (Jun 24, 2026)',
     quote: 'The Grand Theft Auto VI: Ultimate Edition ... will be available for $99.99.',
     url: PRICE_URL, published: '2026-06-24', checked: CHECKED, status: 'confirmed',
+  },
+  {
+    id: 'languages',
+    claim: 'The official PlayStation support page lists English as the only in-game language with voice, and text support in 11 more languages: French, German, Italian, Korean, Polish, Portuguese (Brazil), Russian, Simplified Chinese, Traditional Chinese, Spanish (Mexico) and Spanish (Spain).',
+    source: 'PlayStation Support - Grand Theft Auto VI, "Which languages are supported?" table',
+    quote: 'Grand Theft Auto VI languages (In-game languages | Voice | Text): English x x; French - x; German - x; Italian - x; Korean - x; Polish - x; Portuguese (Brazil) - x; Russian - x; Simplified Chinese - x; Spanish (Mexico) - x; Spanish (Spain) - x; Traditional Chinese - x',
+    url: LANG_URL, published: null, checked: CHECKED, status: 'confirmed',
   },
 ];
 

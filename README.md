@@ -1,6 +1,6 @@
 # Leonida Atlas
 
-Unofficial GTA VI fan site (English). Not affiliated with Rockstar Games or Take-Two. Built with Astro.
+Unofficial GTA VI fan site (12 locales, English default). Not affiliated with Rockstar Games or Take-Two. Built with Astro.
 
 ## Run
 

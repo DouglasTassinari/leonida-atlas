@@ -1,0 +1,77 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { facts } from '../../../data/facts.js';
+import { t, completeLocales, url, guideSlugs, guideFacts, guideRelated, langTable, langName, meta } from '../../../i18n/index.js';
+export function getStaticPaths() {
+  return completeLocales.flatMap((lang) => guideSlugs.map((slug) => ({ params: { lang, slug } })));
+}
+const { lang, slug } = Astro.params;
+const ui = t(lang);
+const g = ui.g;
+const p = ui.guides[slug];
+const site = Astro.site;
+const here = new URL(url(lang, '/guides/' + slug), site).href;
+const byId = Object.fromEntries(facts.map((f) => [f.id, f]));
+const used = guideFacts[slug].map((id) => byId[id]);
+const checked = used.length ? used.map((f) => f.checked).sort().pop() : '2026-11-19';
+const related = guideRelated[slug];
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: g.home, item: new URL(url(lang), site).href },
+    { '@type': 'ListItem', position: 2, name: g.hubTitle, item: new URL(url(lang, '/guides'), site).href },
+    { '@type': 'ListItem', position: 3, name: p.title, item: here },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'Article', headline: p.title, description: p.desc, inLanguage: meta[lang].html,
+    mainEntityOfPage: here, datePublished: checked, dateModified: checked,
+    author: { '@type': 'Organization', name: 'Leonida Atlas' }, publisher: { '@type': 'Organization', name: 'Leonida Atlas' } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
+    { '@type': 'Question', name: p.q, acceptedAnswer: { '@type': 'Answer', text: p.a } },
+  ] },
+];
+---
+<Base lang={lang} path={'/guides/' + slug} title={p.title} description={p.desc} jsonld={jsonld} ogType="article">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{g.home}</a> / <a href={url(lang, '/guides')}>{g.hubTitle}</a> / {p.title}</nav>
+  <h1>{p.title}</h1>
+  {slug === 'cheats' && <p><span class="tag unconfirmed">{g.unconfirmedTag}</span></p>}
+  <p class="lead">{p.lead}</p>
+  <p>{p.body}</p>
+
+  {(slug === 'languages' || slug === 'brazilian-portuguese') && (
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">{g.language}</th><th scope="col" class="c">{g.voice}</th><th scope="col" class="c">{g.text}</th></tr></thead>
+        <tbody>
+          {langTable.map(([tag, voice]) => (
+            <tr>
+              <th scope="row" style={tag === 'pt-BR' && slug === 'brazilian-portuguese' ? 'color:var(--teal)' : ''}>{langName(tag, meta[lang].html)}</th>
+              <td class="c">{voice ? g.yes : '—'}</td>
+              <td class="c">{g.yes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="meta">{g.tableSrc}</p>
+  )}
+
+  <h2>{g.sourcesH}</h2>
+  {used.length === 0 ? (
+    <p class="panel"><span class="tag unconfirmed">{g.unconfirmedTag}</span> {g.noSource}</p>
+  ) : used.map((f) => (
+    <article class="panel">
+      <span class="tag confirmed">{ui.fc.tag}</span>
+      <p><strong>{ui.facts[f.id] ?? f.claim}</strong></p>
+      <blockquote class="meta" lang="en">“{f.quote}”</blockquote>
+      <p class="meta">{g.officialSource}: <span lang="en">{f.source}</span><br /><a href={f.url} rel="noopener">{f.url}</a><br />{ui.fc.published}: {f.published ? <time datetime={f.published}>{f.published}</time> : ui.fc.notStated} · {g.updated}: <time datetime={f.checked}>{f.checked}</time></p>
+    </article>
+  ))}
+
+  <h2>{g.faqH}</h2>
+  <details class="faq" open><summary>{p.q}</summary><p>{p.a}</p></details>
+
+  <h2>{g.relatedH}</h2>
+  <ul class="related">
+    {related.map((s) => <li><a href={url(lang, '/guides/' + s)}>{ui.guides[s].title}</a></li>)}
+    <li><a href={url(lang, '/fact-check')}>{ui.nav.fact}</a></li>
+  </ul>
+</Base>

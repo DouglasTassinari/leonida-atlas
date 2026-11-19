@@ -1,0 +1,146 @@
+{
+ "skip": "跳到內容",
+ "langLabel": "語言",
+ "nav": { "log": "萊昂尼達日誌", "fact": "事實查核", "reality": "真假測驗", "guides": "指南", "about": "關於" },
+ "footer": {
+  "disclaimer": "Leonida Atlas 是非官方粉絲網站，與 Rockstar Games 或 Take-Two Interactive 無關聯，也未獲其認可或贊助。所有商標歸其各自所有人。",
+  "about": "關於", "disc": "免責聲明", "privacy": "隱私權"
+ },
+ "home": {
+  "title": "Leonida Atlas", "desc": "Leonida Atlas 是獨立的 GTA VI 粉絲專案：記錄個人探索日誌、製作可分享的探索者卡片，並對照官方來源查核事實。",
+  "kicker": "獨立粉絲專案", "h1": "你的萊昂尼達，你的發現。", "lead": "探索、記錄並分享你在 GTA VI 世界中的旅程。", "cta": "開始記錄",
+  "c1t": "記錄你的發現", "c1p": "用個人日誌記錄地點、角色、載具、活動與祕密。內容只會儲存在你的瀏覽器中。",
+  "c2t": "製作探索者卡片", "c2p": "把你的發現做成可分享的旅程紀錄。",
+  "c3t": "分辨事實與傳聞", "c3p": "查看附來源的已查證資訊，並透過「真假測驗」檢驗自己。",
+  "guidesH": "有來源佐證的 GTA VI 指南", "guidesLead": "語言、平台、版本、下載大小等。每項說法都連結到官方頁面。", "guidesAll": "查看所有指南",
+  "note": "這是粉絲自製的獨立專案，與 Rockstar Games 或 Take-Two Interactive 無關聯，也未獲其認可。"
+ },
+ "log": {
+  "title": "萊昂尼達日誌", "desc": "儲存在瀏覽器中的私人 GTA VI 探索日誌，並可下載「我的萊昂尼達探索者卡片」。",
+  "lead": "記錄你在萊昂尼達的發現。條目只會保存在此瀏覽器（localStorage），不會上傳。",
+  "category": "類別", "titleLabel": "標題", "titlePh": "你發現了什麼？", "note": "備註（選填）", "add": "新增發現",
+  "discoveries": "項發現", "del": "刪除",
+  "cats": { "Locations": "地點", "Characters": "角色", "Vehicles": "載具", "Activities": "活動", "Secrets": "祕密" },
+  "ranks": { "Rookie": "新手", "Explorer": "探索者", "Veteran": "老手", "Legend": "傳奇" },
+  "next": "下一個等級：{rank}（還差 {n} 項）", "top": "已達最高等級。你是萊昂尼達的傳奇！",
+  "cardH": "我的萊昂尼達探索者卡片", "cardMeta": "圖片在你的裝置上產生，不會上傳任何內容。", "nick": "你的名字（選填）", "make": "產生卡片", "download": "下載 PNG", "share": "分享我的卡片",
+  "cardKicker": "LEONIDA ATLAS / 探索者 / 我的萊昂尼達日誌", "cardTitle": "我的萊昂尼達探索者卡片", "cardBeat": "你能打破我的紀錄嗎？", "cardDisc": "粉絲網站，與 Rockstar Games 或 Take-Two 無關聯",
+  "shareText": "我的萊昂尼達探索者卡片 — 你能打破我的紀錄嗎？", "shareFallback": "此處無法使用分享功能，已改為下載 PNG。"
+ },
+ "fc": {
+  "title": "事實查核", "desc": "經 Rockstar Games、Take-Two 與 PlayStation 官方頁面證實的 GTA VI 事實，附來源、網址與查核日期。傳聞會另外標示。",
+  "lead": "以下每一項都連結到官方頁面，並顯示我們查核的日期。引文保留英文原文。",
+  "confirmed": "已證實的事實", "tag": "已證實", "source": "來源", "url": "網址", "published": "發布日期", "checked": "最近查核", "status": "狀態", "statusConfirmed": "已證實", "notStated": "頁面未註明",
+  "rumors": "傳聞", "rumorsNote": "此處列出的內容皆未經證實，不應視為事實。", "none": "目前沒有追蹤中的傳聞。", "rumorTag": "傳聞"
+ },
+ "rc": {
+  "title": "真假測驗", "desc": "七題的 GTA VI 測驗：是傳聞還是事實？答案皆有官方來源佐證。",
+  "lead": "傳聞還是事實？共七則說法，皆可在「事實查核」頁面核對。", "qOf": "第 {i} 題，共 {n} 題", "truth": "事實", "rumor": "傳聞",
+  "correct": "答對了。", "wrong": "不太對。", "isTrue": "這則說法屬實。", "isFalse": "這則說法沒有官方來源佐證。", "source": "來源",
+  "next": "下一題", "see": "查看結果", "score": "你答對了 {s} 題，共 {n} 題。", "again": "再試一次", "noscript": "此測驗需要 JavaScript。",
+  "q": [
+   "《Grand Theft Auto VI》於 2026 年 11 月 19 日在全球發售。",
+   "《Grand Theft Auto VI》登上 PlayStation 5 與 Xbox Series X|S。",
+   "主角是傑森與露西亞。",
+   "標準版在美國的公布價格為 99.99 美元。",
+   "終極版在美國的公布價格為 99.99 美元。",
+   "GTA VI 的預先下載檔案依裝置不同，最多需要 212 GB。",
+   "官方發售預告片於 2026 年 12 月 1 日發布。"
+  ]
+ },
+ "about": {
+  "title": "關於", "desc": "關於 Leonida Atlas：一個關於《Grand Theft Auto VI》的獨立粉絲專案。",
+  "p1": "Leonida Atlas 是關於《Grand Theft Auto VI》的獨立粉絲專案，提供個人遊玩日誌、附來源的事實清單、簡短指南，以及一個「傳聞對事實」的小測驗。",
+  "h2": "我們如何處理事實", "p2": "只有在我們能連結官方來源並標明查核日期時，一則說法才會以事實呈現。其餘內容會標為傳聞、標為未證實，或直接不收錄。",
+  "h3": "我們不做的事", "p3": "我們不使用 Rockstar 的圖片、標誌或文字，也不代管外流內容。請參閱免責聲明。"
+ },
+ "disc": {
+  "title": "免責聲明", "desc": "Leonida Atlas 是非官方粉絲網站，與 Rockstar Games 或 Take-Two Interactive 無關聯。",
+  "p1": "Leonida Atlas 是非官方粉絲網站，與 Rockstar Games、Take-Two Interactive Software, Inc.、Sony Interactive Entertainment、Microsoft 及其任何子公司皆無關聯，也未獲其認可或贊助。",
+  "p2": "Grand Theft Auto、GTA 及相關名稱、標題與標誌為其各自所有人的商標。此處提及僅為評論與粉絲用途而識別該遊戲。",
+  "p3": "本網站不使用 Rockstar Games 的任何圖片、標誌或文字。事實皆連結至官方來源；最新資訊可能變動，請以官方來源為準。"
+ },
+ "priv": {
+  "title": "隱私權政策", "desc": "Leonida Atlas 如何處理你的資料：萊昂尼達日誌保留在你的瀏覽器中，以及日後加入廣告或 Cookie 時的做法。", "updated": "最後更新：2026 年 11 月 19 日",
+  "h1": "你的萊昂尼達日誌留在你的裝置上", "p1": "你加入萊昂尼達日誌的條目會儲存在瀏覽器的 localStorage 中，不會傳送到我們的伺服器，我們也看不到。清除瀏覽器資料會將其刪除。可分享的等級卡片在你的瀏覽器中於本機產生。",
+  "h2": "我們蒐集什麼", "p2": "我們不要求你建立帳號，也不透過表單蒐集個人資料。我們的主機服務供應商可能基於安全與營運目的保留標準伺服器日誌（例如 IP 位址與所請求的頁面）。",
+  "h3": "未來的廣告與 Cookie", "p3": "我們日後可能會顯示廣告或使用流量分析。屆時，第三方廠商可能使用 Cookie 或類似技術投放廣告或衡量流量。在此之前我們會更新本政策，包括如何選擇退出，以及在必要時提供同意提示。",
+  "h4": "外部連結", "p4": "我們會連結到第三方網站，例如 Rockstar Games 新聞網站。其隱私權做法由其自行負責。"
+ },
+ "g": {
+  "hubTitle": "GTA VI 指南", "hubDesc": "關於語言、平台、版本、下載大小、預先下載、發售日期、實體版與祕技的 GTA VI 簡明指南，每篇皆附官方來源。",
+  "hubLead": "針對 GTA VI 常見問題的簡短解答。每項說法都連結到官方頁面並標明查核日期。",
+  "home": "首頁", "sourcesH": "官方來源證實了什麼", "faqH": "常見問題", "relatedH": "相關指南", "updated": "最近查核",
+  "voice": "語音", "text": "文字", "language": "語言", "yes": "有", "no": "未列出", "tableSrc": "來源：PlayStation 官方支援頁面的 GTA VI 語言表，查核於 2026-11-19。",
+  "unconfirmedTag": "未證實", "noSource": "我們的事實庫中沒有關於此主題的官方來源，因此這裡不將任何內容當作事實陳述。", "officialSource": "官方來源"
+ },
+ "facts": {
+  "release-date": "《Grand Theft Auto VI》於 2026 年 11 月 19 日在全球發售。",
+  "platforms": "《Grand Theft Auto VI》登上 PlayStation 5 與 Xbox Series X|S。",
+  "setting": "《Grand Theft Auto VI》的故事背景設定在萊昂尼達州。",
+  "protagonists": "主角是傑森與露西亞。",
+  "trailer-date": "官方發售預告片於 2026 年 10 月 15 日發布。",
+  "preload-start": "數位版預先下載預定於 2026 年 11 月 10 日開始（PS5 為當地時間午夜，Xbox Series X|S 為 GMT 0 點）。盒裝序號版本預計自 11 月 12 日起在零售商上架。",
+  "preload-size": "預先下載檔案依裝置不同，最多需要 212 GB。",
+  "map-poster": "Rockstar 表示將於 11 月 19 日在官方網站提供可列印海報與萊昂尼達地圖的免費數位下載。我們只提供連結，不代管也不複製。",
+  "price-base": "標準版公布價格為 79.99 美元（僅限美國價格）。",
+  "price-ultimate": "終極版公布價格為 99.99 美元（僅限美國價格）。",
+  "languages": "PlayStation 官方支援頁面列出英文為唯一有語音的遊戲語言，另有 11 種語言提供文字：法文、德文、義大利文、韓文、波蘭文、葡萄牙文（巴西）、俄文、簡體中文、繁體中文、西班牙文（墨西哥）與西班牙文（西班牙）。"
+ },
+ "guides": {
+  "languages": {
+   "title": "GTA VI 支援語言：語音與文字", "desc": "GTA VI 支援哪些語言？依 PlayStation 官方表格，英文有語音與文字，另有 11 種語言支援文字。",
+   "lead": "依據 PlayStation 官方支援頁面，英文是唯一有語音的語言，另有 11 種語言僅列出文字。",
+   "body": "下表重現該頁面：英文有語音與文字；法文、德文、義大利文、韓文、波蘭文、葡萄牙文（巴西）、俄文、簡體中文、繁體中文、西班牙文（墨西哥）與西班牙文（西班牙）為文字。後續變動請以官方頁面為準。",
+   "q": "GTA VI 有英文以外的語音嗎？", "a": "官方表格只在英文一欄列出語音，其餘 11 種語言僅列出文字。"
+  },
+  "brazilian-portuguese": {
+   "title": "GTA VI 有巴西葡萄牙文嗎？", "desc": "文字有：葡萄牙文（巴西）在官方語言清單中。語音僅列出英文。",
+   "lead": "有，葡萄牙文（巴西）支援文字（來源未區分選單與字幕）。該語言未列出語音。",
+   "body": "PlayStation 官方表格將葡萄牙文（巴西）標在「文字」欄，「語音」欄則是空白。表格沒有更多資訊，因此我們不對配音計畫，或文字在選單與字幕之間如何劃分作任何說法。",
+   "q": "有巴西葡萄牙文配音嗎？", "a": "依官方表格，沒有：語音僅列出英文。"
+  },
+  "platforms": {
+   "title": "GTA VI 平台：PS5 與 Xbox 支援", "desc": "依據 Rockstar 的發售公告，GTA VI 登上 PlayStation 5 與 Xbox Series X|S。",
+   "lead": "Rockstar 的發售公告指出，遊戲已登上 PlayStation 5 與 Xbox Series X|S。",
+   "body": "這是我們追蹤的官方來源中唯一提到的平台。對其他平台，我們不作任何說法。",
+   "q": "GTA VI 有 PC 版嗎？", "a": "我們追蹤的官方來源只提到 PlayStation 5 與 Xbox Series X|S，因此不對其他平台作任何說法。"
+  },
+  "editions": {
+   "title": "GTA VI 版本：標準版與終極版", "desc": "關於 GTA VI 標準版與終極版，我們能證實的內容：公布的美國價格，以及所有有來源的內容。",
+   "lead": "Take-Two 公布標準版售價 79.99 美元，終極版售價 99.99 美元（美國價格）。",
+   "body": "我們的來源只證實了價格。由於事實庫中沒有任何來源列出內容，我們不描述各版本包含什麼。請查看你所用平台的官方商店頁面。",
+   "q": "終極版包含什麼？", "a": "依我們的來源無法回答。請查看官方商店頁面。"
+  },
+  "download-size": {
+   "title": "GTA VI 下載大小", "desc": "Rockstar 表示 GTA VI 預先下載檔案依裝置不同，最多需要 212 GB。",
+   "lead": "據 Rockstar 表示，預先下載檔案依裝置不同，最多需要 212 GB。",
+   "body": "這個數字是 Rockstar 給出的預先下載檔案大小上限。可用空間至少應涵蓋這個數值；你的主機上的實際大小可能較小。後續更新可能改變大小。",
+   "q": "212 GB 是最終安裝大小嗎？", "a": "Rockstar 將其描述為預先下載檔案的大小：依裝置不同最多 212 GB。"
+  },
+  "preload-guide": {
+   "title": "GTA VI 預先下載與下載指南", "desc": "依 Rockstar 公告整理的 PS5 與 Xbox Series X|S 預先下載日期與時間、檔案大小，以及盒裝序號版本時程。",
+   "lead": "數位版預先下載已於 2026 年 11 月 10 日開始：PS5 為當地時間午夜，Xbox Series X|S 為 GMT 0 點。",
+   "body": "請以最多 212 GB 的檔案做準備，並在開始前騰出足夠空間。盒裝序號版本預計自 11 月 12 日起在零售商上架。Rockstar 也表示將於 11 月 19 日提供可列印海報與萊昂尼達地圖（我們只提供連結）。",
+   "q": "預先下載是什麼時候開始的？", "a": "2026 年 11 月 10 日，依 Rockstar 新聞網站。"
+  },
+  "release-date": {
+   "title": "GTA VI 發售日期與供應狀況", "desc": "依 Rockstar 表示，GTA VI 於 2026 年 11 月 19 日在全球登上 PlayStation 5 與 Xbox Series X|S。",
+   "lead": "Rockstar 日期為 2026 年 11 月 19 日的新聞指出，《Grand Theft Auto VI》已在全球登上 PlayStation 5 與 Xbox Series X|S。",
+   "body": "預先下載於 11 月 10 日開始，盒裝序號版本預計自 11 月 12 日起在零售商上架。官方發售預告片於 2026 年 10 月 15 日發布。",
+   "q": "GTA VI 的發售日期是什麼時候？", "a": "2026 年 11 月 19 日。"
+  },
+  "physical-edition": {
+   "title": "GTA VI 實體版", "desc": "Rockstar 對實體版 GTA VI 證實的內容：零售商的盒裝序號版本。我們不宣稱是否附光碟。",
+   "lead": "Rockstar 表示，兩個主機平台的盒裝序號版本預計自 11 月 12 日起在零售商上架。",
+   "body": "來源說的是盒裝序號。它沒有說明是否附光碟，因此我們對此不作任何說法。請查看零售商頁面或包裝。",
+   "q": "實體版包含光碟嗎？", "a": "我們的來源沒有說明，因此無法證實。"
+  },
+  "cheats": {
+   "title": "GTA VI 祕技：哪些已證實，哪些沒有", "desc": "我們的來源中沒有 Rockstar 官方祕技清單。第三方指南彼此不一，因此我們不列出任何按鍵順序。",
+   "lead": "未證實：我們沒有找到 Rockstar 的官方祕技清單，因此不發布任何清單。",
+   "body": "網路上流傳的第三方指南彼此不一致，且沒有一個是官方來源。在 Rockstar 發布之前，請將任何祕技代碼或按鍵順序清單視為未經證實。如果 Rockstar 發布官方清單，我們會在此連結。",
+   "q": "GTA VI 有官方祕技嗎？", "a": "沒有官方來源證實，因此我們不把任何內容當作事實。"
+  }
+ }
+}

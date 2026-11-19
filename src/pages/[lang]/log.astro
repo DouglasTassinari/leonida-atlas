@@ -1,0 +1,150 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, staticLocales } from '../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const L = t(lang).log;
+const CATS = ['Locations', 'Characters', 'Vehicles', 'Activities', 'Secrets'];
+---
+<Base lang={lang} path="/log" title={L.title} description={L.desc}>
+  <div id="app" data-i18n={JSON.stringify(L)}>
+  <h1>{L.title}</h1>
+  <p class="lead">{L.lead}</p>
+
+  <form id="form" class="panel">
+    <div class="row">
+      <div style="flex:1 1 160px">
+        <label for="cat">{L.category}</label>
+        <select id="cat">
+          {CATS.map((k) => <option value={k}>{L.cats[k]}</option>)}
+        </select>
+      </div>
+      <div style="flex:2 1 240px">
+        <label for="title">{L.titleLabel}</label>
+        <input id="title" required maxlength="80" placeholder={L.titlePh} />
+      </div>
+    </div>
+    <label for="note">{L.note}</label>
+    <textarea id="note" rows="2" maxlength="300"></textarea>
+    <p><button type="submit">{L.add}</button></p>
+  </form>
+
+  <section class="panel" aria-live="polite">
+    <p><strong id="total" style="font-size:2rem">0</strong> <span class="meta">{L.discoveries}</span> · <strong id="rank">{L.ranks.Rookie}</strong></p>
+    <p class="meta" id="counts"></p>
+    <p class="next-rank" id="next"></p>
+  </section>
+
+  <ul class="entries" id="list"></ul>
+
+  <h2>{L.cardH}</h2>
+  <p class="meta">{L.cardMeta}</p>
+  <p class="row"><input id="nick" maxlength="24" placeholder={L.nick} aria-label={L.nick} style="max-width:260px" />
+    <button id="make" type="button">{L.make}</button>
+    <a id="dl" download="my-leonida-explorer-card.png" hidden><button type="button" class="ghost">{L.download}</button></a>
+    <button id="share" type="button" class="ghost" hidden>{L.share}</button></p>
+  <p class="meta" id="sharemsg" aria-live="polite"></p>
+  <canvas id="card" width="1200" height="630" hidden></canvas>
+  </div>
+</Base>
+
+<script is:inline>
+  (function () {
+    var KEY = 'leonida-log-v1';
+    var CATS = ['Locations', 'Characters', 'Vehicles', 'Activities', 'Secrets'];
+    var $ = function (id) { return document.getElementById(id); };
+    var I = JSON.parse($('app').dataset.i18n);
+    function f(s, v) { return s.replace(/\{(\w+)\}/g, function (_, k) { return v[k]; }); }
+    var items = [];
+    try { items = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { items = []; }
+    items = items.filter(function (x) { return x && CATS.indexOf(x.cat) >= 0; });
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} }
+
+    function rankKey(n) { return n >= 50 ? 'Legend' : n >= 10 ? 'Veteran' : n >= 1 ? 'Explorer' : 'Rookie'; }
+    function rank(n) { return I.ranks[rankKey(n)]; }
+    function nextInfo(n) {
+      if (n >= 50) return I.top;
+      var t = n >= 10 ? 50 : n >= 1 ? 10 : 1, r = t === 50 ? 'Legend' : t === 10 ? 'Veteran' : 'Explorer';
+      return f(I.next, { rank: I.ranks[r], n: t - n });
+    }
+    function stats() {
+      var c = {}; CATS.forEach(function (k) { c[k] = 0; });
+      items.forEach(function (x) { c[x.cat]++; });
+      return { c: c, t: items.length };
+    }
+
+    function render() {
+      var s = stats();
+      $('total').textContent = s.t;
+      $('rank').textContent = rank(s.t);
+      $('next').textContent = nextInfo(s.t);
+      $('counts').textContent = CATS.map(function (k) { return I.cats[k] + ': ' + s.c[k]; }).join(' · ');
+      var ul = $('list'); ul.innerHTML = '';
+      items.forEach(function (it, idx) {
+        var li = document.createElement('li');
+        var body = document.createElement('div'); body.className = 'body';
+        var c = document.createElement('div'); c.className = 'cat'; c.textContent = I.cats[it.cat];
+        var t = document.createElement('div'); t.className = 't'; t.textContent = it.title;
+        body.appendChild(c); body.appendChild(t);
+        if (it.note) { var n = document.createElement('div'); n.className = 'meta'; n.textContent = it.note; body.appendChild(n); }
+        var del = document.createElement('button'); del.className = 'ghost'; del.type = 'button'; del.textContent = I.del;
+        del.onclick = function () { items.splice(idx, 1); save(); render(); };
+        li.appendChild(body); li.appendChild(del); ul.appendChild(li);
+      });
+    }
+
+    $('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var title = $('title').value.trim(); if (!title) return;
+      items.push({ cat: $('cat').value, title: title, note: $('note').value.trim(), at: Date.now() });
+      $('title').value = ''; $('note').value = '';
+      save(); render();
+    });
+
+    var FONT = 'system-ui, "Segoe UI", "Noto Sans", "PingFang SC", "Microsoft YaHei", "Malgun Gothic", sans-serif';
+    $('make').addEventListener('click', function () {
+      var s = stats(), cv = $('card'), g = cv.getContext('2d');
+      var grad = g.createLinearGradient(0, 0, 1200, 630);
+      grad.addColorStop(0, '#2a0e55'); grad.addColorStop(0.6, '#8a2d9c'); grad.addColorStop(1, '#ff4fa3');
+      g.fillStyle = grad; g.fillRect(0, 0, 1200, 630);
+      g.fillStyle = 'rgba(18,8,31,0.72)'; g.fillRect(30, 30, 1140, 570);
+      g.fillStyle = '#2ee6d6'; g.fillRect(30, 30, 14, 570);
+      g.textAlign = 'left';
+      g.fillStyle = '#c3b4dc'; g.font = '28px ' + FONT; g.fillText(I.cardKicker, 80, 90);
+      g.fillStyle = '#f6f0ff'; g.font = 'bold 46px ' + FONT; g.fillText(I.cardTitle, 80, 152);
+      g.fillStyle = '#ff9a3c'; g.font = 'bold 190px ' + FONT; g.fillText(String(s.t), 80, 330);
+      var w = g.measureText(String(s.t)).width;
+      g.fillStyle = '#f6f0ff'; g.font = '34px ' + FONT;
+      g.fillText(I.discoveries + ' · ' + rank(s.t), 100 + w, 330);
+      CATS.forEach(function (k, i) {
+        var x = 80 + i * 215;
+        g.fillStyle = '#f6f0ff'; g.font = 'bold 56px ' + FONT; g.fillText(String(s.c[k]), x, 440);
+        g.fillStyle = '#c3b4dc'; g.font = '24px ' + FONT; g.fillText(I.cats[k], x, 480);
+      });
+      var nick = $('nick').value.trim();
+      if (nick) { g.fillStyle = '#f6f0ff'; g.font = '30px ' + FONT; g.fillText(nick, 80, 545); }
+      g.fillStyle = '#2ee6d6'; g.font = 'bold 30px ' + FONT; g.fillText(I.cardBeat, 80, 510);
+      g.textAlign = 'right'; g.fillStyle = '#c3b4dc'; g.font = '22px ' + FONT; g.fillText('Leonida Atlas', 1140, 575); g.textAlign = 'left';
+      g.fillStyle = '#c3b4dc'; g.font = '20px ' + FONT;
+      g.fillText(I.cardDisc, 80, 580);
+      cv.hidden = false;
+      var dl = $('dl'); dl.href = cv.toDataURL('image/png'); dl.hidden = false;
+      $('share').hidden = false; $('sharemsg').textContent = '';
+    });
+
+    $('share').addEventListener('click', function () {
+      var cv = $('card'), msg = $('sharemsg');
+      function fallback() { $('dl').click(); msg.textContent = I.shareFallback; }
+      cv.toBlob(function (blob) {
+        if (!blob) { fallback(); return; }
+        var file = new File([blob], 'my-leonida-explorer-card.png', { type: 'image/png' });
+        var data = { files: [file], text: I.shareText, url: location.origin };
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share(data).catch(function (err) { if (!err || err.name !== 'AbortError') fallback(); });
+        } else { fallback(); }
+      }, 'image/png');
+    });
+
+    render();
+  })();
+</script>

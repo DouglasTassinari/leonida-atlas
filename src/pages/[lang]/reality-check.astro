@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { facts } from '../../data/facts.js';
+import { t, staticLocales, url } from '../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const r = ui.rc;
+const byId = Object.fromEntries(facts.map((f) => [f.id, f]));
+const defs = [['release-date', true], ['platforms', true], ['protagonists', true], ['price-base', false], ['price-ultimate', true], ['preload-size', true], ['trailer-date', false]];
+const questions = defs.map(([id, truth], i) => ({ text: r.q[i], truth, url: byId[id].url, source: byId[id].source }));
+const strings = { qOf: r.qOf, truth: r.truth, rumor: r.rumor, correct: r.correct, wrong: r.wrong, isTrue: r.isTrue, isFalse: r.isFalse, source: r.source, next: r.next, see: r.see, score: r.score, again: r.again };
+---
+<Base lang={lang} path="/reality-check" title={r.title} description={r.desc}>
+  <h1>{r.title}</h1>
+  <p class="lead">{r.lead} <a href={url(lang, '/fact-check')}>{ui.nav.fact}</a></p>
+  <div id="quiz" class="q" data-questions={JSON.stringify(questions)} data-strings={JSON.stringify(strings)}></div>
+  <p id="result" class="panel" hidden aria-live="polite"></p>
+  <button id="restart" class="ghost" hidden>{r.again}</button>
+  <noscript><p>{r.noscript}</p></noscript>
+</Base>
+
+<script is:inline>
+  (function () {
+    var box = document.getElementById('quiz');
+    var qs = JSON.parse(box.dataset.questions);
+    var S = JSON.parse(box.dataset.strings);
+    var result = document.getElementById('result');
+    var restart = document.getElementById('restart');
+    var i = 0, score = 0;
+    function f(s, v) { return s.replace(/\{(\w+)\}/g, function (_, k) { return v[k]; }); }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function render() {
+      if (i >= qs.length) {
+        box.innerHTML = '';
+        result.hidden = false; restart.hidden = false;
+        result.textContent = f(S.score, { s: score, n: qs.length });
+        return;
+      }
+      var q = qs[i];
+      box.innerHTML = '<h2>' + esc(f(S.qOf, { i: i + 1, n: qs.length })) + '</h2><p>' + esc(q.text) +
+        '</p><button data-a="true">' + esc(S.truth) + '</button><button data-a="false">' + esc(S.rumor) + '</button><div id="fb" aria-live="polite"></div>';
+      box.querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var ans = b.dataset.a === 'true';
+          var ok = ans === q.truth;
+          if (ok) score++;
+          box.querySelectorAll('button').forEach(function (x) {
+            x.disabled = true;
+            if ((x.dataset.a === 'true') === q.truth) x.classList.add('right');
+          });
+          if (!ok) b.classList.add('wrong');
+          var fb = document.getElementById('fb');
+          fb.innerHTML = '<p class="panel">' + esc(ok ? S.correct : S.wrong) + ' ' + esc(q.truth ? S.isTrue : S.isFalse) +
+            ' ' + esc(S.source) + ': <a href="' + esc(q.url) + '" rel="noopener" lang="en">' + esc(q.source) + '</a></p>' +
+            '<button id="next">' + esc(i + 1 < qs.length ? S.next : S.see) + '</button>';
+          document.getElementById('next').addEventListener('click', function () { i++; render(); });
+        });
+      });
+    }
+
+    restart.addEventListener('click', function () {
+      i = 0; score = 0; result.hidden = true; restart.hidden = true; render();
+    });
+    render();
+  })();
+</script>
