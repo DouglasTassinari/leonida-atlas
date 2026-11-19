@@ -7,7 +7,8 @@
   "reality": "Prueba de realidad",
   "guides": "Guías",
   "about": "Acerca de",
-  "news": "Noticias"
+  "news": "Noticias",
+  "posts": "Publicaciones"
  },
  "footer": {
   "disclaimer": "Leonida Atlas es un sitio de fans no oficial. No está afiliado, respaldado ni patrocinado por Rockstar Games ni Take-Two Interactive. Todas las marcas pertenecen a sus dueños.",
@@ -298,5 +299,28 @@
   "ext": "Abre el sitio original en una pestaña nueva",
   "editH": "Noticias y fuentes",
   "editP": "Elegimos las noticias recientes de GTA VI primero de canales oficiales (Rockstar Games, Take-Two, PlayStation, Xbox) y después de medios reconocidos, y abrimos cada fuente antes de listarla. Los resúmenes están escritos con palabras nuestras y son breves; no copiamos artículos ni imágenes. Los derechos de los textos, nombres y marcas originales pertenecen a sus dueños, y cada elemento enlaza al original. Lo reportado no está confirmado por nosotros."
+ },
+ "posts": {
+  "title": "Publicaciones",
+  "desc": "Artículos originales de Leonida Atlas sobre GTA VI, con las fuentes listadas y verificadas.",
+  "lead": "Artículos más largos escritos por nosotros, siempre con las fuentes usadas y la fecha en que las verificamos.",
+  "cardP": "Artículos originales con fuentes listadas.",
+  "readTime": "{n} min de lectura",
+  "published": "Publicado el",
+  "updated": "Actualizado el",
+  "sources": "Fuentes",
+  "checkedOn": "Verificado el {date}",
+  "related": "Publicaciones relacionadas",
+  "back": "Todas las publicaciones",
+  "inEnglish": "Artículo disponible en inglés",
+  "videoH": "Video",
+  "videoCredit": "Crédito del video: {credit}",
+  "latest": "Últimas publicaciones",
+  "all": "Todas las publicaciones",
+  "empty": "Aún no hay publicaciones.",
+  "ext": "Abre la fuente en una pestaña nueva",
+  "fan": "Leonida Atlas es un sitio de fans no oficial, sin relación con Rockstar Games ni Take-Two Interactive. La información puede cambiar; consulta las fuentes oficiales.",
+  "home": "Inicio",
+  "srcQuote": "Extracto"
  }
 }

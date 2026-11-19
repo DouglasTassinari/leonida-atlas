@@ -7,7 +7,8 @@
   "reality": "Test de réalité",
   "guides": "Guides",
   "about": "À propos",
-  "news": "Actualités"
+  "news": "Actualités",
+  "posts": "Articles"
  },
  "footer": {
   "disclaimer": "Leonida Atlas est un site de fans non officiel. Il n’est ni affilié, ni approuvé, ni sponsorisé par Rockstar Games ou Take-Two Interactive. Toutes les marques appartiennent à leurs propriétaires.",
@@ -298,5 +299,28 @@
   "ext": "Ouvre le site d’origine dans un nouvel onglet",
   "editH": "Actualités et sources",
   "editP": "Nous choisissons les actualités récentes sur GTA VI d’abord sur les canaux officiels (Rockstar Games, Take-Two, PlayStation, Xbox), puis dans des médias reconnus, et nous ouvrons chaque source avant de la lister. Les résumés sont rédigés avec nos propres mots et restent courts ; nous ne copions ni articles ni images. Les droits sur les textes, noms et marques d’origine appartiennent à leurs propriétaires, et chaque élément renvoie à l’original. Les éléments rapportés ne sont pas confirmés par nous."
+ },
+ "posts": {
+  "title": "Articles",
+  "desc": "Articles originaux de Leonida Atlas sur GTA VI, avec les sources citées et vérifiées.",
+  "lead": "Des articles plus longs rédigés par nos soins, toujours avec les sources utilisées et la date de vérification.",
+  "cardP": "Articles originaux avec sources citées.",
+  "readTime": "{n} min de lecture",
+  "published": "Publié le",
+  "updated": "Mis à jour le",
+  "sources": "Sources",
+  "checkedOn": "Vérifié le {date}",
+  "related": "Articles liés",
+  "back": "Tous les articles",
+  "inEnglish": "Article disponible en anglais",
+  "videoH": "Vidéo",
+  "videoCredit": "Crédit vidéo : {credit}",
+  "latest": "Derniers articles",
+  "all": "Tous les articles",
+  "empty": "Aucun article publié pour le moment.",
+  "ext": "Ouvre la source dans un nouvel onglet",
+  "fan": "Leonida Atlas est un site de fans non officiel, sans lien avec Rockstar Games ni Take-Two Interactive. Les informations peuvent changer ; consultez les sources officielles.",
+  "home": "Accueil",
+  "srcQuote": "Extrait"
  }
 }

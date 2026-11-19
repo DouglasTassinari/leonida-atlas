@@ -7,7 +7,8 @@
   "reality": "真假测验",
   "guides": "指南",
   "about": "关于",
-  "news": "新闻"
+  "news": "新闻",
+  "posts": "文章"
  },
  "footer": {
   "disclaimer": "Leonida Atlas 是非官方粉丝网站，与 Rockstar Games 或 Take-Two Interactive 无关联，也未获其认可或赞助。所有商标归其各自所有者。",
@@ -298,5 +299,28 @@
   "ext": "在新标签页打开原站",
   "editH": "新闻与来源",
   "editP": "我们先从官方渠道（Rockstar Games、Take-Two、PlayStation、Xbox）挑选近期 GTA VI 新闻，再从知名媒体挑选，并在列出前逐一打开来源核对。摘要用我们自己的话撰写且保持简短，不复制文章或图片。原文、名称和商标的权利归各自所有者，每一条都链接到原文。媒体报道的内容并非由我们确认。"
+ },
+ "posts": {
+  "title": "文章",
+  "desc": "Leonida Atlas 关于 GTA VI 的原创文章，列出并核对了来源。",
+  "lead": "我们自己撰写的长文，始终附上所用来源和核对日期。",
+  "cardP": "附有来源的原创文章。",
+  "readTime": "阅读约 {n} 分钟",
+  "published": "发布于",
+  "updated": "更新于",
+  "sources": "来源",
+  "checkedOn": "核对于 {date}",
+  "related": "相关文章",
+  "back": "全部文章",
+  "inEnglish": "文章提供英文版",
+  "videoH": "视频",
+  "videoCredit": "视频来源：{credit}",
+  "latest": "最新文章",
+  "all": "全部文章",
+  "empty": "暂无已发布的文章。",
+  "ext": "在新标签页中打开来源",
+  "fan": "Leonida Atlas 是非官方粉丝网站，与 Rockstar Games 和 Take-Two Interactive 无关。信息可能变化，请以官方来源为准。",
+  "home": "首页",
+  "srcQuote": "摘录"
  }
 }

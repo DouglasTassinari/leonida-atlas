@@ -1,0 +1,85 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ArticleCover from '../../../components/ArticleCover.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { posts } from '../../../data/posts/index.js';
+import { postText, translatedLangs, readMinutes, fmtDate, isoDay, related } from '../../../data/posts-core.js';
+import { t, completeLocales, url, fmt, meta } from '../../../i18n/index.js';
+export function getStaticPaths() {
+  return completeLocales.flatMap((lang) => posts.map((post) => ({ params: { lang, slug: post.slug }, props: { post } })));
+}
+const { lang } = Astro.params;
+const { post } = Astro.props;
+const p = t(lang).posts;
+const site = Astro.site;
+const x = postText(post, lang);
+// hreflang only between real translations; other locales point their canonical to English
+const alternates = translatedLangs(post).filter((l) => completeLocales.includes(l));
+const canonicalLang = x.translated ? lang : 'en';
+const here = new URL(url(lang, '/posts/' + post.slug), site).href;
+const hl = meta[lang].html;
+const modified = post.updated || post.publishAt;
+const rel = related(posts, post);
+const ytOk = post.video && /^[\w-]{6,20}$/.test(post.video.youtubeId || '');
+const srcs = (post.sources || []).filter((s) => /^https?:\/\//.test(s.url));
+const showUpdated = post.updated && post.updated !== isoDay(post.publishAt).slice(0, 10);
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: p.home, item: new URL(url(lang), site).href },
+    { '@type': 'ListItem', position: 2, name: p.title, item: new URL(url(lang, '/posts'), site).href },
+    { '@type': 'ListItem', position: 3, name: x.title, item: here },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: x.title.slice(0, 110), description: x.description,
+    inLanguage: meta[x.lang].html, mainEntityOfPage: here, datePublished: post.publishAt, dateModified: modified,
+    image: [new URL('/og/' + post.cover + '.png', site).href],
+    keywords: (post.tags || []).join(', ') || undefined,
+    author: { '@type': 'Organization', name: 'Leonida Atlas' }, publisher: { '@type': 'Organization', name: 'Leonida Atlas' },
+    citation: srcs.map((s) => s.url) },
+];
+---
+<Base lang={lang} path={'/posts/' + post.slug} title={x.title} description={x.description} jsonld={jsonld} ogType="article" image={post.cover} alternates={alternates} canonicalLang={canonicalLang}>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{p.home}</a> / <a href={url(lang, '/posts')}>{p.title}</a></nav>
+  <h1 lang={x.lang}>{x.title}</h1>
+  <ArticleCover slug={post.cover} alt={x.title} />
+  <p class="meta">{p.published}: <time datetime={post.publishAt}>{fmtDate(post.publishAt, hl)}</time>{showUpdated ? <> · {p.updated}: <time datetime={post.updated}>{fmtDate(post.updated, hl)}</time></> : null} · {fmt(p.readTime, { n: readMinutes(post, lang) })}</p>
+  {!x.translated && <p class="meta">{p.inEnglish}</p>}
+  <p class="lead" lang={x.lang}>{x.description}</p>
+  <div class="post-body" lang={x.lang}>
+    {x.sections.map((s) => (
+      <section>
+        <h2>{s.h}</h2>
+        {s.paras.map((para) => <p>{para}</p>)}
+        {s.list.length > 0 && <ul>{s.list.map((li) => <li>{li}</li>)}</ul>}
+      </section>
+    ))}
+  </div>
+  {ytOk && (
+    <figure class="post-video">
+      <h2>{p.videoH}</h2>
+      <div class="video-frame"><iframe src={`https://www.youtube-nocookie.com/embed/${post.video.youtubeId}`} title={post.video.title} loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      {post.video.credit && <figcaption class="meta">{fmt(p.videoCredit, { credit: post.video.credit })}</figcaption>}
+    </figure>
+  )}
+  {srcs.length > 0 && (
+    <section class="post-sources">
+      <h2>{p.sources}</h2>
+      <ul>
+        {srcs.map((s) => (
+          <li>
+            <a href={s.url} target="_blank" rel="noopener nofollow" aria-label={`${s.name}. ${p.ext}`}>{s.name}</a>
+            {s.quote && <blockquote class="meta" lang="en">{s.quote}</blockquote>}
+            {s.checked && <p class="meta">{fmt(p.checkedOn, { date: fmtDate(s.checked, hl) })}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+  {rel.length > 0 && (
+    <section>
+      <h2>{p.related}</h2>
+      <ul class="ncards">{rel.map((r) => <PostCard post={r} lang={lang} />)}</ul>
+    </section>
+  )}
+  <p class="meta">{p.fan}</p>
+  <ul class="related"><li><a href={url(lang, '/posts')}>{p.back}</a></li></ul>
+</Base>

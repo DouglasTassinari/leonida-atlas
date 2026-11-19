@@ -1,0 +1,15 @@
+---
+import ArticleCover from './ArticleCover.astro';
+import { postText, readMinutes, fmtDate, isoDay } from '../data/posts-core.js';
+import { t, url, fmt, meta } from '../i18n/index.js';
+const { post, lang } = Astro.props;
+const p = t(lang).posts;
+const x = postText(post, lang);
+const href = url(lang, '/posts/' + post.slug);
+---
+<li class="ncard">
+  <ArticleCover slug={post.cover} alt={x.title} />
+  <h3><a href={href} lang={x.lang}>{x.title}</a></h3>
+  <p class="meta"><time datetime={isoDay(post.publishAt)}>{fmtDate(post.publishAt, meta[lang].html)}</time> · {fmt(p.readTime, { n: readMinutes(post, lang) })}</p>
+  <p lang={x.lang}>{x.description}</p>
+</li>

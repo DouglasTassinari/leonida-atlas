@@ -7,7 +7,8 @@
   "reality": "리얼리티 체크",
   "guides": "가이드",
   "about": "소개",
-  "news": "뉴스"
+  "news": "뉴스",
+  "posts": "글"
  },
  "footer": {
   "disclaimer": "Leonida Atlas는 비공식 팬 사이트입니다. Rockstar Games 또는 Take-Two Interactive와 제휴, 승인, 후원 관계가 없습니다. 모든 상표는 각 소유자에게 있습니다.",
@@ -298,5 +299,28 @@
   "ext": "원문 사이트를 새 탭에서 엽니다",
   "editH": "뉴스와 출처",
   "editP": "최근 GTA VI 소식은 공식 채널(Rockstar Games, Take-Two, PlayStation, Xbox)에서 먼저, 그다음 공신력 있는 매체에서 고르며, 목록에 올리기 전에 모든 출처를 직접 열어 확인합니다. 요약은 우리 말로 짧게 쓰며 기사나 이미지를 복사하지 않습니다. 원문의 저작권, 이름, 상표는 각 권리자에게 있고 모든 항목은 원문으로 연결됩니다. 보도된 내용은 우리가 확인한 것이 아닙니다."
+ },
+ "posts": {
+  "title": "글",
+  "desc": "GTA VI에 관한 Leonida Atlas의 자체 작성 글입니다. 출처를 명시하고 확인했습니다.",
+  "lead": "우리가 직접 쓴 긴 글입니다. 사용한 출처와 확인한 날짜를 항상 함께 적습니다.",
+  "cardP": "출처를 명시한 자체 작성 글.",
+  "readTime": "읽는 시간 {n}분",
+  "published": "게시일",
+  "updated": "수정일",
+  "sources": "출처",
+  "checkedOn": "{date} 확인",
+  "related": "관련 글",
+  "back": "모든 글",
+  "inEnglish": "이 글은 영어로 제공됩니다",
+  "videoH": "영상",
+  "videoCredit": "영상 출처: {credit}",
+  "latest": "최신 글",
+  "all": "모든 글",
+  "empty": "아직 게시된 글이 없습니다.",
+  "ext": "출처를 새 탭에서 엽니다",
+  "fan": "Leonida Atlas는 비공식 팬 사이트이며 Rockstar Games 및 Take-Two Interactive와 무관합니다. 정보는 변경될 수 있으니 공식 출처를 확인하세요.",
+  "home": "홈",
+  "srcQuote": "발췌"
  }
 }

@@ -1,5 +1,24 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import fs from 'node:fs';
+import { isPublished, translatedLangs } from './src/data/posts-core.js';
+
+// Published posts (publishAt <= build time) -> locales with a real translation. Mirrors src/data/posts/index.js.
+const postDir = new URL('./src/data/posts/', import.meta.url);
+const publishedPosts = {};
+for (const f of fs.readdirSync(postDir)) {
+  if (!f.endsWith('.js') || f === 'index.js' || f.startsWith('_')) continue;
+  const p = (await import(new URL(f, postDir).href)).default;
+  if (p && p.slug && isPublished(p)) publishedPosts[p.slug] = translatedLangs(p);
+}
+const sitemapFilter = (page) => {
+  const path = new URL(page).pathname;
+  if (path === '/') return false;
+  const m = path.match(/^\/([^/]+)\/posts\/([^/]+)\/$/);
+  // Article pages only for real translations (other locales canonicalize to English).
+  if (m) return !!publishedPosts[m[2]] && publishedPosts[m[2]].includes(m[1]);
+  return true;
+};
 
 // TODO: replace with the real production domain before publishing (also update public/robots.txt).
 const locales = ['en', 'fr', 'de', 'it', 'ko', 'pl', 'pt-br', 'ru', 'zh-hans', 'zh-hant', 'es-mx', 'es-es'];
@@ -22,5 +41,5 @@ export default defineConfig({
     '/disclaimer': '/en/disclaimer/',
     '/privacy': '/en/privacy/',
   },
-  integrations: [sitemap({ filter: (page) => new URL(page).pathname !== '/', i18n: { defaultLocale: 'en', locales: sitemapLocales } })],
+  integrations: [sitemap({ filter: sitemapFilter, i18n: { defaultLocale: 'en', locales: sitemapLocales } })],
 });

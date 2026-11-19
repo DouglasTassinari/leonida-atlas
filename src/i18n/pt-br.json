@@ -7,7 +7,8 @@
   "reality": "Teste de realidade",
   "guides": "Guias",
   "about": "Sobre",
-  "news": "Notícias"
+  "news": "Notícias",
+  "posts": "Posts"
  },
  "footer": {
   "disclaimer": "O Leonida Atlas é um site de fãs não oficial. Não é afiliado, endossado nem patrocinado pela Rockstar Games ou pela Take-Two Interactive. Todas as marcas pertencem aos seus donos.",
@@ -298,5 +299,28 @@
   "ext": "Abre o site original em uma nova aba",
   "editH": "Notícias e fontes",
   "editP": "Escolhemos as notícias recentes de GTA VI primeiro em canais oficiais (Rockstar Games, Take-Two, PlayStation, Xbox) e depois em veículos reconhecidos, e abrimos cada fonte antes de listá-la. Os resumos são escritos com palavras nossas e ficam curtos; não copiamos matérias nem imagens. Os direitos sobre os textos, nomes e marcas originais pertencem aos seus donos, e cada item leva ao original. O que é reportado não é confirmado por nós."
+ },
+ "posts": {
+  "title": "Posts",
+  "desc": "Artigos originais do Leonida Atlas sobre GTA VI, com as fontes listadas e conferidas.",
+  "lead": "Artigos mais longos escritos por nós, sempre com as fontes usadas e a data em que conferimos.",
+  "cardP": "Artigos originais com fontes listadas.",
+  "readTime": "{n} min de leitura",
+  "published": "Publicado em",
+  "updated": "Atualizado em",
+  "sources": "Fontes",
+  "checkedOn": "Conferido em {date}",
+  "related": "Posts relacionados",
+  "back": "Todos os posts",
+  "inEnglish": "Artigo disponível em inglês",
+  "videoH": "Vídeo",
+  "videoCredit": "Crédito do vídeo: {credit}",
+  "latest": "Últimos posts",
+  "all": "Todos os posts",
+  "empty": "Nenhum post publicado ainda.",
+  "ext": "Abre a fonte em uma nova aba",
+  "fan": "O Leonida Atlas é um site de fãs não oficial, sem ligação com a Rockstar Games nem com a Take-Two Interactive. As informações podem mudar; confira as fontes oficiais.",
+  "home": "Início",
+  "srcQuote": "Trecho"
  }
 }

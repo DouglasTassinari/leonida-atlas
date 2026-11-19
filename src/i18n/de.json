@@ -7,7 +7,8 @@
   "reality": "Realitätscheck",
   "guides": "Ratgeber",
   "about": "Über uns",
-  "news": "News"
+  "news": "News",
+  "posts": "Beiträge"
  },
  "footer": {
   "disclaimer": "Leonida Atlas ist eine inoffizielle Fanseite. Sie steht in keiner Verbindung zu Rockstar Games oder Take-Two Interactive und wird weder von ihnen unterstützt noch gesponsert. Alle Marken gehören ihren Inhabern.",
@@ -298,5 +299,28 @@
   "ext": "Öffnet die Originalseite in einem neuen Tab",
   "editH": "News und Quellen",
   "editP": "Wir wählen aktuelle GTA-VI-News zuerst aus offiziellen Kanälen (Rockstar Games, Take-Two, PlayStation, Xbox) und dann aus anerkannten Medien aus und öffnen jede Quelle, bevor wir sie auflisten. Die Zusammenfassungen sind in eigenen Worten verfasst und kurz gehalten; wir kopieren weder Artikel noch Bilder. Die Rechte an den Originaltexten, Namen und Marken liegen bei ihren Inhabern, und jeder Eintrag verlinkt das Original. Berichtete Meldungen sind von uns nicht bestätigt."
+ },
+ "posts": {
+  "title": "Beiträge",
+  "desc": "Eigene Beiträge von Leonida Atlas zu GTA VI, mit angegebenen und geprüften Quellen.",
+  "lead": "Längere Beiträge von uns, immer mit den verwendeten Quellen und dem Datum der Prüfung.",
+  "cardP": "Eigene Beiträge mit Quellenangaben.",
+  "readTime": "{n} Min. Lesezeit",
+  "published": "Veröffentlicht am",
+  "updated": "Aktualisiert am",
+  "sources": "Quellen",
+  "checkedOn": "Geprüft am {date}",
+  "related": "Verwandte Beiträge",
+  "back": "Alle Beiträge",
+  "inEnglish": "Beitrag auf Englisch verfügbar",
+  "videoH": "Video",
+  "videoCredit": "Video-Quelle: {credit}",
+  "latest": "Neueste Beiträge",
+  "all": "Alle Beiträge",
+  "empty": "Noch keine Beiträge veröffentlicht.",
+  "ext": "Öffnet die Quelle in einem neuen Tab",
+  "fan": "Leonida Atlas ist eine inoffizielle Fanseite ohne Verbindung zu Rockstar Games oder Take-Two Interactive. Angaben können sich ändern; prüfe die offiziellen Quellen.",
+  "home": "Startseite",
+  "srcQuote": "Auszug"
  }
 }

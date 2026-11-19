@@ -7,7 +7,8 @@
   "reality": "Reality Check",
   "guides": "Guides",
   "about": "About",
-  "news": "News"
+  "news": "News",
+  "posts": "Posts"
  },
  "footer": {
   "disclaimer": "Leonida Atlas is an unofficial fan site. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All trademarks belong to their owners.",
@@ -298,5 +299,28 @@
   "ext": "Opens the original site in a new tab",
   "editH": "News and sources",
   "editP": "We pick recent GTA VI news from official channels first (Rockstar Games, Take-Two, PlayStation, Xbox) and then from recognized outlets, and we open every source before listing it. Summaries are written in our own words and kept short; we do not copy articles or images. Rights to the original texts, names and marks belong to their owners, and each item links to the original. Reported items are not confirmed by us."
+ },
+ "posts": {
+  "title": "Posts",
+  "desc": "Original GTA VI articles from Leonida Atlas, each with its sources listed and checked.",
+  "lead": "Longer articles written by us, always with the sources we used and the date we checked them.",
+  "cardP": "Original articles with listed sources.",
+  "readTime": "{n} min read",
+  "published": "Published",
+  "updated": "Updated",
+  "sources": "Sources",
+  "checkedOn": "Checked on {date}",
+  "related": "Related posts",
+  "back": "All posts",
+  "inEnglish": "Article available in English",
+  "videoH": "Video",
+  "videoCredit": "Video credit: {credit}",
+  "latest": "Latest posts",
+  "all": "All posts",
+  "empty": "No posts published yet.",
+  "ext": "Opens the source in a new tab",
+  "fan": "Leonida Atlas is an unofficial fan site, not affiliated with Rockstar Games or Take-Two Interactive. Information may change; check official sources.",
+  "home": "Home",
+  "srcQuote": "Excerpt"
  }
 }
