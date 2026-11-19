@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Leonida Log" description="A private GTA VI discovery log saved in your browser, with a downloadable My Leonida Explorer Card.">
+  <h1>Leonida Log</h1>
+  <p class="lead">Log what you discover in Leonida. Entries stay in this browser (localStorage) and are never uploaded.</p>
+
+  <form id="form" class="panel">
+    <div class="row">
+      <div style="flex:1 1 160px">
+        <label for="cat">Category</label>
+        <select id="cat">
+          <option>Locations</option><option>Characters</option><option>Vehicles</option>
+          <option>Activities</option><option>Secrets</option>
+        </select>
+      </div>
+      <div style="flex:2 1 240px">
+        <label for="title">Title</label>
+        <input id="title" required maxlength="80" placeholder="What did you discover?" />
+      </div>
+    </div>
+    <label for="note">Note (optional)</label>
+    <textarea id="note" rows="2" maxlength="300"></textarea>
+    <p><button type="submit">Add discovery</button></p>
+  </form>
+
+  <section class="panel" aria-live="polite">
+    <p><strong id="total" style="font-size:2rem">0</strong> <span class="meta">discoveries</span> · <strong id="rank">Rookie</strong></p>
+    <p class="meta" id="counts"></p>
+  </section>
+
+  <ul class="entries" id="list"></ul>
+
+  <h2>My Leonida Explorer Card</h2>
+  <p class="meta">Generates an image on your device. Nothing is uploaded.</p>
+  <p class="row"><input id="nick" maxlength="24" placeholder="Your name (optional)" style="max-width:260px" />
+    <button id="make" type="button">Generate card</button>
+    <a id="dl" download="my-leonida-explorer-card.png" hidden><button type="button" class="ghost">Download PNG</button></a></p>
+  <canvas id="card" width="1200" height="630" hidden></canvas>
+</Base>
+
+<script is:inline>
+  (function () {
+    var KEY = 'leonida-log-v1';
+    var CATS = ['Locations', 'Characters', 'Vehicles', 'Activities', 'Secrets'];
+    var $ = function (id) { return document.getElementById(id); };
+    var items = [];
+    try { items = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { items = []; }
+    items = items.filter(function (x) { return x && CATS.indexOf(x.cat) >= 0; });
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} }
+
+    function rank(n) { return n >= 50 ? 'Legend' : n >= 10 ? 'Veteran' : n >= 1 ? 'Explorer' : 'Rookie'; }
+    function stats() {
+      var c = {}; CATS.forEach(function (k) { c[k] = 0; });
+      items.forEach(function (x) { c[x.cat]++; });
+      return { c: c, t: items.length };
+    }
+
+    function render() {
+      var s = stats();
+      $('total').textContent = s.t;
+      $('rank').textContent = rank(s.t);
+      $('counts').textContent = CATS.map(function (k) { return k + ': ' + s.c[k]; }).join(' · ');
+      var ul = $('list'); ul.innerHTML = '';
+      items.forEach(function (it, idx) {
+        var li = document.createElement('li');
+        var body = document.createElement('div'); body.className = 'body';
+        var c = document.createElement('div'); c.className = 'cat'; c.textContent = it.cat;
+        var t = document.createElement('div'); t.className = 't'; t.textContent = it.title;
+        body.appendChild(c); body.appendChild(t);
+        if (it.note) { var n = document.createElement('div'); n.className = 'meta'; n.textContent = it.note; body.appendChild(n); }
+        var del = document.createElement('button'); del.className = 'ghost'; del.type = 'button'; del.textContent = 'Delete';
+        del.onclick = function () { items.splice(idx, 1); save(); render(); };
+        li.appendChild(body); li.appendChild(del); ul.appendChild(li);
+      });
+    }
+
+    $('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var title = $('title').value.trim(); if (!title) return;
+      items.push({ cat: $('cat').value, title: title, note: $('note').value.trim(), at: Date.now() });
+      $('title').value = ''; $('note').value = '';
+      save(); render();
+    });
+
+    $('make').addEventListener('click', function () {
+      var s = stats(), cv = $('card'), g = cv.getContext('2d');
+      var grad = g.createLinearGradient(0, 0, 1200, 630);
+      grad.addColorStop(0, '#0f1218'); grad.addColorStop(1, '#2a1020');
+      g.fillStyle = grad; g.fillRect(0, 0, 1200, 630);
+      g.fillStyle = '#ff5c8a'; g.fillRect(0, 0, 14, 630);
+      g.textAlign = 'left';
+      g.fillStyle = '#9aa4b8'; g.font = '30px system-ui, sans-serif'; g.fillText('LEONIDA ATLAS / EXPLORER / MY LEONIDA LOG', 70, 85);
+      g.fillStyle = '#e8ebf2'; g.font = 'bold 48px system-ui, sans-serif'; g.fillText('My Leonida Explorer Card', 70, 150);
+      g.fillStyle = '#ff5c8a'; g.font = 'bold 190px system-ui, sans-serif'; g.fillText(String(s.t), 70, 330);
+      var w = g.measureText(String(s.t)).width;
+      g.fillStyle = '#e8ebf2'; g.font = '36px system-ui, sans-serif';
+      g.fillText('discoveries · ' + rank(s.t), 90 + w, 330);
+      CATS.forEach(function (k, i) {
+        var x = 70 + i * 220;
+        g.fillStyle = '#e8ebf2'; g.font = 'bold 56px system-ui, sans-serif'; g.fillText(String(s.c[k]), x, 440);
+        g.fillStyle = '#9aa4b8'; g.font = '26px system-ui, sans-serif'; g.fillText(k, x, 480);
+      });
+      var nick = $('nick').value.trim();
+      if (nick) { g.fillStyle = '#e8ebf2'; g.font = '30px system-ui, sans-serif'; g.fillText(nick, 70, 540); }
+      g.fillStyle = '#9aa4b8'; g.font = '22px system-ui, sans-serif';
+      g.fillText('Fan site, not affiliated with Rockstar Games or Take-Two', 70, 595);
+      cv.hidden = false;
+      var dl = $('dl'); dl.href = cv.toDataURL('image/png'); dl.hidden = false;
+    });
+
+    render();
+  })();
+</script>

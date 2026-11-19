@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+const { title, description } = Astro.props;
+const fullTitle = title === 'Leonida Atlas' ? title : `${title} | Leonida Atlas`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const nav = [
+  ['/log', 'Leonida Log'],
+  ['/fact-check', 'Fact Check'],
+  ['/reality-check', 'Reality Check'],
+  ['/about', 'About'],
+];
+const path = Astro.url.pathname.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Leonida Atlas" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="/">Leonida <span>Atlas</span></a>
+      <nav aria-label="Main">
+        {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+      </nav>
+    </div>
+  </header>
+  <main class="wrap"><slot /></main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Leonida Atlas is an unofficial fan site. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All trademarks belong to their owners.</p>
+      <p><a href="/about">About</a> · <a href="/disclaimer">Disclaimer</a> · <a href="/privacy">Privacy</a></p>
+    </div>
+  </footer>
+</body>
+</html>

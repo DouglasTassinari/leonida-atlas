@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { facts } from '../data/facts.js';
+const byId = Object.fromEntries(facts.map((f) => [f.id, f]));
+const questions = [
+  { text: 'Grand Theft Auto VI launches on November 19, 2026.', truth: true, fact: 'release-date' },
+  { text: 'Grand Theft Auto VI is on PlayStation 5 and Xbox Series X|S.', truth: true, fact: 'platforms' },
+  { text: 'The protagonists are Jason and Lucia.', truth: true, fact: 'protagonists' },
+  { text: 'The base edition was announced at US$99.99 in the US.', truth: false, fact: 'price-base' },
+  { text: 'The Ultimate edition was announced at US$99.99 in the US.', truth: true, fact: 'price-ultimate' },
+  { text: 'The GTA VI pre-load file requires up to 212 GB depending on the device.', truth: true, fact: 'preload-size' },
+  { text: 'The official Launch Trailer was published on December 1, 2026.', truth: false, fact: 'trailer-date' },
+].map((q) => ({ ...q, url: byId[q.fact].url, source: byId[q.fact].source }));
+---
+<Base title="Reality Check" description="A seven-question GTA VI quiz: is each statement a rumor or the truth? Answers are backed by official sources.">
+  <h1>Reality Check</h1>
+  <p class="lead">Rumor or truth? Seven statements, each checkable on the <a href="/fact-check">Fact Check</a> page.</p>
+  <div id="quiz" class="q" data-questions={JSON.stringify(questions)}></div>
+  <p id="result" class="panel" hidden></p>
+  <button id="restart" class="ghost" hidden>Try again</button>
+  <noscript><p>This quiz needs JavaScript.</p></noscript>
+</Base>
+
+<script is:inline>
+  (function () {
+    var box = document.getElementById('quiz');
+    var qs = JSON.parse(box.dataset.questions);
+    var result = document.getElementById('result');
+    var restart = document.getElementById('restart');
+    var i = 0, score = 0;
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function render() {
+      if (i >= qs.length) {
+        box.innerHTML = '';
+        result.hidden = false; restart.hidden = false;
+        result.textContent = 'You scored ' + score + ' out of ' + qs.length + '.';
+        return;
+      }
+      var q = qs[i];
+      box.innerHTML = '<h2>Question ' + (i + 1) + ' of ' + qs.length + '</h2><p>' + esc(q.text) +
+        '</p><button data-a="true">Truth</button><button data-a="false">Rumor</button><div id="fb"></div>';
+      box.querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var ans = b.dataset.a === 'true';
+          var ok = ans === q.truth;
+          if (ok) score++;
+          box.querySelectorAll('button').forEach(function (x) {
+            x.disabled = true;
+            if ((x.dataset.a === 'true') === q.truth) x.classList.add('right');
+          });
+          if (!ok) b.classList.add('wrong');
+          var fb = document.getElementById('fb');
+          fb.innerHTML = '<p class="panel">' + (ok ? 'Correct. ' : 'Not quite. ') +
+            'This statement is ' + (q.truth ? 'true' : 'not supported by official sources') +
+            '. Source: <a href="' + q.url + '" rel="noopener">' + esc(q.source) + '</a></p>' +
+            '<button id="next">' + (i + 1 < qs.length ? 'Next' : 'See result') + '</button>';
+          document.getElementById('next').addEventListener('click', function () { i++; render(); });
+        });
+      });
+    }
+
+    restart.addEventListener('click', function () {
+      i = 0; score = 0; result.hidden = true; restart.hidden = true; render();
+    });
+    render();
+  })();
+</script>
