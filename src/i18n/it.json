@@ -9,7 +9,8 @@
   "about": "Chi siamo",
   "news": "Notizie",
   "posts": "Articoli",
-  "community": "Community"
+  "community": "Community",
+  "radio": "Radio"
  },
  "footer": {
   "disclaimer": "Leonida Atlas è un sito di fan non ufficiale. Non è affiliato, approvato né sponsorizzato da Rockstar Games o Take-Two Interactive. Tutti i marchi appartengono ai rispettivi proprietari.",
@@ -383,5 +384,44 @@
   "p4": "Per rimuovere il tuo contenuto apri una issue su https://github.com/DouglasTassinari/leonida-atlas/issues con il link della pagina. Non chiediamo e-mail. Rimuoviamo i contenuti che violano queste regole o diritti, o che l'autore chiede di rimuovere.",
   "h5": "Moderazione",
   "p5": "Nulla viene pubblicato automaticamente. Le immagini sono controllate da uno strumento automatico e ogni invio è rivisto da una persona. Possiamo rifiutare o rimuovere qualsiasi contenuto in ogni momento, senza preavviso. Leonida Atlas è un sito di fan non ufficiale e i post della community non sono verificati."
+ },
+ "radio": {
+  "title": "Leonida Radio: stazioni di GTA VI e player musicali ufficiali",
+  "desc": "Scegli una stazione su un quadrante radio retro. Stazioni del gioco con link a Rockstar e player ufficiali per album, colonna sonora e trailer.",
+  "h1": "Leonida Radio",
+  "lead": "Un quadrante radio creato dai fan per la musica di GTA VI. Gira la manopola per cambiare stazione. Usiamo solo player ufficiali di Rockstar e delle piattaforme; qui non si registra né si ospita nulla.",
+  "tune": "Tune in",
+  "tuneNote": "Il suono parte solo dopo aver premuto Tune in. Il browser blocca l'audio che parte da solo.",
+  "standby": "STANDBY",
+  "onAir": "IN ONDA",
+  "noPlayer": "NESSUN PLAYER",
+  "decorative": "frequenza decorativa",
+  "knob": "Manopola di sintonia: ruotala con le frecce o trascinala",
+  "prev": "Stazione precedente",
+  "next": "Stazione successiva",
+  "presets": "Stazioni preimpostate",
+  "hosts": "Conduttori",
+  "listen": "Ascolta alla fonte ufficiale",
+  "channel": "Canale",
+  "verified": "Verificato il",
+  "tuning": "Sintonizzazione...",
+  "cardP": "Gira il quadrante e scegli una stazione. Il suono parte quando premi Tune in.",
+  "open": "Apri la radio completa",
+  "legal": "Questa stazione non ha un player ufficiale incorporabile. Linkiamo solo Rockstar Games, dove puoi ascoltarne un'anteprima.",
+  "playerNote": "Player ufficiale di {p}. Si carica solo dopo aver premuto Tune in.",
+  "privH": "Player radio (Apple Music, Spotify, YouTube)",
+  "privP": "La pagina Leonida Radio non carica nulla da terze parti finché non premi Tune in. Dopo, viene caricato il player ufficiale scelto (Apple Music, Spotify o YouTube tramite youtube-nocookie.com) e la piattaforma può impostare cookie e ricevere dati tecnici, come il tuo IP, secondo la propria informativa. Salviamo solo l'ultima stazione scelta nel tuo browser (localStorage). Non ospitiamo alcun audio.",
+  "genre": {
+   "album": "Album",
+   "score": "Colonna sonora",
+   "trailer": "Trailer",
+   "house": "House e techno",
+   "latin": "Latin moderno",
+   "country": "Country",
+   "afro": "Amapiano e classici africani",
+   "metal": "Metal",
+   "pop": "Pop",
+   "rap": "Rap del Sud e classici hip-hop"
+  }
  }
 }

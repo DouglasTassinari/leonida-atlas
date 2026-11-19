@@ -9,7 +9,8 @@
   "about": "Über uns",
   "news": "News",
   "posts": "Beiträge",
-  "community": "Community"
+  "community": "Community",
+  "radio": "Radio"
  },
  "footer": {
   "disclaimer": "Leonida Atlas ist eine inoffizielle Fanseite. Sie steht in keiner Verbindung zu Rockstar Games oder Take-Two Interactive und wird weder von ihnen unterstützt noch gesponsert. Alle Marken gehören ihren Inhabern.",
@@ -383,5 +384,44 @@
   "p4": "Um deinen Inhalt entfernen zu lassen, eröffne ein Issue unter https://github.com/DouglasTassinari/leonida-atlas/issues mit dem Link zur Seite. Wir verlangen keine E-Mail. Wir entfernen Inhalte, die gegen diese Regeln oder Rechte verstoßen oder deren Urheber die Entfernung verlangt.",
   "h5": "Moderation",
   "p5": "Nichts wird automatisch veröffentlicht. Bilder werden von einem automatischen Werkzeug geprüft und jeder Beitrag wird von einer Person gesichtet. Wir können jederzeit und ohne Vorankündigung Inhalte ablehnen oder entfernen. Leonida Atlas ist eine inoffizielle Fanseite; Community-Beiträge sind nicht verifiziert."
+ },
+ "radio": {
+  "title": "Leonida Radio: GTA-VI-Sender und offizielle Musik-Player",
+  "desc": "Wähle einen Sender auf einer Retro-Radioskala. Sender aus dem Spiel mit Links zu Rockstar sowie offizielle Player für Album, Score und Trailer.",
+  "h1": "Leonida Radio",
+  "lead": "Eine Fan-Radioskala für den GTA-VI-Soundtrack. Dreh am Knopf, um den Sender zu wechseln. Es werden nur offizielle Player von Rockstar und den Plattformen genutzt; hier wird nichts aufgenommen oder gehostet.",
+  "tune": "Tune in",
+  "tuneNote": "Der Ton startet erst, nachdem du auf Tune in drückst. Dein Browser blockiert Audio, das von selbst startet.",
+  "standby": "BEREIT",
+  "onAir": "ON AIR",
+  "noPlayer": "KEIN PLAYER",
+  "decorative": "dekorative Frequenz",
+  "knob": "Abstimmknopf: mit den Pfeiltasten drehen oder ziehen",
+  "prev": "Vorheriger Sender",
+  "next": "Nächster Sender",
+  "presets": "Senderspeicher",
+  "hosts": "Moderatoren",
+  "listen": "Bei der offiziellen Quelle anhören",
+  "channel": "Kanal",
+  "verified": "Geprüft am",
+  "tuning": "Abstimmen...",
+  "cardP": "Dreh an der Skala und wähle einen Sender. Der Ton startet, wenn du auf Tune in drückst.",
+  "open": "Ganzes Radio öffnen",
+  "legal": "Dieser Sender hat keinen offiziellen Einbettungs-Player. Wir verlinken nur auf Rockstar Games, wo du ihn vorhören kannst.",
+  "playerNote": "Offizieller Player von {p}. Er lädt erst, nachdem du auf Tune in drückst.",
+  "privH": "Radio-Player (Apple Music, Spotify, YouTube)",
+  "privP": "Die Seite Leonida Radio lädt nichts von Dritten, bis du auf Tune in drückst. Danach wird der gewählte offizielle Player (Apple Music, Spotify oder YouTube über youtube-nocookie.com) geladen; die Plattform kann Cookies setzen und technische Daten wie deine IP-Adresse erhalten, gemäß ihrer eigenen Datenschutzerklärung. Wir speichern nur deinen zuletzt gewählten Sender im Browser (localStorage). Wir hosten kein Audio.",
+  "genre": {
+   "album": "Album",
+   "score": "Score",
+   "trailer": "Trailer",
+   "house": "House und Techno",
+   "latin": "Moderner Latin",
+   "country": "Country",
+   "afro": "Amapiano und afrikanische Klassiker",
+   "metal": "Metal",
+   "pop": "Pop",
+   "rap": "Southern Rap und Hip-Hop-Klassiker"
+  }
  }
 }

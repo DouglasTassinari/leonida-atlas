@@ -9,7 +9,8 @@
   "about": "소개",
   "news": "뉴스",
   "posts": "글",
-  "community": "커뮤니티"
+  "community": "커뮤니티",
+  "radio": "라디오"
  },
  "footer": {
   "disclaimer": "Leonida Atlas는 비공식 팬 사이트입니다. Rockstar Games 또는 Take-Two Interactive와 제휴, 승인, 후원 관계가 없습니다. 모든 상표는 각 소유자에게 있습니다.",
@@ -383,5 +384,44 @@
   "p4": "콘텐츠를 삭제하려면 https://github.com/DouglasTassinari/leonida-atlas/issues 에서 페이지 링크와 함께 issue를 열어 주세요. 이메일은 요구하지 않습니다. 이 규칙이나 권리를 침해하는 콘텐츠, 작성자가 삭제를 요청한 콘텐츠는 삭제합니다.",
   "h5": "검토",
   "p5": "아무것도 자동으로 게시되지 않습니다. 이미지는 자동 도구가 확인하고 모든 게시물은 사람이 검토합니다. 언제든 사전 통지 없이 콘텐츠를 거부하거나 삭제할 수 있습니다. Leonida Atlas는 비공식 팬 사이트이며 커뮤니티 게시물은 검증되지 않습니다."
+ },
+ "radio": {
+  "title": "Leonida Radio: GTA VI 방송국과 공식 음악 플레이어",
+  "desc": "레트로 라디오 다이얼에서 방송국을 고르세요. 록스타 링크가 있는 게임 속 방송국과 앨범, 스코어, 트레일러의 공식 플레이어를 제공합니다.",
+  "h1": "Leonida Radio",
+  "lead": "GTA VI 음악을 위한 팬 제작 라디오 다이얼입니다. 노브를 돌려 방송국을 바꾸세요. 록스타와 각 플랫폼의 공식 플레이어만 사용하며, 이 사이트에서는 아무것도 녹음하거나 호스팅하지 않습니다.",
+  "tune": "Tune in",
+  "tuneNote": "Tune in을 누른 뒤에야 소리가 시작됩니다. 브라우저는 저절로 시작되는 오디오를 차단합니다.",
+  "standby": "대기",
+  "onAir": "방송 중",
+  "noPlayer": "플레이어 없음",
+  "decorative": "장식용 주파수",
+  "knob": "튜닝 노브: 화살표 키로 돌리거나 드래그하세요",
+  "prev": "이전 방송국",
+  "next": "다음 방송국",
+  "presets": "방송국 프리셋",
+  "hosts": "진행자",
+  "listen": "공식 출처에서 듣기",
+  "channel": "채널",
+  "verified": "확인일",
+  "tuning": "튜닝 중...",
+  "cardP": "다이얼을 돌려 방송국을 고르세요. Tune in을 누르면 소리가 시작됩니다.",
+  "open": "전체 라디오 열기",
+  "legal": "이 방송국에는 삽입 가능한 공식 플레이어가 없습니다. 미리 들을 수 있는 Rockstar Games 링크만 제공합니다.",
+  "playerNote": "{p}의 공식 플레이어입니다. Tune in을 누른 뒤에만 불러옵니다.",
+  "privH": "라디오 플레이어 (Apple Music, Spotify, YouTube)",
+  "privP": "Leonida Radio 페이지는 Tune in을 누르기 전에는 제3자에게서 아무것도 불러오지 않습니다. 이후 선택한 공식 플레이어(Apple Music, Spotify 또는 youtube-nocookie.com을 통한 YouTube)가 로드되며, 해당 플랫폼이 자체 개인정보 처리방침에 따라 쿠키를 설정하고 IP 주소 같은 기술 정보를 받을 수 있습니다. 브라우저(localStorage)에는 마지막으로 선택한 방송국만 저장합니다. 오디오는 호스팅하지 않습니다.",
+  "genre": {
+   "album": "앨범",
+   "score": "스코어",
+   "trailer": "트레일러",
+   "house": "하우스와 테크노",
+   "latin": "모던 라틴",
+   "country": "컨트리",
+   "afro": "아마피아노와 아프리카 클래식",
+   "metal": "메탈",
+   "pop": "팝",
+   "rap": "서던 랩과 힙합 클래식"
+  }
  }
 }

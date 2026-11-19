@@ -5,6 +5,7 @@ export const getStaticPaths = staticLocales;
 const { lang } = Astro.params;
 const p = t(lang).priv;
 const G = t(lang).gallery;
+const R = t(lang).radio;
 ---
 <Base lang={lang} path="/privacy" title={p.title} description={p.desc}>
   <h1>{p.title}</h1>
@@ -14,5 +15,6 @@ const G = t(lang).gallery;
   <h2>{p.h3}</h2><p>{p.p3}</p>
   <h2>{p.h4}</h2><p>{p.p4}</p>
   <h2>{G.privH}</h2><p>{G.privP}</p>
+  <h2>{R.privH}</h2><p>{R.privP}</p>
   <h2>{p.commH}</h2><p>{p.commP} <a href={url(lang, '/terms')}>{t(lang).footer.terms}</a></p>
 </Base>

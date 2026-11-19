@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Radio from '../../components/Radio.astro';
+import { t, url, staticLocales, meta } from '../../i18n/index.js';
+import { stations, officialMusic, verified } from '../../data/radio.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const R = ui.radio;
+const pageUrl = new URL(url(lang, '/radio'), Astro.site).href;
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: R.title, description: R.desc, url: pageUrl, inLanguage: meta[lang].html,
+    isPartOf: { '@type': 'WebSite', name: 'Leonida Atlas', url: new URL(url(lang), Astro.site).href },
+    mainEntity: { '@type': 'ItemList', numberOfItems: stations.length,
+      itemListElement: stations.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: s.name, url: s.url })) } },
+];
+---
+<Base lang={lang} path="/radio" title={R.title} description={R.desc} jsonld={jsonld}>
+  <h1>{R.h1}</h1>
+  <p class="lead">{R.lead}</p>
+  <Radio lang={lang} />
+  <p class="meta">{ui.home.note} <a href={officialMusic} rel="noopener">rockstargames.com/VI/music</a> · <a href={url(lang, '/privacy')}>{ui.footer.privacy}</a> · {R.verified} {verified}</p>
+</Base>

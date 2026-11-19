@@ -9,7 +9,8 @@
   "about": "關於",
   "news": "新聞",
   "posts": "文章",
-  "community": "社群"
+  "community": "社群",
+  "radio": "電台"
  },
  "footer": {
   "disclaimer": "Leonida Atlas 是非官方粉絲網站，與 Rockstar Games 或 Take-Two Interactive 無關聯，也未獲其認可或贊助。所有商標歸其各自所有人。",
@@ -383,5 +384,44 @@
   "p4": "如需刪除你的內容，請在 https://github.com/DouglasTassinari/leonida-atlas/issues 提交 issue 並附上頁面連結。我們不要求提供電子郵件。我們會刪除違反這些規則、侵犯權利或作者要求刪除的內容。",
   "h5": "審核",
   "p5": "任何內容都不會自動發佈。圖片由自動化工具檢查，每則投稿都由人工審核。我們可隨時拒絕或刪除任何內容，恕不另行通知。Leonida Atlas 是非官方粉絲網站，社群投稿未經證實。"
+ },
+ "radio": {
+  "title": "Leonida Radio：GTA VI 電台與官方音樂播放器",
+  "desc": "在復古收音機刻度盤上選擇電台。遊戲內電台附 Rockstar 連結，並提供專輯、原聲和預告片的官方播放器。",
+  "h1": "Leonida Radio",
+  "lead": "為 GTA VI 音樂製作的粉絲收音機刻度盤。轉動旋鈕切換電台。僅使用 Rockstar 與各平台的官方播放器，本站不錄製也不代管任何音訊。",
+  "tune": "Tune in",
+  "tuneNote": "按下 Tune in 後才會開始播放。瀏覽器會阻擋自動播放的聲音。",
+  "standby": "待機",
+  "onAir": "直播中",
+  "noPlayer": "無播放器",
+  "decorative": "裝飾性頻率",
+  "knob": "調諧旋鈕：用方向鍵轉動或拖曳",
+  "prev": "上一個電台",
+  "next": "下一個電台",
+  "presets": "電台預設",
+  "hosts": "主持人",
+  "listen": "前往官方來源收聽",
+  "channel": "頻道",
+  "verified": "查證日期",
+  "tuning": "調諧中...",
+  "cardP": "轉動刻度盤選擇電台。按下 Tune in 後開始播放。",
+  "open": "開啟完整電台",
+  "legal": "此電台沒有可嵌入的官方播放器。我們只提供指向 Rockstar Games 的連結，可在那裡試聽。",
+  "playerNote": "來自 {p} 的官方播放器。僅在你按下 Tune in 後載入。",
+  "privH": "電台播放器（Apple Music、Spotify、YouTube）",
+  "privP": "在你按下 Tune in 之前，Leonida Radio 頁面不會從第三方載入任何內容。之後會載入所選的官方播放器（Apple Music、Spotify 或透過 youtube-nocookie.com 的 YouTube），相關平台可能依其自身隱私政策設定 Cookie 並接收 IP 位址等技術資料。我們只在瀏覽器（localStorage）中儲存你最後選擇的電台。我們不代管任何音訊。",
+  "genre": {
+   "album": "專輯",
+   "score": "原聲",
+   "trailer": "預告片",
+   "house": "浩室與科技舞曲",
+   "latin": "現代拉丁",
+   "country": "鄉村",
+   "afro": "Amapiano 與非洲經典",
+   "metal": "金屬",
+   "pop": "流行",
+   "rap": "南方說唱與嘻哈經典"
+  }
  }
 }
