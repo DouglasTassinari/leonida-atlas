@@ -6,7 +6,8 @@
   "fact": "Fact Check",
   "reality": "Reality Check",
   "guides": "Guides",
-  "about": "About"
+  "about": "About",
+  "news": "News"
  },
  "footer": {
   "disclaimer": "Leonida Atlas is an unofficial fan site. Not affiliated with, endorsed by, or sponsored by Rockstar Games or Take-Two Interactive. All trademarks belong to their owners.",
@@ -271,5 +272,31 @@
   "privH": "Embedded third-party content",
   "privP": "The Fan gallery shows posts from X, and the home page and one guide show a YouTube video. Gallery posts load only after you click “Load embed”. When loaded, the platform may set cookies and receive technical data such as your IP address and the page you visited, under its own privacy policy. The YouTube trailer uses the privacy-enhanced youtube-nocookie.com domain, but it still contacts YouTube when the page opens. We do not host these images or videos."
  },
- "trailer": {"h": "Official launch trailer", "title": "Grand Theft Auto VI Launch Trailer, YouTube video player", "cap": "Official Launch Trailer, Rockstar Games YouTube channel", "src": "Rockstar Newswire article"}
+ "trailer": {
+  "h": "Official launch trailer",
+  "title": "Grand Theft Auto VI Launch Trailer, YouTube video player",
+  "cap": "Official Launch Trailer, Rockstar Games YouTube channel",
+  "src": "Rockstar Newswire article"
+ },
+ "news": {
+  "title": "GTA VI news",
+  "desc": "Recent Grand Theft Auto VI news with source links: official announcements and reports from recognized outlets, each clearly labeled.",
+  "lead": "A short, curated list of recent GTA VI news. We link to the original and add a brief summary in our own words. Items from Rockstar Games are labeled official; everything else is labeled as reported by the outlet.",
+  "home": "Home",
+  "all": "All",
+  "official": "Official",
+  "reported": "Reported",
+  "officialSource": "Official source",
+  "reportedBy": "Reported by {source}",
+  "read": "Read the original at {source}",
+  "summaryEn": "Summary in English",
+  "published": "Published",
+  "checked": "Checked",
+  "back": "All news",
+  "cardP": "Recent GTA VI headlines with source links, clearly labeled official or reported.",
+  "count": "{n} items",
+  "ext": "Opens the original site in a new tab",
+  "editH": "News and sources",
+  "editP": "We pick recent GTA VI news from official channels first (Rockstar Games, Take-Two, PlayStation, Xbox) and then from recognized outlets, and we open every source before listing it. Summaries are written in our own words and kept short; we do not copy articles or images. Rights to the original texts, names and marks belong to their owners, and each item links to the original. Reported items are not confirmed by us."
+ }
 }

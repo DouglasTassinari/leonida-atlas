@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ArticleCover from '../../../components/ArticleCover.astro';
+import { news } from '../../../data/news.js';
+import { t, completeLocales, url, fmt } from '../../../i18n/index.js';
+export function getStaticPaths() {
+  return completeLocales.flatMap((lang) => news.map((it) => ({ params: { lang, id: it.id }, props: { it } })));
+}
+const { lang } = Astro.params;
+const { it } = Astro.props;
+const ui = t(lang);
+const n = ui.news;
+const site = Astro.site;
+const here = new URL(url(lang, '/news/' + it.id), site).href;
+const label = it.type === 'official' ? n.officialSource : fmt(n.reportedBy, { source: it.source });
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: n.home, item: new URL(url(lang), site).href },
+    { '@type': 'ListItem', position: 2, name: n.title, item: new URL(url(lang, '/news'), site).href },
+    { '@type': 'ListItem', position: 3, name: it.title, item: here },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: it.title.slice(0, 110), description: it.summary, inLanguage: 'en',
+    mainEntityOfPage: here, datePublished: it.published, dateModified: it.checked,
+    image: new URL('/og/' + it.cover + '.png', site).href, isBasedOn: it.url,
+    author: { '@type': 'Organization', name: 'Leonida Atlas' }, publisher: { '@type': 'Organization', name: 'Leonida Atlas' } },
+];
+---
+<Base lang={lang} path={'/news/' + it.id} title={it.title} description={it.summary} jsonld={jsonld} ogType="article" image={it.cover}>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{n.home}</a> / <a href={url(lang, '/news')}>{n.title}</a></nav>
+  <h1 lang="en">{it.title}</h1>
+  <ArticleCover slug={it.cover} alt={it.title} />
+  <p><span class={'ntag ' + it.type}>{label}</span></p>
+  <p class="lead" lang="en">{it.summary}</p>
+  {lang !== 'en' && <p class="meta">{n.summaryEn}</p>}
+  <p class="meta">{n.published}: <time datetime={it.published}>{it.published}</time> · {n.checked}: <time datetime={it.checked}>{it.checked}</time> · <span lang="en">{it.source}</span></p>
+  <p><a class="cta" href={it.url} target="_blank" rel="noopener nofollow ugc" aria-label={n.ext}>{fmt(n.read, { source: it.source })}</a></p>
+  <ul class="related"><li><a href={url(lang, '/news')}>{n.back}</a></li></ul>
+</Base>

@@ -166,3 +166,23 @@ pre,code{overflow-wrap:anywhere;white-space:pre-wrap}
 details.faq summary{min-height:44px;display:flex;align-items:center}
 .cover{max-width:1000px}
 @media (max-width:430px){.menu-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.brand{font-size:1.2rem}}
+
+/* news */
+.nfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+#nf-all,#nf-official,#nf-reported{position:absolute;opacity:0;pointer-events:none}
+.nfilter label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:99px;cursor:pointer;color:var(--muted);font-weight:700}
+#nf-all:checked~.nfilter label[for=nf-all],#nf-official:checked~.nfilter label[for=nf-official],#nf-reported:checked~.nfilter label[for=nf-reported]{border-color:var(--teal);color:var(--text);box-shadow:0 0 14px rgba(46,230,214,.35)}
+#nf-all:focus-visible~.nfilter label[for=nf-all],#nf-official:focus-visible~.nfilter label[for=nf-official],#nf-reported:focus-visible~.nfilter label[for=nf-reported]{outline:2px solid var(--teal);outline-offset:2px}
+#nf-official:checked~.ncards .ncard[data-type=reported],#nf-reported:checked~.ncards .ncard[data-type=official]{display:none}
+.ncards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(14px,1.5vw,24px);margin:16px 0 24px;padding:0;list-style:none}
+.ncard{background:linear-gradient(160deg,var(--panel),#160a28);border:1px solid var(--line);border-radius:14px;padding:12px 12px 16px;overflow-wrap:anywhere}
+.ncard .cover{margin:0 0 12px}
+.ncard h3{margin:8px 0 6px;font-size:1.05rem;text-transform:none}
+.ncard h3 a{color:var(--text);text-decoration:none}
+.ncard h3 a:hover{color:var(--pink)}
+.ncard p{margin:6px 0;color:var(--muted);font-size:.95rem}
+.ntag{display:inline-block;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em}
+.ntag.official{background:#0f3a33;color:var(--ok);border:1px solid var(--ok)}
+.ntag.reported{background:#3d2f10;color:var(--warn);border:1px solid var(--warn)}
+.nlinks{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:8px;font-size:.95rem}
+.nlinks a{display:inline-flex;align-items:center;min-height:44px}

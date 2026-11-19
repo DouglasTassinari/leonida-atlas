@@ -1,43 +1,112 @@
 {
  "skip": "Vai al contenuto",
  "langLabel": "Lingua",
- "nav": { "log": "Diario Leonida", "fact": "Verifica fatti", "reality": "Test di realtà", "guides": "Guide", "about": "Chi siamo" },
+ "nav": {
+  "log": "Diario Leonida",
+  "fact": "Verifica fatti",
+  "reality": "Test di realtà",
+  "guides": "Guide",
+  "about": "Chi siamo",
+  "news": "Notizie"
+ },
  "footer": {
   "disclaimer": "Leonida Atlas è un sito di fan non ufficiale. Non è affiliato, approvato né sponsorizzato da Rockstar Games o Take-Two Interactive. Tutti i marchi appartengono ai rispettivi proprietari.",
-  "about": "Chi siamo", "disc": "Avvertenza", "privacy": "Privacy"
+  "about": "Chi siamo",
+  "disc": "Avvertenza",
+  "privacy": "Privacy"
  },
  "home": {
-  "title": "Leonida Atlas", "desc": "Leonida Atlas è un progetto indipendente di fan su GTA VI: tieni un diario delle scoperte, crea una Carta Esploratore condivisibile e verifica i fatti con fonti ufficiali.",
-  "kicker": "Progetto indipendente di fan", "h1": "La tua Leonida. Le tue scoperte.", "lead": "Esplora, documenta e condividi il tuo viaggio nel mondo di GTA VI.", "cta": "Inizia il tuo diario",
-  "c1t": "Traccia le tue scoperte", "c1p": "Tieni un diario personale di luoghi, personaggi, veicoli, attività e segreti. Resta nel tuo browser.",
-  "c2t": "Crea la tua Carta Esploratore", "c2p": "Trasforma le tue scoperte in un ricordo condivisibile del tuo viaggio.",
-  "c3t": "Separa fatti e voci", "c3p": "Consulta informazioni verificate con fonti e mettiti alla prova con il quiz Test di realtà.",
-  "guidesH": "Guide su GTA VI, con fonti", "guidesLead": "Lingue, piattaforme, edizioni, dimensione del download e altro. Ogni affermazione rimanda a una pagina ufficiale.", "guidesAll": "Vedi tutte le guide",
+  "title": "Leonida Atlas",
+  "desc": "Leonida Atlas è un progetto indipendente di fan su GTA VI: tieni un diario delle scoperte, crea una Carta Esploratore condivisibile e verifica i fatti con fonti ufficiali.",
+  "kicker": "Progetto indipendente di fan",
+  "h1": "La tua Leonida. Le tue scoperte.",
+  "lead": "Esplora, documenta e condividi il tuo viaggio nel mondo di GTA VI.",
+  "cta": "Inizia il tuo diario",
+  "c1t": "Traccia le tue scoperte",
+  "c1p": "Tieni un diario personale di luoghi, personaggi, veicoli, attività e segreti. Resta nel tuo browser.",
+  "c2t": "Crea la tua Carta Esploratore",
+  "c2p": "Trasforma le tue scoperte in un ricordo condivisibile del tuo viaggio.",
+  "c3t": "Separa fatti e voci",
+  "c3p": "Consulta informazioni verificate con fonti e mettiti alla prova con il quiz Test di realtà.",
+  "guidesH": "Guide su GTA VI, con fonti",
+  "guidesLead": "Lingue, piattaforme, edizioni, dimensione del download e altro. Ogni affermazione rimanda a una pagina ufficiale.",
+  "guidesAll": "Vedi tutte le guide",
   "note": "Progetto indipendente creato da fan. Non affiliato né approvato da Rockstar Games o Take-Two Interactive."
  },
  "log": {
-  "title": "Diario Leonida", "desc": "Un diario privato delle scoperte in GTA VI salvato nel browser, con una Carta Esploratore Leonida scaricabile.",
+  "title": "Diario Leonida",
+  "desc": "Un diario privato delle scoperte in GTA VI salvato nel browser, con una Carta Esploratore Leonida scaricabile.",
   "lead": "Annota ciò che scopri a Leonida. Le voci restano in questo browser (localStorage) e non vengono mai caricate.",
-  "category": "Categoria", "titleLabel": "Titolo", "titlePh": "Cosa hai scoperto?", "note": "Nota (facoltativa)", "add": "Aggiungi scoperta",
-  "discoveries": "scoperte", "del": "Elimina",
-  "cats": { "Locations": "Luoghi", "Characters": "Personaggi", "Vehicles": "Veicoli", "Activities": "Attività", "Secrets": "Segreti" },
-  "ranks": { "Rookie": "Recluta", "Explorer": "Esploratore", "Veteran": "Veterano", "Legend": "Leggenda" },
-  "next": "Prossimo grado: {rank} (ne mancano {n})", "top": "Grado massimo raggiunto. Sei una Leggenda di Leonida!",
-  "cardH": "La mia Carta Esploratore Leonida", "cardMeta": "L’immagine viene generata sul tuo dispositivo. Non viene caricato nulla.", "nick": "Il tuo nome (facoltativo)", "make": "Genera carta", "download": "Scarica PNG", "share": "Condividi la mia carta",
-  "cardKicker": "LEONIDA ATLAS / ESPLORATORE / IL MIO DIARIO LEONIDA", "cardTitle": "La mia Carta Esploratore Leonida", "cardBeat": "Riesci a battere il mio record?", "cardDisc": "Sito di fan, non affiliato a Rockstar Games o Take-Two",
-  "shareText": "La mia Carta Esploratore Leonida — Riesci a battere il mio record?", "shareFallback": "La condivisione non è disponibile qui, quindi il PNG è stato scaricato."
+  "category": "Categoria",
+  "titleLabel": "Titolo",
+  "titlePh": "Cosa hai scoperto?",
+  "note": "Nota (facoltativa)",
+  "add": "Aggiungi scoperta",
+  "discoveries": "scoperte",
+  "del": "Elimina",
+  "cats": {
+   "Locations": "Luoghi",
+   "Characters": "Personaggi",
+   "Vehicles": "Veicoli",
+   "Activities": "Attività",
+   "Secrets": "Segreti"
+  },
+  "ranks": {
+   "Rookie": "Recluta",
+   "Explorer": "Esploratore",
+   "Veteran": "Veterano",
+   "Legend": "Leggenda"
+  },
+  "next": "Prossimo grado: {rank} (ne mancano {n})",
+  "top": "Grado massimo raggiunto. Sei una Leggenda di Leonida!",
+  "cardH": "La mia Carta Esploratore Leonida",
+  "cardMeta": "L’immagine viene generata sul tuo dispositivo. Non viene caricato nulla.",
+  "nick": "Il tuo nome (facoltativo)",
+  "make": "Genera carta",
+  "download": "Scarica PNG",
+  "share": "Condividi la mia carta",
+  "cardKicker": "LEONIDA ATLAS / ESPLORATORE / IL MIO DIARIO LEONIDA",
+  "cardTitle": "La mia Carta Esploratore Leonida",
+  "cardBeat": "Riesci a battere il mio record?",
+  "cardDisc": "Sito di fan, non affiliato a Rockstar Games o Take-Two",
+  "shareText": "La mia Carta Esploratore Leonida — Riesci a battere il mio record?",
+  "shareFallback": "La condivisione non è disponibile qui, quindi il PNG è stato scaricato."
  },
  "fc": {
-  "title": "Verifica dei fatti", "desc": "Fatti su GTA VI confermati dalle pagine ufficiali di Rockstar Games, Take-Two e PlayStation, con fonte, URL e data di verifica. Le voci non verificate sono segnalate.",
+  "title": "Verifica dei fatti",
+  "desc": "Fatti su GTA VI confermati dalle pagine ufficiali di Rockstar Games, Take-Two e PlayStation, con fonte, URL e data di verifica. Le voci non verificate sono segnalate.",
   "lead": "Ogni voce rimanda a una pagina ufficiale e mostra la data in cui l’abbiamo controllata. Le citazioni restano nell’inglese originale.",
-  "confirmed": "Fatti confermati", "tag": "Confermato", "source": "Fonte", "url": "URL", "published": "Pubblicato", "checked": "Ultima verifica", "status": "Stato", "statusConfirmed": "confermato", "notStated": "non indicato nella pagina",
-  "rumors": "Voci", "rumorsNote": "Tutto ciò che è elencato qui non è verificato e non va considerato un fatto.", "none": "Nessuna voce monitorata per ora.", "rumorTag": "Voce"
+  "confirmed": "Fatti confermati",
+  "tag": "Confermato",
+  "source": "Fonte",
+  "url": "URL",
+  "published": "Pubblicato",
+  "checked": "Ultima verifica",
+  "status": "Stato",
+  "statusConfirmed": "confermato",
+  "notStated": "non indicato nella pagina",
+  "rumors": "Voci",
+  "rumorsNote": "Tutto ciò che è elencato qui non è verificato e non va considerato un fatto.",
+  "none": "Nessuna voce monitorata per ora.",
+  "rumorTag": "Voce"
  },
  "rc": {
-  "title": "Test di realtà", "desc": "Un quiz su GTA VI di sette domande: voce o verità? Le risposte si basano su fonti ufficiali.",
-  "lead": "Voce o verità? Sette affermazioni, verificabili nella pagina Verifica dei fatti.", "qOf": "Domanda {i} di {n}", "truth": "Vero", "rumor": "Voce",
-  "correct": "Esatto.", "wrong": "Non proprio.", "isTrue": "Questa affermazione è vera.", "isFalse": "Questa affermazione non è supportata da fonti ufficiali.", "source": "Fonte",
-  "next": "Avanti", "see": "Vedi il risultato", "score": "Hai totalizzato {s} su {n}.", "again": "Riprova", "noscript": "Questo quiz richiede JavaScript.",
+  "title": "Test di realtà",
+  "desc": "Un quiz su GTA VI di sette domande: voce o verità? Le risposte si basano su fonti ufficiali.",
+  "lead": "Voce o verità? Sette affermazioni, verificabili nella pagina Verifica dei fatti.",
+  "qOf": "Domanda {i} di {n}",
+  "truth": "Vero",
+  "rumor": "Voce",
+  "correct": "Esatto.",
+  "wrong": "Non proprio.",
+  "isTrue": "Questa affermazione è vera.",
+  "isFalse": "Questa affermazione non è supportata da fonti ufficiali.",
+  "source": "Fonte",
+  "next": "Avanti",
+  "see": "Vedi il risultato",
+  "score": "Hai totalizzato {s} su {n}.",
+  "again": "Riprova",
+  "noscript": "Questo quiz richiede JavaScript.",
   "q": [
    "Grand Theft Auto VI è uscito in tutto il mondo il 19 novembre 2026.",
    "Grand Theft Auto VI è disponibile su PlayStation 5 e Xbox Series X|S.",
@@ -49,30 +118,52 @@
   ]
  },
  "about": {
-  "title": "Chi siamo", "desc": "Informazioni su Leonida Atlas, un progetto indipendente di fan su Grand Theft Auto VI.",
+  "title": "Chi siamo",
+  "desc": "Informazioni su Leonida Atlas, un progetto indipendente di fan su Grand Theft Auto VI.",
   "p1": "Leonida Atlas è un progetto indipendente di fan su Grand Theft Auto VI. Offre un diario di gioco personale, un elenco di fatti con fonti, brevi guide e un piccolo quiz voce contro verità.",
-  "h2": "Come trattiamo i fatti", "p2": "Un’affermazione compare come fatto solo se possiamo collegare una fonte ufficiale e indicare la data di verifica. Tutto il resto è segnalato come voce, indicato come non confermato oppure omesso.",
-  "h3": "Cosa non facciamo", "p3": "Non usiamo immagini, loghi o testi di Rockstar e non ospitiamo materiale trapelato. Vedi l’avvertenza."
+  "h2": "Come trattiamo i fatti",
+  "p2": "Un’affermazione compare come fatto solo se possiamo collegare una fonte ufficiale e indicare la data di verifica. Tutto il resto è segnalato come voce, indicato come non confermato oppure omesso.",
+  "h3": "Cosa non facciamo",
+  "p3": "Non usiamo immagini, loghi o testi di Rockstar e non ospitiamo materiale trapelato. Vedi l’avvertenza."
  },
  "disc": {
-  "title": "Avvertenza", "desc": "Leonida Atlas è un sito di fan non ufficiale e non è affiliato a Rockstar Games o Take-Two Interactive.",
+  "title": "Avvertenza",
+  "desc": "Leonida Atlas è un sito di fan non ufficiale e non è affiliato a Rockstar Games o Take-Two Interactive.",
   "p1": "Leonida Atlas è un sito di fan non ufficiale. Non è affiliato, approvato, sponsorizzato né collegato a Rockstar Games, Take-Two Interactive Software, Inc., Sony Interactive Entertainment, Microsoft o a qualsiasi loro controllata.",
   "p2": "Grand Theft Auto, GTA e i relativi nomi, titoli e marchi appartengono ai rispettivi proprietari. Sono citati qui solo per identificare il gioco a scopo di commento e di fan.",
   "p3": "Questo sito non usa immagini, loghi o testi di Rockstar Games. I fatti rimandano a fonti ufficiali; consultale per le informazioni più recenti, che possono cambiare."
  },
  "priv": {
-  "title": "Informativa sulla privacy", "desc": "Come Leonida Atlas gestisce i tuoi dati: il Diario Leonida resta nel browser e cosa aspettarsi se verranno aggiunti annunci o cookie.", "updated": "Ultimo aggiornamento: 19 novembre 2026",
-  "h1": "Il tuo Diario Leonida resta sul tuo dispositivo", "p1": "Le voci aggiunte al Diario Leonida sono salvate nel localStorage del browser. Non vengono inviate ai nostri server e non possiamo vederle. Cancellare i dati del browser le elimina. La carta del grado condivisibile è generata localmente nel browser.",
-  "h2": "Cosa raccogliamo", "p2": "Non richiediamo un account e non raccogliamo dati personali tramite moduli. Il nostro provider di hosting può conservare i normali log del server (come indirizzo IP e pagina richiesta) per sicurezza e funzionamento.",
-  "h3": "Annunci e cookie futuri", "p3": "In futuro potremmo mostrare pubblicità o usare strumenti di analisi. In tal caso, fornitori terzi potrebbero usare cookie o tecnologie simili per mostrare annunci o misurare il traffico. Questa informativa sarà aggiornata prima, con le modalità di rifiuto e, dove richiesto, una richiesta di consenso.",
-  "h4": "Link esterni", "p4": "Rimandiamo a siti di terzi come il newswire di Rockstar Games. Le loro pratiche sulla privacy sono indipendenti dalle nostre."
+  "title": "Informativa sulla privacy",
+  "desc": "Come Leonida Atlas gestisce i tuoi dati: il Diario Leonida resta nel browser e cosa aspettarsi se verranno aggiunti annunci o cookie.",
+  "updated": "Ultimo aggiornamento: 19 novembre 2026",
+  "h1": "Il tuo Diario Leonida resta sul tuo dispositivo",
+  "p1": "Le voci aggiunte al Diario Leonida sono salvate nel localStorage del browser. Non vengono inviate ai nostri server e non possiamo vederle. Cancellare i dati del browser le elimina. La carta del grado condivisibile è generata localmente nel browser.",
+  "h2": "Cosa raccogliamo",
+  "p2": "Non richiediamo un account e non raccogliamo dati personali tramite moduli. Il nostro provider di hosting può conservare i normali log del server (come indirizzo IP e pagina richiesta) per sicurezza e funzionamento.",
+  "h3": "Annunci e cookie futuri",
+  "p3": "In futuro potremmo mostrare pubblicità o usare strumenti di analisi. In tal caso, fornitori terzi potrebbero usare cookie o tecnologie simili per mostrare annunci o misurare il traffico. Questa informativa sarà aggiornata prima, con le modalità di rifiuto e, dove richiesto, una richiesta di consenso.",
+  "h4": "Link esterni",
+  "p4": "Rimandiamo a siti di terzi come il newswire di Rockstar Games. Le loro pratiche sulla privacy sono indipendenti dalle nostre."
  },
  "g": {
-  "hubTitle": "Guide su GTA VI", "hubDesc": "Brevi guide su GTA VI: lingue, piattaforme, edizioni, dimensione del download, precaricamento, data di uscita, edizione fisica e trucchi, ciascuna con fonte ufficiale.",
+  "hubTitle": "Guide su GTA VI",
+  "hubDesc": "Brevi guide su GTA VI: lingue, piattaforme, edizioni, dimensione del download, precaricamento, data di uscita, edizione fisica e trucchi, ciascuna con fonte ufficiale.",
   "hubLead": "Risposte brevi alle domande più comuni su GTA VI. Ogni affermazione rimanda a una pagina ufficiale e alla data di verifica.",
-  "home": "Home", "sourcesH": "Cosa confermano le fonti ufficiali", "faqH": "FAQ", "relatedH": "Guide correlate", "updated": "Ultima verifica",
-  "voice": "Voce", "text": "Testo", "language": "Lingua", "yes": "Sì", "no": "Non indicato", "tableSrc": "Fonte: pagina di supporto ufficiale PlayStation, tabella delle lingue di GTA VI, verificata il 2026-11-19.",
-  "unconfirmedTag": "Non confermato", "noSource": "Nella nostra base di fatti non c’è una fonte ufficiale su questo tema, quindi qui non affermiamo nulla come fatto.", "officialSource": "Fonte ufficiale"
+  "home": "Home",
+  "sourcesH": "Cosa confermano le fonti ufficiali",
+  "faqH": "FAQ",
+  "relatedH": "Guide correlate",
+  "updated": "Ultima verifica",
+  "voice": "Voce",
+  "text": "Testo",
+  "language": "Lingua",
+  "yes": "Sì",
+  "no": "Non indicato",
+  "tableSrc": "Fonte: pagina di supporto ufficiale PlayStation, tabella delle lingue di GTA VI, verificata il 2026-11-19.",
+  "unconfirmedTag": "Non confermato",
+  "noSource": "Nella nostra base di fatti non c’è una fonte ufficiale su questo tema, quindi qui non affermiamo nulla come fatto.",
+  "officialSource": "Fonte ufficiale"
  },
  "facts": {
   "release-date": "Grand Theft Auto VI è uscito in tutto il mondo il 19 novembre 2026.",
@@ -89,58 +180,76 @@
  },
  "guides": {
   "languages": {
-   "title": "Lingue di GTA VI: voce e testo", "desc": "Quali lingue supporta GTA VI? Inglese con voce e testo; altre 11 lingue con testo, secondo la tabella ufficiale PlayStation.",
+   "title": "Lingue di GTA VI: voce e testo",
+   "desc": "Quali lingue supporta GTA VI? Inglese con voce e testo; altre 11 lingue con testo, secondo la tabella ufficiale PlayStation.",
    "lead": "Secondo la pagina di supporto ufficiale di PlayStation, l’inglese è l’unica lingua con voce. Altre undici lingue sono indicate solo con testo.",
    "body": "La tabella qui sotto riprende quella pagina: inglese con voce e testo; francese, tedesco, italiano, coreano, polacco, portoghese (Brasile), russo, cinese semplificato, cinese tradizionale, spagnolo (Messico) e spagnolo (Spagna) con testo. Consulta la pagina ufficiale per eventuali modifiche successive.",
-   "q": "GTA VI ha il doppiaggio in lingue diverse dall’inglese?", "a": "La tabella ufficiale indica la voce solo per l’inglese. Le altre 11 lingue sono elencate solo con testo."
+   "q": "GTA VI ha il doppiaggio in lingue diverse dall’inglese?",
+   "a": "La tabella ufficiale indica la voce solo per l’inglese. Le altre 11 lingue sono elencate solo con testo."
   },
   "brazilian-portuguese": {
-   "title": "GTA VI ha il portoghese brasiliano?", "desc": "Sì per il testo: il portoghese (Brasile) è nell’elenco ufficiale. La voce è indicata solo per l’inglese.",
+   "title": "GTA VI ha il portoghese brasiliano?",
+   "desc": "Sì per il testo: il portoghese (Brasile) è nell’elenco ufficiale. La voce è indicata solo per l’inglese.",
    "lead": "Sì, il portoghese (Brasile) è supportato come testo (la fonte non distingue tra menu e sottotitoli). La voce non è indicata.",
    "body": "La tabella ufficiale di PlayStation segna il portoghese (Brasile) sotto Testo e lascia vuota la colonna Voce. Non dice altro, quindi non affermiamo nulla su un eventuale doppiaggio né su come il testo sia diviso tra menu e sottotitoli.",
-   "q": "Esiste il doppiaggio in portoghese brasiliano?", "a": "Non secondo la tabella ufficiale: la voce è indicata solo per l’inglese."
+   "q": "Esiste il doppiaggio in portoghese brasiliano?",
+   "a": "Non secondo la tabella ufficiale: la voce è indicata solo per l’inglese."
   },
   "platforms": {
-   "title": "Piattaforme di GTA VI: PS5 e Xbox", "desc": "GTA VI è disponibile su PlayStation 5 e Xbox Series X|S, secondo l’annuncio di lancio di Rockstar.",
+   "title": "Piattaforme di GTA VI: PS5 e Xbox",
+   "desc": "GTA VI è disponibile su PlayStation 5 e Xbox Series X|S, secondo l’annuncio di lancio di Rockstar.",
    "lead": "L’annuncio di lancio di Rockstar dice che il gioco è disponibile su PlayStation 5 e Xbox Series X|S.",
    "body": "Sono le uniche piattaforme citate nelle fonti ufficiali che seguiamo. Non affermiamo nulla su altre piattaforme.",
-   "q": "GTA VI è disponibile su PC?", "a": "Le fonti ufficiali che seguiamo citano solo PlayStation 5 e Xbox Series X|S, quindi non affermiamo nulla su altre piattaforme."
+   "q": "GTA VI è disponibile su PC?",
+   "a": "Le fonti ufficiali che seguiamo citano solo PlayStation 5 e Xbox Series X|S, quindi non affermiamo nulla su altre piattaforme."
   },
   "editions": {
-   "title": "Edizioni di GTA VI: Base e Ultimate", "desc": "Cosa possiamo confermare sulle edizioni base e Ultimate di GTA VI: i prezzi USA annunciati, e nient’altro senza fonte.",
+   "title": "Edizioni di GTA VI: Base e Ultimate",
+   "desc": "Cosa possiamo confermare sulle edizioni base e Ultimate di GTA VI: i prezzi USA annunciati, e nient’altro senza fonte.",
    "lead": "Take-Two ha annunciato un’edizione base a 79,99 $ e un’edizione Ultimate a 99,99 $ (prezzi USA).",
    "body": "Le nostre fonti confermano solo i prezzi. Non descriviamo cosa include ciascuna edizione perché nessuna fonte della nostra base di fatti ne elenca i contenuti. Controlla la pagina ufficiale dello store della tua piattaforma.",
-   "q": "Cosa include l’edizione Ultimate?", "a": "Non possiamo dirlo con le nostre fonti. Controlla la scheda ufficiale dello store."
+   "q": "Cosa include l’edizione Ultimate?",
+   "a": "Non possiamo dirlo con le nostre fonti. Controlla la scheda ufficiale dello store."
   },
   "download-size": {
-   "title": "Dimensione del download di GTA VI", "desc": "Rockstar dice che il file di precaricamento di GTA VI richiede fino a 212 GB a seconda del dispositivo.",
+   "title": "Dimensione del download di GTA VI",
+   "desc": "Rockstar dice che il file di precaricamento di GTA VI richiede fino a 212 GB a seconda del dispositivo.",
    "lead": "Secondo Rockstar, il file di precaricamento richiede fino a 212 GB, a seconda del dispositivo.",
    "body": "La cifra è un limite massimo per il file di precaricamento, come indicato da Rockstar. Lo spazio libero dovrebbe coprire almeno quella quantità; la dimensione effettiva sulla tua console può essere inferiore. Gli aggiornamenti successivi possono cambiare le dimensioni.",
-   "q": "212 GB è la dimensione finale dell’installazione?", "a": "Rockstar la descrive come la dimensione del file di precaricamento: fino a 212 GB a seconda del dispositivo."
+   "q": "212 GB è la dimensione finale dell’installazione?",
+   "a": "Rockstar la descrive come la dimensione del file di precaricamento: fino a 212 GB a seconda del dispositivo."
   },
   "preload-guide": {
-   "title": "Guida al precaricamento di GTA VI", "desc": "Date e orari del precaricamento su PS5 e Xbox Series X|S, dimensione del file e versioni con codice in confezione, dall’annuncio di Rockstar.",
+   "title": "Guida al precaricamento di GTA VI",
+   "desc": "Date e orari del precaricamento su PS5 e Xbox Series X|S, dimensione del file e versioni con codice in confezione, dall’annuncio di Rockstar.",
    "lead": "Il precaricamento digitale è iniziato il 10 novembre 2026: PS5 a mezzanotte ora locale, Xbox Series X|S alle 00:00 GMT.",
    "body": "Metti in conto un file fino a 212 GB e libera abbastanza spazio prima di iniziare. Le versioni con codice in confezione dovevano arrivare nei negozi dal 12 novembre. Rockstar ha anche annunciato un poster stampabile e una mappa di Leonida per il 19 novembre (ci limitiamo a linkarli).",
-   "q": "Quando è iniziato il precaricamento?", "a": "Il 10 novembre 2026, secondo il newswire di Rockstar."
+   "q": "Quando è iniziato il precaricamento?",
+   "a": "Il 10 novembre 2026, secondo il newswire di Rockstar."
   },
   "release-date": {
-   "title": "Data di uscita e disponibilità di GTA VI", "desc": "GTA VI è uscito in tutto il mondo il 19 novembre 2026 su PlayStation 5 e Xbox Series X|S, secondo Rockstar.",
+   "title": "Data di uscita e disponibilità di GTA VI",
+   "desc": "GTA VI è uscito in tutto il mondo il 19 novembre 2026 su PlayStation 5 e Xbox Series X|S, secondo Rockstar.",
    "lead": "Il newswire di Rockstar, datato 19 novembre 2026, afferma che Grand Theft Auto VI è disponibile in tutto il mondo su PlayStation 5 e Xbox Series X|S.",
    "body": "Il precaricamento è iniziato il 10 novembre e le versioni con codice in confezione dovevano arrivare nei negozi dal 12 novembre. Il trailer di lancio ufficiale è stato pubblicato il 15 ottobre 2026.",
-   "q": "Qual è la data di uscita di GTA VI?", "a": "19 novembre 2026."
+   "q": "Qual è la data di uscita di GTA VI?",
+   "a": "19 novembre 2026."
   },
   "physical-edition": {
-   "title": "Edizione fisica di GTA VI", "desc": "Cosa conferma Rockstar sulla versione fisica di GTA VI: versioni con codice in confezione nei negozi. Non affermiamo se sia incluso un disco.",
+   "title": "Edizione fisica di GTA VI",
+   "desc": "Cosa conferma Rockstar sulla versione fisica di GTA VI: versioni con codice in confezione nei negozi. Non affermiamo se sia incluso un disco.",
    "lead": "Rockstar dice che le versioni con codice in confezione per entrambe le console dovrebbero essere disponibili nei negozi dal 12 novembre.",
    "body": "La fonte parla di codice in confezione. Non dice se sia incluso un disco, quindi non affermiamo nulla in merito. Controlla la scheda del negozio o la confezione.",
-   "q": "L’edizione fisica include un disco?", "a": "La nostra fonte non lo dice, quindi non possiamo confermarlo."
+   "q": "L’edizione fisica include un disco?",
+   "a": "La nostra fonte non lo dice, quindi non possiamo confermarlo."
   },
   "cheats": {
-   "title": "Trucchi di GTA VI: cosa è confermato e cosa no", "desc": "Nelle nostre fonti non c’è un elenco ufficiale di trucchi di Rockstar. Le guide di terze parti discordano, quindi non elenchiamo sequenze di tasti.",
+   "title": "Trucchi di GTA VI: cosa è confermato e cosa no",
+   "desc": "Nelle nostre fonti non c’è un elenco ufficiale di trucchi di Rockstar. Le guide di terze parti discordano, quindi non elenchiamo sequenze di tasti.",
    "lead": "Non confermato: non abbiamo trovato un elenco ufficiale di trucchi di Rockstar, quindi non ne pubblichiamo.",
    "body": "Le guide di terze parti in circolazione si contraddicono e nessuna è una fonte ufficiale. Finché Rockstar non pubblica nulla, considera non verificato qualsiasi elenco di codici o sequenze di tasti. Se Rockstar pubblicherà un elenco ufficiale, lo linkeremo qui.",
-   "q": "Esistono trucchi ufficiali per GTA VI?", "a": "Nessuna fonte ufficiale ne conferma, quindi non affermiamo nulla come fatto."
+   "q": "Esistono trucchi ufficiali per GTA VI?",
+   "a": "Nessuna fonte ufficiale ne conferma, quindi non affermiamo nulla come fatto."
   }
  },
  "gallery": {
@@ -163,5 +272,31 @@
   "privH": "Contenuti di terze parti incorporati",
   "privP": "La Galleria dei fan mostra post di X, mentre la home page e una guida mostrano un video di YouTube. I post della galleria si caricano solo dopo il clic su “Carica contenuto”. Una volta caricati, la piattaforma può impostare cookie e ricevere dati tecnici, come il tuo indirizzo IP e la pagina visitata, secondo la propria informativa sulla privacy. Il trailer di YouTube usa il dominio a privacy avanzata youtube-nocookie.com, ma contatta comunque YouTube all'apertura della pagina. Non ospitiamo queste immagini né questi video."
  },
- "trailer": {"h": "Trailer ufficiale di lancio", "title": "Trailer di lancio di Grand Theft Auto VI, lettore video di YouTube", "cap": "Official Launch Trailer, canale YouTube di Rockstar Games", "src": "Articolo su Rockstar Newswire"}
+ "trailer": {
+  "h": "Trailer ufficiale di lancio",
+  "title": "Trailer di lancio di Grand Theft Auto VI, lettore video di YouTube",
+  "cap": "Official Launch Trailer, canale YouTube di Rockstar Games",
+  "src": "Articolo su Rockstar Newswire"
+ },
+ "news": {
+  "title": "Notizie su GTA VI",
+  "desc": "Ultime notizie su Grand Theft Auto VI con link alle fonti: annunci ufficiali e articoli di testate riconosciute, ognuno chiaramente etichettato.",
+  "lead": "Un breve elenco selezionato di notizie recenti su GTA VI. Linkiamo l’originale e aggiungiamo un breve riassunto con parole nostre. Le notizie di Rockstar Games sono etichettate come ufficiali; tutto il resto è indicato come riportato dalla testata.",
+  "home": "Home",
+  "all": "Tutte",
+  "official": "Ufficiale",
+  "reported": "Riportato",
+  "officialSource": "Fonte ufficiale",
+  "reportedBy": "Riportato da {source}",
+  "read": "Leggi l’originale su {source}",
+  "summaryEn": "Riassunto in inglese",
+  "published": "Pubblicato",
+  "checked": "Verificato",
+  "back": "Tutte le notizie",
+  "cardP": "Titoli recenti su GTA VI con link alle fonti, etichettati come ufficiali o riportati.",
+  "count": "{n} elementi",
+  "ext": "Apre il sito originale in una nuova scheda",
+  "editH": "Notizie e fonti",
+  "editP": "Scegliamo le notizie recenti su GTA VI prima dai canali ufficiali (Rockstar Games, Take-Two, PlayStation, Xbox) e poi da testate riconosciute, e apriamo ogni fonte prima di elencarla. I riassunti sono scritti con parole nostre e restano brevi; non copiamo articoli né immagini. I diritti sui testi, nomi e marchi originali appartengono ai rispettivi proprietari e ogni voce rimanda all’originale. Le notizie riportate non sono confermate da noi."
+ }
 }

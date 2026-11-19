@@ -1,0 +1,46 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ArticleCover from '../../../components/ArticleCover.astro';
+import { newsSorted } from '../../../data/news.js';
+import { t, staticLocales, url, fmt, meta } from '../../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const ui = t(lang);
+const n = ui.news;
+const site = Astro.site;
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: n.home, item: new URL(url(lang), site).href },
+    { '@type': 'ListItem', position: 2, name: n.title, item: new URL(url(lang, '/news'), site).href },
+  ] },
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: n.title, description: n.desc, inLanguage: meta[lang].html,
+    mainEntity: { '@type': 'ItemList', numberOfItems: newsSorted.length,
+      itemListElement: newsSorted.map((it, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(url(lang, '/news/' + it.id), site).href, name: it.title })) } },
+];
+---
+<Base lang={lang} path="/news" title={n.title} description={n.desc} jsonld={jsonld} image="news">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{n.home}</a> / {n.title}</nav>
+  <h1>{n.title}</h1>
+  <p class="lead">{n.lead}</p>
+  <p class="meta">{fmt(n.count, { n: newsSorted.length })}{lang !== 'en' ? ' · ' + n.summaryEn : ''}</p>
+  <input type="radio" name="nf" id="nf-all" checked />
+  <input type="radio" name="nf" id="nf-official" />
+  <input type="radio" name="nf" id="nf-reported" />
+  <div class="nfilter" role="group" aria-label={n.title}>
+    <label for="nf-all">{n.all}</label>
+    <label for="nf-official">{n.official}</label>
+    <label for="nf-reported">{n.reported}</label>
+  </div>
+  <ul class="ncards">
+    {newsSorted.map((it) => (
+      <li class="ncard" data-type={it.type}>
+        <ArticleCover slug={it.cover} alt={it.title} />
+        <span class={'ntag ' + it.type}>{it.type === 'official' ? n.officialSource : fmt(n.reportedBy, { source: it.source })}</span>
+        <h3><a href={url(lang, '/news/' + it.id)} lang="en">{it.title}</a></h3>
+        <p class="meta"><time datetime={it.published}>{it.published}</time> · <span lang="en">{it.source}</span></p>
+        <p lang="en">{it.summary}</p>
+        <div class="nlinks"><a href={url(lang, '/news/' + it.id)}>{n.published}: {it.published}</a><a href={it.url} target="_blank" rel="noopener nofollow ugc" aria-label={n.ext}>{fmt(n.read, { source: it.source })}</a></div>
+      </li>
+    ))}
+  </ul>
+</Base>

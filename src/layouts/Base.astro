@@ -13,6 +13,7 @@ const fullTitle = isHome ? title : `${title} | Leonida Atlas`;
 const abs = (l) => new URL(url(l, path), Astro.site).href;
 const canonical = abs(lang);
 const nav = [
+  ['/news', ui.nav.news],
   ['/log', ui.nav.log],
   ['/fact-check', ui.nav.fact],
   ['/reality-check', ui.nav.reality],
@@ -23,7 +24,7 @@ const nav = [
 const ogImage = new URL(`/og/${image}.png`, Astro.site).href;
 const ads = site.adsEnabled;
 const cur = path.replace(/\/$/, '');
-const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guides'));
+const isCurrent = (p) => cur === p || (p === '/guides' && cur.startsWith('/guides')) || (p === '/news' && cur.startsWith('/news'));
 ---
 <!doctype html>
 <html lang={meta[lang].html}>
