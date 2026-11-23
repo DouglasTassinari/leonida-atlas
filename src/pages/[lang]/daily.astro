@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import { bank } from '../../data/daily.js';
+import { ui } from '../../data/play.js';
+import { staticLocales, url } from '../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const tr = lang === 'en' || lang === 'pt-br';
+const L = tr ? lang : 'en';
+const u = ui[L].daily;
+const qs = bank.map((q) => ({ q: q[L].q, o: q[L].o, w: q[L].w, a: q.a, sn: q.src[0], su: q.src[1] }));
+const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Leonida Daily', applicationCategory: 'GameApplication', operatingSystem: 'Any', url: new URL(url(lang, '/daily'), Astro.site).href, inLanguage: L, description: u.desc, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }];
+---
+<Base lang={lang} path="/daily" title={u.title} description={u.desc} jsonld={jsonld} alternates={['en', 'pt-br']} canonicalLang={L}>
+  <div lang={L}>
+    <h1>{u.h1}</h1>
+    <p class="lead">{u.lead}</p>
+    <div id="daily" class="panel daily" data-qs={JSON.stringify(qs)} data-ui={JSON.stringify(u)} data-pass={url(lang, '/pass')}>
+      <noscript><p>{u.noscript}</p></noscript>
+    </div>
+    <p class="meta">{u.rules}</p>
+  </div>
+</Base>
+
+<style is:global>
+.daily .dstats{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0 16px}
+.daily .dstat{background:#0e0619;border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:96px;text-align:center}
+.daily .dstat b{display:block;font-size:1.6rem;color:var(--teal)}
+.daily .dstat span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.daily .dopts{display:grid;gap:10px;margin:14px 0}
+.daily .dopts button{text-align:left;justify-content:flex-start;background:#1e1033;color:var(--text);border:2px solid var(--line);font-weight:600;padding:12px 14px;min-height:48px}
+.daily .dopts button:hover:not(:disabled){border-color:var(--teal)}
+.daily .dopts button.right{border-color:var(--ok);background:#0f2a22}
+.daily .dopts button.wrong{border-color:var(--bad);background:#2a1020}
+.daily .dgrid{font-size:2rem;letter-spacing:.15em;margin:8px 0}
+.daily .dbig{font-size:1.4rem;font-weight:800}
+.daily .dact{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.daily progress{width:100%;height:8px;accent-color:var(--pink)}
+.daily .dwhy{background:#0e0619;border-radius:10px;padding:10px 12px;margin-top:10px}
+</style>
+
+<script is:inline>
+(function () {
+  var box = document.getElementById('daily');
+  if (!box || box.dataset.ready) return;
+  box.dataset.ready = '1';
+  var U = JSON.parse(box.dataset.ui), BANK = JSON.parse(box.dataset.qs), PASS = box.dataset.pass;
+  var N = 5, KEY = 'leonida-daily', EPOCH = Date.UTC(2026, 10, 23) / 86400000;   // day #1 = 23 Nov 2026 (Brasilia time)
+  function f(s, v) { return s.replace(/\{(\w+)\}/g, function (_, k) { return v[k]; }); }
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function dayIdx() { return Math.floor((Date.now() - 3 * 3600000) / 86400000) - EPOCH; }
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var order = BANK.map(function (_, i) { return i; }), r = rng(20261124);
+  for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var tmp = order[i]; order[i] = order[j]; order[j] = tmp; }
+  var d = Math.max(0, dayIdx()), start = (d * N) % order.length;
+  var todays = [];
+  for (var k = 0; k < N; k++) {
+    var src = BANK[order[(start + k) % order.length]], idxs = src.o.map(function (_, n) { return n; }), rr = rng(d * 1000 + order[(start + k) % order.length] + 7);
+    for (var m = idxs.length - 1; m > 0; m--) { var z = Math.floor(rr() * (m + 1)); var t2 = idxs[m]; idxs[m] = idxs[z]; idxs[z] = t2; }   // same option order for everyone that day
+    todays.push({ q: src.q, w: src.w, sn: src.sn, su: src.su, o: idxs.map(function (n) { return src.o[n]; }), a: idxs.indexOf(src.a) });
+  }
+
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+  var S = load(); if (!S.played) S.played = {};
+
+  function stats() {
+    var cur = S.streak || 0; if (S.last !== undefined && S.last < d - 1) cur = 0;
+    return '<div class="dstats"><div class="dstat"><b>' + (d + 1) + '</b><span>#</span></div><div class="dstat"><b>' + cur + '</b><span>' + esc(U.streak) + '</span></div><div class="dstat"><b>' + (S.best || 0) + '</b><span>' + esc(U.best) + '</span></div></div>';
+  }
+  function countdown() {
+    var ms = 86400000 - ((Date.now() - 3 * 3600000) % 86400000), h = Math.floor(ms / 3600000), m = Math.floor(ms % 3600000 / 60000);
+    return h + 'h ' + String(m).padStart(2, '0') + 'm';
+  }
+  function intro() {
+    var p = S.played[d];
+    if (p) return result(p, true);
+    box.innerHTML = stats() + '<p class="dbig">' + esc(f(U.today, { n: d + 1 })) + '</p><div class="dact"><button id="go">' + esc(U.play) + '</button></div>';
+    document.getElementById('go').addEventListener('click', function () { ask(0, 0, ''); });
+  }
+  function ask(i, score, grid) {
+    var q = todays[i];
+    box.innerHTML = '<progress max="' + N + '" value="' + i + '"></progress><h2>' + esc(f(U.q, { i: i + 1, n: N })) + '</h2><p class="dbig">' + esc(q.q) + '</p><div class="dopts" id="opts"></div><div id="fb" aria-live="polite"></div>';
+    var opts = document.getElementById('opts');
+    q.o.forEach(function (text, idx) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = text;
+      b.addEventListener('click', function () {
+        var ok = idx === q.a; if (ok) score++; grid += ok ? '🟩' : '🟥';
+        opts.querySelectorAll('button').forEach(function (x, n) { x.disabled = true; if (n === q.a) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+        document.getElementById('fb').innerHTML = '<div class="dwhy"><b>' + esc(ok ? U.right : U.wrong) + '</b> ' + esc(q.w) + ' <span class="meta">' + esc(U.source) + ': <a href="' + esc(q.su) + '" rel="noopener" target="_blank" lang="en">' + esc(q.sn) + '</a></span></div><div class="dact"><button id="nx">' + esc(i + 1 < N ? U.next : U.see) + '</button></div>';
+        var nx = document.getElementById('nx'); nx.focus();
+        nx.addEventListener('click', function () { if (i + 1 < N) ask(i + 1, score, grid); else finish(score, grid); });
+      });
+      opts.appendChild(b);
+    });
+  }
+  function finish(score, grid) {
+    var cur = (S.last === d - 1) ? (S.streak || 0) + 1 : 1;
+    S.streak = cur; S.last = d; S.best = Math.max(S.best || 0, cur); S.played[d] = { s: score, g: grid }; save(S);
+    result(S.played[d], false);
+  }
+  function result(p, again) {
+    var text = f(U.shareText, { n: d + 1, s: p.s, t: N }) + '\n' + p.g + '\n' + location.origin + location.pathname;
+    box.innerHTML = stats() + '<p class="dbig">' + esc(f(U.score, { s: p.s, n: N })) + '</p><p class="dgrid" aria-hidden="true">' + p.g + '</p>' + (again ? '<p>' + esc(U.played) + '</p>' : '') +
+      '<div class="dact"><button id="sh">' + esc(U.share) + '</button><a class="cta" href="' + esc(PASS) + '">' + esc(U.passCta) + '</a></div><p class="meta" id="cd">' + esc(f(U.next_in, { t: countdown() })) + ' · ' + esc(U.again) + '</p><p id="cp" class="meta" aria-live="polite"></p>';
+    document.getElementById('sh').addEventListener('click', function () {
+      if (navigator.share) { navigator.share({ text: text }).catch(function () {}); return; }
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { document.getElementById('cp').textContent = U.copied; }, function () { window.prompt('', text); });
+    });
+  }
+  intro();
+})();
+</script>

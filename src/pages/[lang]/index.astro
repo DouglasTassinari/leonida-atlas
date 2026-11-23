@@ -29,6 +29,13 @@ const jsonld = [{
     <a class="card t" href={url(lang, '/log')}><h3>{h.c2t}</h3><p>{h.c2p}</p></a>
     <a class="card" href={url(lang, '/fact-check')}><h3>{h.c3t}</h3><p>{h.c3p}</p></a>
   </div>
+  <section aria-labelledby="home-play">
+    <h2 id="home-play">{h.playH}</h2>
+    <div class="cards">
+      <a class="card t" href={url(lang, '/daily')}><h3>{h.dailyT}</h3><p>{h.dailyP}</p></a>
+      <a class="card" href={url(lang, '/pass')}><h3>{h.passT}</h3><p>{h.passP}</p></a>
+    </div>
+  </section>
   <Trailer lang={lang} />
   <div class="cards">
     <a class="card t" href={url(lang, '/news')}><h3>{ui.news.title}</h3><p>{ui.news.cardP}</p></a>

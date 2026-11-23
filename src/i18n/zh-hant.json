@@ -10,7 +10,9 @@
   "news": "新聞",
   "posts": "文章",
   "community": "社群",
-  "radio": "電台"
+  "radio": "電台",
+  "daily": "Daily game",
+  "pass": "Passport"
  },
  "footer": {
   "disclaimer": "Leonida Atlas 是非官方粉絲網站，與 Rockstar Games 或 Take-Two Interactive 無關聯，也未獲其認可或贊助。所有商標歸其各自所有人。",
@@ -35,7 +37,12 @@
   "guidesH": "有來源佐證的 GTA VI 指南",
   "guidesLead": "語言、平台、版本、下載大小等。每項說法都連結到官方頁面。",
   "guidesAll": "查看所有指南",
-  "note": "這是粉絲自製的獨立專案，與 Rockstar Games 或 Take-Two Interactive 無關聯，也未獲其認可。"
+  "note": "這是粉絲自製的獨立專案，與 Rockstar Games 或 Take-Two Interactive 無關聯，也未獲其認可。",
+  "playH": "Play now",
+  "dailyT": "Leonida Daily",
+  "dailyP": "Five questions a day, no spoilers. Share your result and keep your streak.",
+  "passT": "Leonida Passport",
+  "passP": "Find out which kind of Leonida resident you are and post your passport."
  },
  "log": {
   "title": "萊昂尼達日誌",

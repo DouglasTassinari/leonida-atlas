@@ -1,0 +1,151 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui, archetypes, passQuestions } from '../../data/play.js';
+import { staticLocales, url } from '../../i18n/index.js';
+export const getStaticPaths = staticLocales;
+const { lang } = Astro.params;
+const tr = lang === 'en' || lang === 'pt-br';
+const L = tr ? lang : 'en';
+const u = ui[L].pass;
+const qs = passQuestions.map((q) => ({ q: q[L].q, o: q[L].o, map: q.map }));
+const arch = Object.fromEntries(Object.entries(archetypes).map(([id, a]) => [id, { name: a[L][0], tag: a[L][1], stamp: a.stamp }]));
+const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Leonida Passport', applicationCategory: 'GameApplication', operatingSystem: 'Any', url: new URL(url(lang, '/pass'), Astro.site).href, inLanguage: L, description: u.desc, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }];
+---
+<Base lang={lang} path="/pass" title={u.title} description={u.desc} jsonld={jsonld} alternates={['en', 'pt-br']} canonicalLang={L}>
+  <div lang={L}>
+    <h1>{u.h1}</h1>
+    <p class="lead">{u.lead}</p>
+    <div id="pass" class="panel pass" data-qs={JSON.stringify(qs)} data-ui={JSON.stringify(u)} data-arch={JSON.stringify(arch)} data-daily={url(lang, '/daily')}>
+      <noscript><p>{u.noscript}</p></noscript>
+    </div>
+  </div>
+</Base>
+
+<style is:global>
+.pass .popts{display:grid;gap:10px;margin:14px 0}
+.pass .popts button{text-align:left;justify-content:flex-start;background:#1e1033;color:var(--text);border:2px solid var(--line);font-weight:600;padding:12px 14px;min-height:48px}
+.pass .popts button:hover{border-color:var(--teal)}
+.pass progress{width:100%;height:8px;accent-color:var(--pink)}
+.pass .pbig{font-size:1.5rem;font-weight:800;color:var(--teal);margin:6px 0}
+.pass .pact{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.pass canvas{display:block;width:min(100%,420px);height:auto;border-radius:16px;border:2px solid var(--purple);box-shadow:0 0 28px rgba(138,77,255,.45);margin:12px 0}
+.pass label{display:block;font-weight:700;margin:10px 0 6px}
+.pass input[type=text]{width:100%;max-width:360px}
+</style>
+
+<script is:inline>
+(function () {
+  var box = document.getElementById('pass');
+  if (!box || box.dataset.ready) return;
+  box.dataset.ready = '1';
+  var U = JSON.parse(box.dataset.ui), QS = JSON.parse(box.dataset.qs), A = JSON.parse(box.dataset.arch), DAILY = box.dataset.daily;
+  function f(s, v) { return s.replace(/\{(\w+)\}/g, function (_, k) { return v[k]; }); }
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  var ORDER = ['radio', 'night', 'swamp', 'keys', 'planner', 'collector'];
+
+  function intro() {
+    box.innerHTML = '<div class="pact"><button id="st">' + esc(U.start) + '</button></div>';
+    document.getElementById('st').addEventListener('click', function () { ask(0, {}, []); });
+  }
+  function ask(i, pts, last) {
+    var q = QS[i];
+    box.innerHTML = '<progress max="' + QS.length + '" value="' + i + '"></progress><h2>' + esc(f(U.q, { i: i + 1, n: QS.length })) + '</h2><p class="pbig">' + esc(q.q) + '</p><div class="popts" id="po"></div>';
+    var po = document.getElementById('po');
+    q.o.forEach(function (text, idx) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = text;
+      b.addEventListener('click', function () {
+        var id = q.map[idx]; pts[id] = (pts[id] || 0) + 1; last.push(id);
+        if (i + 1 < QS.length) ask(i + 1, pts, last); else name(pts, last);
+      });
+      po.appendChild(b);
+    });
+  }
+  function winner(pts, last) {
+    var best = null, bs = -1;
+    ORDER.forEach(function (id) { var s = pts[id] || 0; if (s > bs || (s === bs && last.lastIndexOf(id) > last.lastIndexOf(best))) { best = id; bs = s; } });
+    return best;
+  }
+  function top3(pts, win, last) {
+    var rest = ORDER.filter(function (x) { return x !== win; }).sort(function (a, b) { return (pts[b] || 0) - (pts[a] || 0) || last.lastIndexOf(b) - last.lastIndexOf(a); });
+    return [win, rest[0], rest[1]];
+  }
+  function name(pts, last) {
+    box.innerHTML = '<label for="nm">' + esc(U.nameLabel) + '</label><input id="nm" type="text" maxlength="18" placeholder="' + esc(U.namePh) + '" autocomplete="off"><div class="pact"><button id="mk">' + esc(U.make) + '</button></div>';
+    var nm = document.getElementById('nm'); nm.focus();
+    function go() { show(pts, last, nm.value.trim() || U.namePh); }
+    document.getElementById('mk').addEventListener('click', go);
+    nm.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+  }
+  function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0); }
+
+  function drawCard(cv, who, win, stamps) {
+    var W = 1080, H = 1350, c = cv.getContext('2d'); cv.width = W; cv.height = H;
+    var g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#1b0b3a'); g.addColorStop(.45, '#6a1b9a'); g.addColorStop(.7, '#ff4fa3'); g.addColorStop(1, '#ff9a3c');
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    // sun with stripes
+    c.save(); c.beginPath(); c.arc(W / 2, 760, 250, 0, Math.PI * 2); c.clip();
+    var sg = c.createLinearGradient(0, 510, 0, 1010); sg.addColorStop(0, '#ffe36a'); sg.addColorStop(1, '#ff4fa3'); c.fillStyle = sg; c.fillRect(0, 500, W, 520);
+    c.fillStyle = '#6a1b9a'; for (var s = 0; s < 6; s++) c.fillRect(0, 800 + s * 36, W, 8 + s * 4);
+    c.restore();
+    // horizon + palms
+    c.fillStyle = '#12061f'; c.fillRect(0, 1000, W, 350);
+    function palm(x, h, flip) {
+      c.save(); c.translate(x, 1000); c.scale(flip ? -1 : 1, 1); c.strokeStyle = '#12061f'; c.lineWidth = 14; c.lineCap = 'round';
+      c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(26, -h / 2, 8, -h); c.stroke();
+      for (var a = -2; a <= 2; a++) { c.beginPath(); c.moveTo(8, -h); c.quadraticCurveTo(8 + a * 55, -h - 70 + Math.abs(a) * 16, 8 + a * 105, -h + 30 + Math.abs(a) * 30); c.lineWidth = 9; c.stroke(); }
+      c.restore();
+    }
+    palm(130, 420, false); palm(960, 380, true); palm(240, 260, true);
+    // frame
+    c.strokeStyle = 'rgba(255,255,255,.85)'; c.lineWidth = 6; c.strokeRect(36, 36, W - 72, H - 72);
+    c.strokeStyle = 'rgba(46,230,214,.9)'; c.lineWidth = 3; c.strokeRect(54, 54, W - 108, H - 108);
+    // text
+    c.textAlign = 'center'; c.fillStyle = '#fff'; c.shadowColor = 'rgba(255,79,163,.9)'; c.shadowBlur = 18;
+    c.font = '800 64px system-ui, Segoe UI, Arial, sans-serif'; c.fillText(U.cardTitle, W / 2, 160);
+    c.shadowBlur = 0; c.font = '600 34px system-ui, Segoe UI, Arial, sans-serif'; c.fillStyle = '#2ee6d6'; c.fillText(U.cardNo + ' ' + String(hash(who + win) % 900000 + 100000), W / 2, 215);
+    c.fillStyle = '#fff'; c.font = '600 40px system-ui, Segoe UI, Arial, sans-serif'; c.fillText(who.toUpperCase(), W / 2, 300);
+    c.shadowColor = 'rgba(0,0,0,.6)'; c.shadowBlur = 14; c.font = '800 76px system-ui, Segoe UI, Arial, sans-serif';
+    var title = A[win].name.toUpperCase(), size = 76; while (c.measureText(title).width > W - 180 && size > 40) { size -= 4; c.font = '800 ' + size + 'px system-ui, Segoe UI, Arial, sans-serif'; }
+    c.fillStyle = '#ffe36a'; c.fillText(title, W / 2, 400);
+    c.shadowBlur = 0; c.font = 'italic 600 36px system-ui, Segoe UI, Arial, sans-serif'; c.fillStyle = '#fff';
+    var tag = A[win].tag; c.fillText(tag, W / 2, 460, W - 160);
+    // stamps
+    var xs = [250, 540, 830];
+    stamps.forEach(function (st, i) {
+      c.save(); c.translate(xs[i], 1150); c.rotate((i - 1) * 0.18);
+      c.strokeStyle = '#2ee6d6'; c.fillStyle = 'rgba(18,6,31,.55)'; c.lineWidth = 6;
+      c.beginPath(); c.arc(0, 0, 118, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.lineWidth = 2; c.beginPath(); c.arc(0, 0, 100, 0, Math.PI * 2); c.stroke();
+      c.fillStyle = '#2ee6d6'; c.textAlign = 'center'; var fs = 30; c.font = '800 ' + fs + 'px system-ui, Segoe UI, Arial, sans-serif';
+      while (c.measureText(st.toUpperCase()).width > 170 && fs > 16) { fs -= 2; c.font = '800 ' + fs + 'px system-ui, Segoe UI, Arial, sans-serif'; }
+      c.fillText(st.toUpperCase(), 0, 10); c.font = '600 18px system-ui, Segoe UI, Arial, sans-serif'; c.fillText('★ LEONIDA ★', 0, -34); c.fillText('★ ★ ★', 0, 48);
+      c.restore();
+    });
+    c.textAlign = 'center'; c.fillStyle = 'rgba(255,255,255,.92)'; c.font = '600 28px system-ui, Segoe UI, Arial, sans-serif';
+    c.fillText(location.host + location.pathname, W / 2, 1292);
+    c.font = '500 22px system-ui, Segoe UI, Arial, sans-serif'; c.fillStyle = 'rgba(255,255,255,.7)'; c.fillText(U.cardNote, W / 2, 1322, W - 140);
+  }
+
+  function show(pts, last, who) {
+    var win = winner(pts, last), st = top3(pts, win, last).map(function (id) { return A[id].stamp; });
+    var link = location.origin + location.pathname, text = f(U.shareText, { a: A[win].name }) + ' ' + link;
+    box.innerHTML = '<p class="meta">' + esc(U.youAre) + '</p><p class="pbig">' + esc(A[win].name) + '</p><p>' + esc(A[win].tag) + '</p><canvas id="cv" role="img" aria-label="' + esc(A[win].name + ' - ' + who) + '"></canvas>' +
+      '<p class="meta">' + esc(U.stamps) + ': ' + esc(st.join(', ')) + '</p>' +
+      '<div class="pact"><button id="shr">' + esc(U.share) + '</button><button id="dl" class="ghost">' + esc(U.download) + '</button><button id="cp" class="ghost">' + esc(U.copy) + '</button><button id="rs" class="ghost">' + esc(U.again) + '</button></div><p id="msg" class="meta" aria-live="polite"></p><p><a class="cta" href="' + esc(DAILY) + '">' + esc(U.dailyCta) + '</a></p>';
+    var cv = document.getElementById('cv'); drawCard(cv, who, win, st);
+    function blob(cb) { cv.toBlob(cb, 'image/png'); }
+    document.getElementById('dl').addEventListener('click', function () { blob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'leonida-passport.png'; document.body.appendChild(a); a.click(); a.remove(); }); });
+    document.getElementById('cp').addEventListener('click', function () { (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { document.getElementById('msg').textContent = U.copied; }, function () { window.prompt('', text); }); });
+    document.getElementById('shr').addEventListener('click', function () {
+      blob(function (b) {
+        var file = new File([b], 'leonida-passport.png', { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) navigator.share({ files: [file], text: text }).catch(function () {});
+        else if (navigator.share) navigator.share({ text: text, url: link }).catch(function () {});
+        else document.getElementById('dl').click();
+      });
+    });
+    document.getElementById('rs').addEventListener('click', intro);
+  }
+  intro();
+})();
+</script>

@@ -14,6 +14,8 @@ for (const f of fs.readdirSync(postDir)) {
 const sitemapFilter = (page) => {
   const path = new URL(page).pathname;
   if (path === '/') return false;
+  // Games are translated only in en and pt-br; other locales show English and canonicalize to /en/.
+  if (/^\/(?!en\/|pt-br\/)[^/]+\/(daily|pass)\/$/.test(path)) return false;
   if (path.startsWith('/admin-review') || /\/community\/item\/$/.test(path)) return false;
   const m = path.match(/^\/([^/]+)\/posts\/([^/]+)\/$/);
   // Article pages only for real translations (other locales canonicalize to English).

@@ -10,7 +10,9 @@
   "news": "Actualités",
   "posts": "Articles",
   "community": "Communauté",
-  "radio": "Radio"
+  "radio": "Radio",
+  "daily": "Daily game",
+  "pass": "Passport"
  },
  "footer": {
   "disclaimer": "Leonida Atlas est un site de fans non officiel. Il n’est ni affilié, ni approuvé, ni sponsorisé par Rockstar Games ou Take-Two Interactive. Toutes les marques appartiennent à leurs propriétaires.",
@@ -35,7 +37,12 @@
   "guidesH": "Guides GTA VI, appuyés sur des sources",
   "guidesLead": "Langues, plateformes, éditions, taille du téléchargement et plus. Chaque affirmation renvoie à une page officielle.",
   "guidesAll": "Voir tous les guides",
-  "note": "Projet de fans indépendant. Non affilié à Rockstar Games ni à Take-Two Interactive, et non approuvé par eux."
+  "note": "Projet de fans indépendant. Non affilié à Rockstar Games ni à Take-Two Interactive, et non approuvé par eux.",
+  "playH": "Play now",
+  "dailyT": "Leonida Daily",
+  "dailyP": "Five questions a day, no spoilers. Share your result and keep your streak.",
+  "passT": "Leonida Passport",
+  "passP": "Find out which kind of Leonida resident you are and post your passport."
  },
  "log": {
   "title": "Journal Leonida",

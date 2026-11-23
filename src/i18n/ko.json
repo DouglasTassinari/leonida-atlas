@@ -10,7 +10,9 @@
   "news": "뉴스",
   "posts": "글",
   "community": "커뮤니티",
-  "radio": "라디오"
+  "radio": "라디오",
+  "daily": "Daily game",
+  "pass": "Passport"
  },
  "footer": {
   "disclaimer": "Leonida Atlas는 비공식 팬 사이트입니다. Rockstar Games 또는 Take-Two Interactive와 제휴, 승인, 후원 관계가 없습니다. 모든 상표는 각 소유자에게 있습니다.",
@@ -35,7 +37,12 @@
   "guidesH": "출처 기반 GTA VI 가이드",
   "guidesLead": "언어, 플랫폼, 에디션, 다운로드 용량 등. 모든 내용은 공식 페이지로 연결됩니다.",
   "guidesAll": "모든 가이드 보기",
-  "note": "팬이 만든 독립 프로젝트입니다. Rockstar Games 또는 Take-Two Interactive와 제휴하거나 승인을 받지 않았습니다."
+  "note": "팬이 만든 독립 프로젝트입니다. Rockstar Games 또는 Take-Two Interactive와 제휴하거나 승인을 받지 않았습니다.",
+  "playH": "Play now",
+  "dailyT": "Leonida Daily",
+  "dailyP": "Five questions a day, no spoilers. Share your result and keep your streak.",
+  "passT": "Leonida Passport",
+  "passP": "Find out which kind of Leonida resident you are and post your passport."
  },
  "log": {
   "title": "레오니다 로그",
