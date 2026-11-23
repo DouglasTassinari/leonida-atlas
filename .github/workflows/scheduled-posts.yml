@@ -1,14 +1,30 @@
 name: Scheduled posts rebuild
 on:
   schedule:
-    # 08:00, 14:00 and 20:00 America/Sao_Paulo (UTC-3) = 11:00, 17:00, 23:00 UTC
-    - cron: '2 11 * * *'
-    - cron: '2 17 * * *'
-    - cron: '2 23 * * *'
+    # every hour at :02 (UTC). Posts use publishAt with a -03:00 offset, so any hour works.
+    - cron: '2 * * * *'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Rebuild even if no post is due'
+        required: false
+        default: 'false'
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: src/data/posts
+      - name: Is any post due in the last 65 minutes?
+        id: due
+        run: |
+          now=$(date -u +%s); due=0
+          for t in $(grep -rhoE "publishAt: *'[^']+'" src/data/posts --include='*.js' | sed -E "s/publishAt: *'([^']+)'/\1/"); do
+            s=$(date -d "$t" +%s 2>/dev/null || echo 0)
+            if [ "$s" -le "$now" ] && [ "$s" -gt $((now-3900)) ]; then due=1; fi
+          done
+          echo "due=$due" >> "$GITHUB_OUTPUT"
       - name: Trigger Cloudflare Pages deploy hook
+        if: steps.due.outputs.due == '1' || github.event.inputs.force == 'true'
         run: curl -fsS -X POST -d "" "${{ secrets.CF_DEPLOY_HOOK }}"
