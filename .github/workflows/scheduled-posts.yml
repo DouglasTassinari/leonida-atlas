@@ -16,13 +16,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: src/data/posts
-      - name: Is any post due in the last 65 minutes?
+      # GitHub often runs the schedule hours late, so look at the live site instead of a time window:
+      # rebuild when a post from the last 3 days is due and its page still answers 404.
+      - name: Is any due post missing from the site?
         id: due
         run: |
           now=$(date -u +%s); due=0
-          for t in $(grep -rhoE "publishAt: *'[^']+'" src/data/posts --include='*.js' | sed -E "s/publishAt: *'([^']+)'/\1/"); do
+          for f in src/data/posts/*.js; do
+            slug=$(sed -nE "s/^ *slug: *'([^']+)'.*/\1/p" "$f" | head -1)
+            t=$(sed -nE "s/^ *publishAt: *'([^']+)'.*/\1/p" "$f" | head -1)
+            [ -n "$slug" ] && [ -n "$t" ] || continue
             s=$(date -d "$t" +%s 2>/dev/null || echo 0)
-            if [ "$s" -le "$now" ] && [ "$s" -gt $((now-3900)) ]; then due=1; fi
+            if [ "$s" -le "$now" ] && [ "$s" -gt $((now-259200)) ]; then
+              code=$(curl -s -o /dev/null -w '%{http_code}' "https://leonida-atlas-4z0.pages.dev/en/posts/$slug/")
+              if [ "$code" = "404" ]; then echo "missing: $slug"; due=1; fi
+            fi
           done
           echo "due=$due" >> "$GITHUB_OUTPUT"
       - name: Trigger Cloudflare Pages deploy hook

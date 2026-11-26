@@ -16,3 +16,6 @@ export async function onRequestGet({ request, env }) {
     headers: { 'content-type': 'application/xml; charset=utf-8', 'cache-control': 'public, max-age=900' },
   });
 }
+
+// Without this, HEAD falls through to the static site and answers with HTML.
+export const onRequestHead = onRequestGet;

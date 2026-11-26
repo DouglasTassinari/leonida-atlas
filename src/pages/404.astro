@@ -1,0 +1,26 @@
+---
+// With this file Cloudflare Pages answers unknown addresses with a real 404
+// (without it, every wrong URL returned the root page with status 200).
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found | Leonida Atlas</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 24px;
+      background: #12081f; color: #fff; font-family: Inter, system-ui, sans-serif; }
+    a { color: #ff7ac6; display: inline-block; margin: 8px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Page not found</h1>
+    <p>This address does not exist on Leonida Atlas.</p>
+    <p><a href="/en/">GTA 6 news and guides</a> <a href="/pt-br/" lang="pt-BR">Ver em português</a></p>
+  </main>
+</body>
+</html>

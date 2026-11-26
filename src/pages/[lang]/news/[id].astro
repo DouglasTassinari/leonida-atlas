@@ -8,6 +8,7 @@ export function getStaticPaths() {
 }
 const { lang } = Astro.params;
 const { it } = Astro.props;
+// Short summaries of other outlets stay out of search (robots on <Base>); the news list is the indexed page.
 const ui = t(lang);
 const n = ui.news;
 const site = Astro.site;
@@ -25,7 +26,7 @@ const jsonld = [
     author: { '@type': 'Organization', name: 'Leonida Atlas' }, publisher: { '@type': 'Organization', name: 'Leonida Atlas' } },
 ];
 ---
-<Base lang={lang} path={'/news/' + it.id} title={it.title} description={it.summary} jsonld={jsonld} ogType="article" image={it.cover}>
+<Base lang={lang} path={'/news/' + it.id} title={it.title} description={it.summary} jsonld={jsonld} ogType="article" image={it.cover} robots="noindex, follow" noAlternates>
   <nav class="crumbs" aria-label="Breadcrumb"><a href={url(lang)}>{n.home}</a> / <a href={url(lang, '/news')}>{n.title}</a></nav>
   <h1 lang="en">{it.title}</h1>
   <ArticleCover slug={it.cover} alt={it.title} />
