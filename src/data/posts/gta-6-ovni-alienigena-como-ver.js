@@ -48,9 +48,29 @@ export default {
         "en": "Another tracker reports that the encounter appears at night, after 2 AM in game time, and does not spawn every time. LADbible also describes a longer follow-up involving a small alien at a secret facility. Treat those details as player reports; Rockstar has not documented the event.",
         "pt-br": "Outro acompanhamento relata que o encontro aparece à noite, depois das 2h no horário do jogo, e não surge sempre. A LADbible também descreve uma continuação maior, com um pequeno alienígena em uma instalação secreta. Trate esses detalhes como relatos de jogadores; a Rockstar não documentou o evento."
       }
+    },
+    {
+      "h": {
+        "en": "What the follow-up pays (spoiler warning)",
+        "pt-br": "O que a continuação dá (aviso de spoiler)"
+      },
+      "p": {
+        "en": "This part touches an optional side quest. BGR and Red Bull report that the sighting is only the first step: the quest line goes on with puzzles and leads to a permanent upgrade. BGR places the start near the Starlet Motel at around 2 AM in Chapter 2 and says the reward is a permanent boost to the health, stamina and focus of Jason and Lucia. Red Bull's easter egg list gives the same reward, attributing it to players.",
+        "pt-br": "Esta parte trata de uma missão paralela opcional. BGR e Red Bull relatam que a aparição é só o primeiro passo: a história paralela continua com quebra-cabeças e leva a uma melhoria permanente. O BGR coloca o início perto do Starlet Motel, por volta das 2h, no Capítulo 2, e diz que a recompensa é um aumento permanente de vida, fôlego e foco de Jason e Lucia. A lista de easter eggs da Red Bull cita a mesma recompensa, atribuída a jogadores."
+      }
     }
   ],
   sources: [
+    {
+      "name": "BGR: missable side quests",
+      "url": "https://www.bgr.com/2327465/gta-6-missable-side-quests-explained/",
+      "checked": "2026-11-27"
+    },
+    {
+      "name": "Red Bull: GTA 6 easter eggs",
+      "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+      "checked": "2026-11-27"
+    },
     {
       "name": "Insider Gaming: where to find the UFO",
       "url": "https://insider-gaming.com/where-to-find-ufo-in-gta-6-explained/",
@@ -68,5 +88,5 @@ export default {
     }
   ],
   tags: ["mystery", "secrets", "ufo"],
-  updated: '2026-11-26',
+  updated: '2026-11-27',
 };
